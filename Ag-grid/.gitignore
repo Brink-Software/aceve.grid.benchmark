@@ -5,3 +5,9 @@ dist/
 *.tsbuildinfo
 package-lock.json
 
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
+*.trace.zip
+

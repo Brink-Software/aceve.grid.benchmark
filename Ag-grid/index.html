@@ -32,14 +32,19 @@
 
       <div class="toolbar">
         <div class="toolbar-info">
-          <span class="info-badge"
-            >📊 <span id="totalEmployees">0</span> Medewerkers</span
+          <span class="info-badge" data-test="info-badge-medewerkers"
+            >📊
+            <span id="totalEmployees" data-test="total-employees">0</span>
+            Medewerkers</span
           >
-          <span class="info-badge"
-            >🏢 <span id="totalDepartments">0</span> Afdelingen</span
+          <span class="info-badge" data-test="info-badge-afdelingen"
+            >🏢
+            <span id="totalDepartments" data-test="total-departments">0</span>
+            Afdelingen</span
           >
-          <span class="info-badge"
-            >👥 <span id="totalTeams">0</span> Teams</span
+          <span class="info-badge" data-test="info-badge-teams"
+            >👥
+            <span id="totalTeams" data-test="total-teams">0</span> Teams</span
           >
         </div>
         <div class="toolbar-actions">
@@ -72,7 +77,11 @@
             disabled
             data-test="verwijderen-geselecteerde"
           >
-            🗑️ Verwijder Geselecteerde (<span id="selectedCount">0</span>)
+            🗑️ Verwijder Geselecteerde (<span
+              id="selectedCount"
+              data-test="selected-count"
+              >0</span
+            >)
           </button>
         </div>
       </div>
@@ -85,16 +94,29 @@
         </p>
       </div>
 
-      <div class="grid-container">
+      <div class="grid-container" data-test="grid-container">
         <!-- Loading Spinner -->
-        <div id="loadingSpinner" class="loading-spinner">
+        <div
+          id="loadingSpinner"
+          class="loading-spinner"
+          data-test="loading-spinner"
+        >
           <div class="spinner"></div>
           <p class="loading-text">
-            Data wordt gegenereerd...<br /><span id="loadingProgress">0</span>
+            Data wordt gegenereerd...<br /><span
+              id="loadingProgress"
+              data-test="loading-progress"
+              >0</span
+            >
             rijen
           </p>
         </div>
-        <div id="myGrid" class="ag-theme-alpine" style="display: none"></div>
+        <div
+          id="myGrid"
+          class="ag-theme-alpine"
+          style="display: none"
+          data-test="ag-grid"
+        ></div>
       </div>
     </div>
 

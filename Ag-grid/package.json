@@ -11,7 +11,10 @@
     "watch": "tsc --watch",
     "dev": "tsc --watch",
     "clean": "rm -rf dist wasm",
-    "serve": "npx serve -l 8000"
+    "serve": "npx serve -l 8000",
+    "test": "cd ../playwright && npm run test:ag-grid",
+    "test:ui": "cd ../playwright && npm run test:ag-grid:ui",
+    "test:headed": "cd ../playwright && npm run test:ag-grid:headed"
   },
   "keywords": [
     "ag-grid",
@@ -24,6 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.10.0",
+    "@playwright/test": "^1.40.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {

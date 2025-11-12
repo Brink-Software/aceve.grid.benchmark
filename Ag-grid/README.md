@@ -1,6 +1,7 @@
 # AG Grid - 200.000 Rijen, 500 Kolommen met CRUD
 
 Een krachtige AG Grid tabel met:
+
 - ✅ **200.000+ rijen** data
 - ✅ **500 kolommen** (10 default + 490 extra)
 - ✅ **Row Grouping** (Afdeling → Team)
@@ -47,17 +48,19 @@ npx serve -l 8000
 
 ### 5. Open in browser
 
-Ga naar: **http://localhost:8000/Ag-grid/index.html**
+Ga naar: **http://localhost:8000/**
 
 ## ✨ Features
 
 ### CRUD Operations
 
 1. **➕ Nieuwe Rij Toevoegen**
+
    - Klik op "➕ Nieuwe Rij Toevoegen" button
    - Een nieuwe rij wordt automatisch gegenereerd en toegevoegd
 
 2. **✏️ Waarde Wijzigen**
+
    - Dubbelklik op een cel om te bewerken
    - Druk op Enter om op te slaan
    - Alle kolommen zijn bewerkbaar (editable)
@@ -113,7 +116,7 @@ Ag-grid/
 
 ### AG Grid Enterprise Licentie
 
-Dit project gebruikt **AG Grid Enterprise Edition** voor row grouping. 
+Dit project gebruikt **AG Grid Enterprise Edition** voor row grouping.
 
 - **Trial**: 30 dagen gratis trial beschikbaar
 - **Licentie**: Vereist voor productie gebruik
@@ -180,6 +183,7 @@ Dit project is beschikbaar op:
 **http://localhost:8000/Ag-grid/index.html**
 
 Voor meerdere projecten in dezelfde server:
+
 - `/Ag-grid` - Dit project
 - `/AnderProject` - Andere projecten kunnen hier worden toegevoegd
 
