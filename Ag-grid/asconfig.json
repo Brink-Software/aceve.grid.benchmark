@@ -1,0 +1,16 @@
+{
+  "targets": {
+    "release": {
+      "binaryFile": "wasm/data-generator.wasm",
+      "textFile": "wasm/data-generator.wat",
+      "sourceMap": true,
+      "optimizeLevel": 3,
+      "shrinkLevel": 2,
+      "converge": false,
+      "noAssert": false
+    }
+  },
+  "options": {
+    "bindings": "esm"
+  }
+}
