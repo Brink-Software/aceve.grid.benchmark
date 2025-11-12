@@ -118,10 +118,7 @@ test.describe("AG Grid Tests", () => {
   });
 
   test("knoppen zijn beschikbaar", async ({ page }) => {
-<<<<<<< HEAD
-=======
     test.slow();
->>>>>>> 72a180f (add playwricht)
     // Wacht tot grid ready is
     await waitForGridReady(page);
 
@@ -216,7 +213,3 @@ test.describe("AG Grid Tests", () => {
     }
   });
 });
-<<<<<<< HEAD
-
-=======
->>>>>>> 72a180f (add playwricht)
