@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AG Grid - 200.000 Rijen, 500 Kolommen met CRUD</title>
+    <!-- Fluent UI CSS -->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <!-- AG Grid Community CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/styles/ag-grid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/styles/ag-theme-alpine.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>🏢 AG Grid - 200.000 Rijen, 500 Kolommen</h1>
+        <p>
+          Met Row Grouping en CRUD functionaliteit (Toevoegen, Bewerken,
+          Verwijderen)
+        </p>
+      </header>
+
+      <div class="toolbar">
+        <div class="toolbar-info">
+          <span class="info-badge"
+            >📊 <span id="totalEmployees">0</span> Medewerkers</span
+          >
+          <span class="info-badge"
+            >🏢 <span id="totalDepartments">0</span> Afdelingen</span
+          >
+          <span class="info-badge"
+            >👥 <span id="totalTeams">0</span> Teams</span
+          >
+        </div>
+        <div class="toolbar-actions">
+          <button
+            id="addRowBtn"
+            class="btn-primary"
+            disabled
+            title="Selecteer eerst een rij of groep om een nieuwe rij toe te voegen"
+          >
+            ➕ Nieuwe Rij Toevoegen
+          </button>
+          <button id="expandAllBtn" class="btn-secondary">
+            📂 Alles Uitklappen
+          </button>
+          <button id="collapseAllBtn" class="btn-secondary">
+            📁 Alles Inklappen
+          </button>
+          <button id="deleteRowsBtn" class="btn-danger" disabled>
+            🗑️ Verwijder Geselecteerde (<span id="selectedCount">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <p>
+          <strong>💡 Tips:</strong> Dubbelklik op een cel om te bewerken |
+          Selecteer rijen en klik op "Verwijder Geselecteerde" | Gebruik "Nieuwe
+          Rij Toevoegen" om een rij toe te voegen
+        </p>
+      </div>
+
+      <div class="grid-container">
+        <!-- Loading Spinner -->
+        <div id="loadingSpinner" class="loading-spinner">
+          <div class="spinner"></div>
+          <p class="loading-text">
+            Data wordt gegenereerd...<br /><span id="loadingProgress">0</span>
+            rijen
+          </p>
+        </div>
+        <div id="myGrid" class="ag-theme-alpine" style="display: none"></div>
+      </div>
+    </div>
+
+    <!-- AG Grid Community JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/dist/ag-grid-community.min.js"></script>
+    <!-- AG Grid Enterprise JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-enterprise@31.0.0/dist/ag-grid-enterprise.min.js"></script>
+    <script type="module" src="dist/app.js"></script>
+    <script>
+      // Error handler voor module loading
+      window.addEventListener("error", function (e) {
+        if (e.filename && e.filename.includes("app.js")) {
+          console.error("Module loading error:", e.message);
+          console.error("File:", e.filename);
+          console.error("Line:", e.lineno);
+        }
+      });
+
+      // Check of module geladen is
+      setTimeout(function () {
+        if (typeof window.gridOptions === "undefined") {
+          console.warn("Waarschuwing: gridOptions niet gevonden na 2 seconden");
+          console.log("Controleer of de module correct is geladen");
+        }
+      }, 2000);
+    </script>
+  </body>
+</html>

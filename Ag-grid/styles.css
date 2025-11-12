@@ -1,0 +1,373 @@
+/* Fluent UI Design Tokens */
+:root {
+  --colorNeutralForeground1: #323130;
+  --colorNeutralForeground2: #605e5c;
+  --colorNeutralForeground3: #8a8886;
+  --colorNeutralBackground1: #ffffff;
+  --colorNeutralBackground2: #faf9f8;
+  --colorNeutralBackground3: #f3f2f1;
+  --colorBrandBackground: #0078d4;
+  --colorBrandBackgroundHover: #106ebe;
+  --colorBrandBackgroundPressed: #005a9e;
+  --colorNeutralStroke1: #edebe9;
+  --colorNeutralStroke2: #e1dfdd;
+  --shadow2: 0 1.6px 3.6px rgba(0, 0, 0, 0.13),
+    0 0.3px 0.9px rgba(0, 0, 0, 0.11);
+  --shadow4: 0 3.2px 7.2px rgba(0, 0, 0, 0.13),
+    0 0.6px 1.8px rgba(0, 0, 0, 0.11);
+  --shadow8: 0 6.4px 14.4px rgba(0, 0, 0, 0.13),
+    0 1.2px 3.6px rgba(0, 0, 0, 0.11);
+  --spacingHorizontalS: 8px;
+  --spacingHorizontalM: 16px;
+  --spacingHorizontalL: 24px;
+  --spacingHorizontalXL: 32px;
+  --fontSizeBase200: 12px;
+  --fontSizeBase300: 14px;
+  --fontSizeBase400: 16px;
+  --fontSizeBase500: 20px;
+  --fontSizeBase600: 24px;
+  --fontWeightRegular: 400;
+  --fontWeightSemibold: 600;
+  --borderRadiusMedium: 4px;
+  --borderRadiusLarge: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto",
+    "Helvetica Neue", sans-serif;
+  background: var(--colorNeutralBackground2);
+  color: var(--colorNeutralForeground1);
+  min-height: 100vh;
+  padding: var(--spacingHorizontalM);
+  font-size: var(--fontSizeBase300);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  background: var(--colorNeutralBackground1);
+  border-radius: var(--borderRadiusLarge);
+  box-shadow: var(--shadow8);
+  overflow: hidden;
+}
+
+header {
+  background: var(--colorBrandBackground);
+  color: white;
+  padding: var(--spacingHorizontalXL);
+  text-align: center;
+}
+
+header h1 {
+  font-size: var(--fontSizeBase600);
+  font-weight: var(--fontWeightSemibold);
+  margin-bottom: var(--spacingHorizontalS);
+  color: white;
+}
+
+header p {
+  font-size: var(--fontSizeBase400);
+  opacity: 0.9;
+  color: white;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacingHorizontalL);
+  background: var(--colorNeutralBackground2);
+  border-bottom: 1px solid var(--colorNeutralStroke1);
+  flex-wrap: wrap;
+  gap: var(--spacingHorizontalM);
+}
+
+.toolbar-info {
+  display: flex;
+  gap: var(--spacingHorizontalM);
+  flex-wrap: wrap;
+}
+
+.info-badge {
+  background: var(--colorNeutralBackground1);
+  padding: var(--spacingHorizontalS) var(--spacingHorizontalM);
+  border-radius: var(--borderRadiusMedium);
+  font-weight: var(--fontWeightSemibold);
+  color: var(--colorNeutralForeground1);
+  box-shadow: var(--shadow2);
+  border: 1px solid var(--colorNeutralStroke1);
+  font-size: var(--fontSizeBase300);
+}
+
+.toolbar-actions {
+  display: flex;
+  gap: var(--spacingHorizontalS);
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  padding: var(--spacingHorizontalS) var(--spacingHorizontalM);
+  border: none;
+  border-radius: var(--borderRadiusMedium);
+  font-size: var(--fontSizeBase300);
+  font-weight: var(--fontWeightSemibold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow2);
+  font-family: inherit;
+  min-height: 32px;
+}
+
+.btn-primary {
+  background: var(--colorBrandBackground);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--colorBrandBackgroundHover);
+  box-shadow: var(--shadow4);
+}
+
+.btn-primary:active {
+  background: var(--colorBrandBackgroundPressed);
+}
+
+.btn-secondary {
+  background: var(--colorNeutralBackground3);
+  color: var(--colorNeutralForeground1);
+  border: 1px solid var(--colorNeutralStroke1);
+}
+
+.btn-secondary:hover {
+  background: var(--colorNeutralBackground2);
+  box-shadow: var(--shadow4);
+}
+
+.btn-danger {
+  background: #d13438;
+  color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #a4262c;
+  box-shadow: var(--shadow4);
+}
+
+.btn-danger:disabled {
+  background: var(--colorNeutralBackground3);
+  color: var(--colorNeutralForeground3);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.info-panel {
+  padding: var(--spacingHorizontalM);
+  background: #deecf9;
+  border-bottom: 1px solid #c7e0f4;
+}
+
+.info-panel p {
+  color: #004578;
+  font-size: var(--fontSizeBase300);
+  margin: 0;
+}
+
+.grid-container {
+  width: 100%;
+  height: calc(100vh - 300px);
+  min-height: 600px;
+  padding: var(--spacingHorizontalM);
+  position: relative;
+}
+
+#myGrid {
+  width: 100%;
+  height: 100%;
+}
+
+/* Fluent UI AG Grid Theme Overrides */
+.ag-theme-alpine {
+  --ag-font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto",
+    sans-serif;
+  --ag-font-size: var(--fontSizeBase300);
+  --ag-header-height: 40px;
+  --ag-header-background-color: var(--colorNeutralBackground2);
+  --ag-header-foreground-color: var(--colorNeutralForeground1);
+  --ag-border-color: var(--colorNeutralStroke1);
+  --ag-row-border-color: var(--colorNeutralStroke1);
+  --ag-background-color: var(--colorNeutralBackground1);
+  --ag-odd-row-background-color: var(--colorNeutralBackground1);
+  --ag-row-hover-color: var(--colorNeutralBackground2);
+  --ag-selected-row-background-color: #deecf9;
+  --ag-header-cell-hover-background-color: var(--colorNeutralBackground3);
+  --ag-header-cell-moving-background-color: var(--colorNeutralBackground3);
+  --ag-range-selection-background-color: rgba(0, 120, 212, 0.1);
+  --ag-range-selection-border-color: var(--colorBrandBackground);
+  --ag-input-focus-border-color: var(--colorBrandBackground);
+  --ag-checkbox-checked-color: var(--colorBrandBackground);
+  --ag-checkbox-unchecked-color: var(--colorNeutralForeground3);
+  --ag-checkbox-background-color: var(--colorNeutralBackground1);
+  --ag-font-weight: var(--fontWeightRegular);
+  --ag-header-font-weight: var(--fontWeightSemibold);
+}
+
+.ag-theme-alpine .ag-header-cell {
+  font-weight: var(--fontWeightSemibold);
+  font-size: var(--fontSizeBase300);
+  color: var(--colorNeutralForeground1);
+}
+
+.ag-theme-alpine .ag-cell {
+  font-size: var(--fontSizeBase300);
+  color: var(--colorNeutralForeground1);
+  padding: var(--spacingHorizontalS) var(--spacingHorizontalM);
+}
+
+.ag-theme-alpine .ag-row {
+  border-bottom: 1px solid var(--colorNeutralStroke1);
+}
+
+.ag-theme-alpine .ag-row:hover {
+  background-color: var(--colorNeutralBackground2);
+}
+
+.ag-theme-alpine .ag-row-selected {
+  background-color: #deecf9 !important;
+}
+
+.ag-theme-alpine .ag-header-cell-resize {
+  background-color: var(--colorNeutralStroke1);
+}
+
+.ag-theme-alpine .ag-input-field-input {
+  border: 1px solid var(--colorNeutralStroke1);
+  border-radius: var(--borderRadiusMedium);
+  padding: var(--spacingHorizontalS);
+  font-family: inherit;
+  font-size: var(--fontSizeBase300);
+}
+
+.ag-theme-alpine .ag-input-field-input:focus {
+  border-color: var(--colorBrandBackground);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--colorBrandBackground);
+}
+
+/* Loading Spinner - Fluent UI Style */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  background: var(--colorNeutralBackground1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid var(--colorNeutralBackground3);
+  border-top: 3px solid var(--colorBrandBackground);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: var(--spacingHorizontalL);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-text {
+  font-size: var(--fontSizeBase400);
+  font-weight: var(--fontWeightSemibold);
+  color: var(--colorNeutralForeground1);
+  text-align: center;
+}
+
+.loading-text span {
+  font-size: var(--fontSizeBase500);
+  font-weight: var(--fontWeightSemibold);
+  color: var(--colorBrandBackground);
+}
+
+.delete-row-btn {
+  background: #d13438;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: var(--borderRadiusMedium);
+  cursor: pointer;
+  font-size: var(--fontSizeBase300);
+  transition: all 0.2s;
+  min-height: 24px;
+  font-family: inherit;
+}
+
+.delete-row-btn:hover {
+  background: #a4262c;
+  box-shadow: var(--shadow2);
+}
+
+/* Fluent UI Button Styles */
+button {
+  font-family: inherit;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: var(--fontSizeBase500);
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar-actions {
+    justify-content: center;
+  }
+
+  .grid-container {
+    height: calc(100vh - 400px);
+  }
+}
+
+/* Fluent UI Focus Styles */
+button:focus-visible,
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.btn-danger:focus-visible {
+  outline: 2px solid var(--colorBrandBackground);
+  outline-offset: 2px;
+}
+
+/* Fluent UI Group Row Styling */
+.ag-theme-alpine .ag-row-group {
+  background-color: var(--colorNeutralBackground2);
+  font-weight: var(--fontWeightSemibold);
+}
+
+.ag-theme-alpine .ag-row-group:hover {
+  background-color: var(--colorNeutralBackground3);
+}

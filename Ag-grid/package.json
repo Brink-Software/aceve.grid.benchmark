@@ -1,0 +1,30 @@
+{
+  "name": "ag-grid-crud",
+  "version": "1.0.0",
+  "description": "AG Grid met 200.000 rijen, 500 kolommen, row grouping en CRUD functionaliteit",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "serve": "npx serve -l 8000"
+  },
+  "keywords": [
+    "ag-grid",
+    "typescript",
+    "row-grouping",
+    "crud",
+    "large-dataset"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "ag-grid-community": "^31.0.0",
+    "ag-grid-enterprise": "^34.3.1"
+  }
+}
