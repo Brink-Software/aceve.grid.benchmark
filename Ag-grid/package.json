@@ -5,9 +5,12 @@
   "main": "dist/app.js",
   "scripts": {
     "build": "tsc",
+    "build:wasm": "powershell -ExecutionPolicy Bypass -File build-wasm.ps1",
+    "build:wasm:unix": "bash build-wasm.sh",
+    "build:all": "npm run build:wasm && npm run build",
     "watch": "tsc --watch",
     "dev": "tsc --watch",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist wasm",
     "serve": "npx serve -l 8000"
   },
   "keywords": [

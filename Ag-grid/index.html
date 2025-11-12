@@ -48,16 +48,30 @@
             class="btn-primary"
             disabled
             title="Selecteer eerst een rij of groep om een nieuwe rij toe te voegen"
+            data-test="nieuw-rij-toevoegen"
           >
             ➕ Nieuwe Rij Toevoegen
           </button>
-          <button id="expandAllBtn" class="btn-secondary">
+          <button
+            id="expandAllBtn"
+            class="btn-secondary"
+            data-test="alles-uitklappen"
+          >
             📂 Alles Uitklappen
           </button>
-          <button id="collapseAllBtn" class="btn-secondary">
+          <button
+            id="collapseAllBtn"
+            class="btn-secondary"
+            data-test="alles-inklappen"
+          >
             📁 Alles Inklappen
           </button>
-          <button id="deleteRowsBtn" class="btn-danger" disabled>
+          <button
+            id="deleteRowsBtn"
+            class="btn-danger"
+            disabled
+            data-test="verwijderen-geselecteerde"
+          >
             🗑️ Verwijder Geselecteerde (<span id="selectedCount">0</span>)
           </button>
         </div>
