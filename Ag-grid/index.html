@@ -124,24 +124,66 @@
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/dist/ag-grid-community.min.js"></script>
     <!-- AG Grid Enterprise JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-enterprise@31.0.0/dist/ag-grid-enterprise.min.js"></script>
-    <script type="module" src="dist/app.js"></script>
     <script>
+      // Verify Enterprise loaded before app script
+      (function checkEnterpriseLoaded() {
+        if (typeof window.agGrid === "undefined") {
+          console.log("Wachten op AG Grid Community...");
+          setTimeout(checkEnterpriseLoaded, 100);
+          return;
+        }
+        
+        const agGrid = window.agGrid;
+        let enterpriseLoaded = false;
+        
+        if (agGrid.EnterpriseModule) {
+          enterpriseLoaded = true;
+          console.log("✓ AG Grid Enterprise geladen (EnterpriseModule)");
+        } else if (agGrid.LicenseManager) {
+          enterpriseLoaded = true;
+          console.log("✓ AG Grid Enterprise geladen (LicenseManager)");
+        } else {
+          console.warn("⚠ AG Grid Enterprise nog niet gedetecteerd, wachten...");
+          setTimeout(checkEnterpriseLoaded, 200);
+          return;
+        }
+        
+        // Enterprise is loaded, now load the app
+        console.log("✓ Alle AG Grid modules geladen, start applicatie...");
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "../dist/Ag-grid/src/ag-grid-app.js";
+        document.body.appendChild(script);
+      })();
+      
       // Error handler voor module loading
       window.addEventListener("error", function (e) {
-        if (e.filename && e.filename.includes("app.js")) {
+        if (e.filename && (e.filename.includes("ag-grid-app.js") || e.filename.includes("app.js") || e.filename.includes("data.js"))) {
           console.error("Module loading error:", e.message);
           console.error("File:", e.filename);
           console.error("Line:", e.lineno);
+          console.error("Full error:", e);
         }
       });
 
-      // Check of module geladen is
-      setTimeout(function () {
-        if (typeof window.gridOptions === "undefined") {
-          console.warn("Waarschuwing: gridOptions niet gevonden na 2 seconden");
-          console.log("Controleer of de module correct is geladen");
+      // Check of module geladen is - verhoog timeout voor grote modules
+      let checkCount = 0;
+      const checkInterval = setInterval(function () {
+        checkCount++;
+        if (typeof window.gridOptions !== "undefined") {
+          console.log("✓ Module succesvol geladen na " + (checkCount * 500) + "ms");
+          clearInterval(checkInterval);
+        } else if (checkCount >= 10) {
+          // Na 5 seconden
+          console.warn("Waarschuwing: gridOptions niet gevonden na 5 seconden");
+          console.log("Controleer browser console voor foutmeldingen");
+          console.log("Mogelijke oorzaken:");
+          console.log("1. Module path incorrect");
+          console.log("2. Import errors (check console voor 'Failed to load module')");
+          console.log("3. JavaScript errors in module");
+          clearInterval(checkInterval);
         }
-      }, 2000);
+      }, 500);
     </script>
   </body>
 </html>
