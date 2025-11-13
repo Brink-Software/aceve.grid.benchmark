@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid Benchmark - Home</title>
+    <!-- Fluent UI CSS -->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto",
+          "Helvetica Neue", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 60px 40px;
+        max-width: 700px;
+        width: 100%;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 48px;
+        font-weight: 700;
+        color: #323130;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        font-size: 20px;
+        color: #605e5c;
+        margin-bottom: 40px;
+        line-height: 1.6;
+      }
+
+      .nav-button {
+        display: inline-block;
+        padding: 18px 40px;
+        font-size: 20px;
+        font-weight: 600;
+        color: white;
+        background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+        border: none;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
+        margin: 8px;
+        cursor: pointer;
+        min-width: 250px;
+      }
+
+      .nav-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5);
+        background: linear-gradient(135deg, #106ebe 0%, #005a9e 100%);
+      }
+
+      .nav-button:active {
+        transform: translateY(0);
+      }
+
+      .features {
+        margin-top: 50px;
+        text-align: left;
+      }
+
+      .features h2 {
+        font-size: 24px;
+        color: #323130;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .feature-list {
+        list-style: none;
+        padding: 0;
+      }
+
+      .feature-list li {
+        padding: 12px 0;
+        color: #605e5c;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+      }
+
+      .feature-list li:before {
+        content: "✓";
+        color: #107c10;
+        font-weight: bold;
+        font-size: 20px;
+        margin-right: 12px;
+        min-width: 24px;
+      }
+
+      .button-group {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 40px;
+        align-items: center;
+      }
+
+      @media (min-width: 768px) {
+        .button-group {
+          flex-direction: row;
+          justify-content: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🏢 Grid Benchmark</h1>
+      <p class="subtitle">
+        Vergelijk de prestaties van verschillende grid componenten met grote
+        datasets
+      </p>
+
+      <div class="button-group">
+        <a href="/Ag-grid/index.html" class="nav-button"> 📊 AG Grid </a>
+      </div>
+
+      <div class="features">
+        <h2>Features</h2>
+        <ul class="feature-list">
+          <li>200.000+ rijen data</li>
+          <li>500 kolommen</li>
+          <li>Row Grouping functionaliteit</li>
+          <li>CRUD operaties (Toevoegen, Bewerken, Verwijderen)</li>
+          <li>Performance metingen</li>
+          <li>Real-time data updates</li>
+          <li>Auto-sizing kolommen</li>
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>

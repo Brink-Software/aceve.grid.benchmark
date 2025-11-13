@@ -9,7 +9,6 @@
       rel="stylesheet"
       href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
     />
-    <link rel="stylesheet" href="styles.css" />
     <!-- AG Grid Community CSS -->
     <link
       rel="stylesheet"
@@ -19,10 +18,22 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/styles/ag-theme-alpine.css"
     />
+    <!-- Custom Styles - Laatste zodat het AG Grid theme kan overschrijven -->
+    <link rel="stylesheet" href="/Ag-grid/styles.css" />
   </head>
   <body>
     <div class="container">
       <header>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+          "
+        >
+          <a href="/"> ← Back to Home </a>
+        </div>
         <h1>🏢 AG Grid - 200.000 Rijen, 500 Kolommen</h1>
         <p>
           Met Row Grouping en CRUD functionaliteit (Toevoegen, Bewerken,

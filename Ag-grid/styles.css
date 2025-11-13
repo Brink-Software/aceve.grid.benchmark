@@ -78,6 +78,22 @@ header p {
   color: white;
 }
 
+header a {
+  color: white;
+  text-decoration: none;
+  font-size: var(--fontSizeBase300);
+  padding: var(--spacingHorizontalS) var(--spacingHorizontalM);
+  border: 1px solid white;
+  border-radius: var(--borderRadiusMedium);
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+header a:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow2);
+}
+
 .toolbar {
   display: flex;
   justify-content: space-between;
