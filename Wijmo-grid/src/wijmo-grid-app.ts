@@ -259,15 +259,9 @@ export function addNewRow(): void {
     let selectedDept: string | null = null;
     let selectedTeam: string | null = null;
 
-    const selectedRows = grid.selection.rows;
-    if (selectedRows.length === 0) {
-      alert(
-        "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen."
-      );
-      return;
-    }
+    console.log("Selected rows for adding new row:");
 
-    const selectedIndex = selectedRows[0];
+    const selectedIndex = grid.selection.row;
     const selectedItem = collectionView.items[selectedIndex];
 
     if (selectedItem) {
@@ -405,8 +399,8 @@ export function deleteSelectedRows(): void {
     return;
   }
 
-  const selectedRows = grid.selection.rows;
-  if (selectedRows.length === 0) {
+  const selectedRow = grid.selection.row;
+  if (!selectedRow) {
     console.warn("Geen rijen geselecteerd voor verwijdering");
     return;
   }
@@ -417,7 +411,7 @@ export function deleteSelectedRows(): void {
     : 0;
 
   console.log("=== PERFORMANCE METING: MEERDERE RIJEN VERWIJDEREN ===");
-  console.log("Aantal rijen:", selectedRows.length);
+  console.log("row to Remove", selectedRow);
   console.log("Start tijd:", performanceStart);
   if (startMemory) {
     console.log(
@@ -427,7 +421,7 @@ export function deleteSelectedRows(): void {
     );
   }
 
-  const idsToDelete = selectedRows
+  const idsToDelete = [selectedRow]
     .map((rowIndex: number) => collectionView.items[rowIndex])
     .filter((item: any) => item && item.id)
     .map((item: any) => item.id);
@@ -453,7 +447,6 @@ export function deleteSelectedRows(): void {
         console.log(
           "=== PERFORMANCE RESULTATEN: MEERDERE RIJEN VERWIJDEREN ==="
         );
-        console.log("Aantal rijen:", selectedRows.length);
         console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
 
         if (startMemory && endMemory) {
@@ -466,7 +459,7 @@ export function deleteSelectedRows(): void {
         }
 
         showPerformanceResult(
-          `Rijen Verwijderen (${selectedRows.length})`,
+          `Rijen Verwijderen (1)`,
           totalTime.toFixed(2) + " ms",
           "rijen-verwijderen"
         );
@@ -474,6 +467,42 @@ export function deleteSelectedRows(): void {
     });
   }, 200);
 }
+
+// Handle selection changed
+const selectionChangedHandler = () => {
+  (window as any).select = grid.selection;
+  console.log("Selection changed event triggered");
+
+  const selectedCountEl = document.getElementById("selectedCount");
+  const deleteBtn = document.getElementById(
+    "deleteRowsBtn"
+  ) as HTMLButtonElement;
+  const addRowBtn = document.getElementById("addRowBtn") as HTMLButtonElement;
+
+  const hasSelection = grid.selection.isSingleCell;
+
+  console.log("Selection changed. Has selection:", hasSelection);
+
+  if (selectedCountEl) {
+    if (hasSelection) {
+      selectedCountEl.textContent = "1";
+    } else {
+      selectedCountEl.textContent = "0";
+    }
+  }
+  if (deleteBtn) {
+    deleteBtn.disabled = !hasSelection;
+  }
+  if (addRowBtn) {
+    addRowBtn.disabled = !hasSelection;
+    if (!hasSelection) {
+      addRowBtn.title =
+        "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
+    } else {
+      addRowBtn.title = "Voeg een nieuwe rij toe in dezelfde groep";
+    }
+  }
+};
 
 // ============================================
 // Expand/Collapse Functions
@@ -617,8 +646,6 @@ function setupEventHandlers() {
   const deleteRowsBtn = document.getElementById("deleteRowsBtn");
   const addRowBtn = document.getElementById("addRowBtn");
 
-  console.log("Setting up event handlers", expandAllBtn);
-
   if (expandAllBtn) {
     expandAllBtn.addEventListener("click", () => {
       expandAllGroups();
@@ -647,6 +674,118 @@ function setupEventHandlers() {
     console.log("Add row button event listener attached");
   } else {
     console.warn("Add row button not found!");
+  }
+}
+
+// ============================================
+// Group Sum Calculations
+// ============================================
+
+function calculateGroupSums(): void {
+  console.log("Calculating group sums...");
+
+  if (!collectionView || !rowData || rowData.length === 0) {
+    console.error("CollectionView or rowData not available");
+    return;
+  }
+
+  const groupSummary: Record<string, Record<string, number>> = {};
+
+  // Numeric fields to sum
+  const numericFields = [
+    "salary",
+    "projectsCompleted",
+    "trainingHours",
+    "yearsExperience",
+    "performanceScore",
+  ];
+
+  // Also include all dynamically generated numeric columns
+  for (let i = 1; i <= 400; i++) {
+    numericFields.push(`num_${i}`);
+  }
+
+  // Group data by department and team
+  rowData.forEach((employee: any) => {
+    const dept = employee.department;
+    const team = employee.team;
+    const groupKey = `${dept} > ${team}`;
+
+    if (!groupSummary[groupKey]) {
+      groupSummary[groupKey] = {};
+      numericFields.forEach((field) => {
+        groupSummary[groupKey][field] = 0;
+      });
+    }
+
+    // Add values
+    numericFields.forEach((field) => {
+      const value = parseFloat(employee[field]) || 0;
+      groupSummary[groupKey][field] += value;
+    });
+  });
+
+  // Also calculate department-level totals
+  const deptSummary: Record<string, Record<string, number>> = {};
+  rowData.forEach((employee: any) => {
+    const dept = employee.department;
+
+    if (!deptSummary[dept]) {
+      deptSummary[dept] = {};
+      numericFields.forEach((field) => {
+        deptSummary[dept][field] = 0;
+      });
+    }
+
+    numericFields.forEach((field) => {
+      const value = parseFloat(employee[field]) || 0;
+      deptSummary[dept][field] += value;
+    });
+  });
+
+  // Log department summaries
+  console.log("=== DEPARTMENT SUMMARIES ===");
+  Object.entries(deptSummary).forEach(([dept, sums]) => {
+    console.log(`\n${dept}:`);
+    console.log(`  Total Salary: €${sums.salary?.toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || 0}`);
+    console.log(`  Total Projects: ${sums.projectsCompleted || 0}`);
+    console.log(`  Total Training Hours: ${sums.trainingHours || 0}`);
+    console.log(`  Avg Years Experience: ${(sums.yearsExperience / (rowData.filter((e: any) => e.department === dept).length || 1)).toFixed(1)}`);
+    console.log(`  Avg Performance Score: ${(sums.performanceScore / (rowData.filter((e: any) => e.department === dept).length || 1)).toFixed(1)}`);
+  });
+
+  // Log team summaries
+  console.log("\n=== TEAM SUMMARIES ===");
+  Object.entries(groupSummary).forEach(([group, sums]) => {
+    console.log(`\n${group}:`);
+    console.log(`  Total Salary: €${sums.salary?.toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || 0}`);
+    console.log(`  Total Projects: ${sums.projectsCompleted || 0}`);
+    console.log(`  Total Training Hours: ${sums.trainingHours || 0}`);
+  });
+
+  // Store in window for console access
+  (window as any).groupSummary = groupSummary;
+  (window as any).deptSummary = deptSummary;
+
+  console.log("Group summaries stored in window.groupSummary and window.deptSummary");
+
+  return;
+}
+
+export function showGroupSums(): void {
+  calculateGroupSums();
+  
+  // Create a summary report
+  if ((window as any).deptSummary) {
+    const summary = (window as any).deptSummary;
+    const report = Object.entries(summary)
+      .map(([dept, sums]: [string, any]) => {
+        const deptCount = rowData.filter((e: any) => e.department === dept).length;
+        return `${dept}: ${deptCount} employees | Salary: €${(sums.salary || 0).toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} | Projects: ${sums.projectsCompleted || 0}`;
+      })
+      .join("\n");
+    
+    console.log("=== QUICK SUMMARY ===\n" + report);
   }
 }
 
@@ -769,7 +908,9 @@ function initializeGrid(gridInitStartTime?: number) {
     collectionView.trackChanges = true;
 
     // Create FlexGrid FIRST
-    grid = new wijmoGrid.FlexGrid(gridDiv);
+    grid = new wijmoGrid.FlexGrid(gridDiv, {
+      selectionChanged: selectionChangedHandler,
+    });
     grid.itemsSource = collectionView;
     grid.autoGenerateColumns = false;
     grid.allowSorting = true;
@@ -799,71 +940,29 @@ function initializeGrid(gridInitStartTime?: number) {
         col.allowSorting = colDef.allowSorting;
       if (colDef.allowFiltering !== undefined)
         col.allowFiltering = colDef.allowFiltering;
-      // Skip aggregate for now - it's causing issues with the enum lookup
-      // if (colDef.aggregate) {
-      //   col.aggregate = colDef.aggregate;
-      // }
+      
+      // Set aggregates for group totals
+      if (colDef.aggregate) {
+        try {
+          const AggregateEnum = wijmo.Aggregate || (wijmo as any).collections?.Aggregate;
+          if (AggregateEnum) {
+            if (colDef.aggregate === "Sum") {
+              col.aggregate = AggregateEnum.Sum;
+            } else if (colDef.aggregate === "Avg") {
+              col.aggregate = AggregateEnum.Avg;
+            }
+          }
+        } catch (e) {
+          console.warn("Could not set aggregate for column:", colDef.binding, e);
+        }
+      }
+      
       if (colDef.visible !== undefined) col.visible = colDef.visible;
       grid.columns.push(col);
     });
 
-    collectionView.console.log(
-      "Group descriptions:",
-      collectionView.groupDescriptions.length
-    );
-
     // Refresh collection view to apply grouping
     collectionView.refresh();
-
-    // Add cell templates for actions column
-    grid.formatItem.addHandler((s: any, e: any) => {
-      if (e.panel.cellType === wijmo.grid.CellType.Cell) {
-        const col = s.columns[e.col];
-        if (col && col.binding === "actions") {
-          const row = s.rows[e.row];
-          if (row && row.dataItem) {
-            const item = row.dataItem;
-            if (item && item.id && !item._isTotalRow) {
-              e.cell.innerHTML = `<button class="delete-row-btn" data-test="verwijder-rij-${item.id}" onclick="window.deleteRow(${item.id}); event.stopPropagation(); return false;">🗑️</button>`;
-            } else {
-              e.cell.innerHTML = "";
-            }
-          } else {
-            e.cell.innerHTML = "";
-          }
-        }
-      }
-    });
-
-    // Handle selection changed
-    grid.selectionChanged.addHandler(() => {
-      const selectedRows = grid.selection.rows;
-      const selectedCountEl = document.getElementById("selectedCount");
-      const deleteBtn = document.getElementById(
-        "deleteRowsBtn"
-      ) as HTMLButtonElement;
-      const addRowBtn = document.getElementById(
-        "addRowBtn"
-      ) as HTMLButtonElement;
-
-      const hasSelection = selectedRows.length > 0;
-
-      if (selectedCountEl) {
-        selectedCountEl.textContent = selectedRows.length.toString();
-      }
-      if (deleteBtn) {
-        deleteBtn.disabled = selectedRows.length === 0;
-      }
-      if (addRowBtn) {
-        addRowBtn.disabled = !hasSelection;
-        if (!hasSelection) {
-          addRowBtn.title =
-            "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
-        } else {
-          addRowBtn.title = "Voeg een nieuwe rij toe in dezelfde groep";
-        }
-      }
-    });
 
     const gridCreateEnd = performance.now();
     console.log("Grid created successfully");
@@ -895,6 +994,8 @@ function initializeGrid(gridInitStartTime?: number) {
         if (totalTeamsEl) {
           totalTeamsEl.textContent = teamsSet.size.toString();
         }
+
+        console.log("########Waiting for grid to stabilize...#########");
 
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
@@ -955,6 +1056,11 @@ function initializeGrid(gridInitStartTime?: number) {
     }, 100);
   } catch (error: any) {
     console.error("Fout bij grid initialisatie:", error);
+    // Still try to setup event handlers even if grid init fails
+    setTimeout(() => {
+      console.log("Setting up event handlers after grid init error");
+      setupEventHandlers();
+    }, 100);
   }
 }
 
@@ -966,6 +1072,8 @@ declare global {
     deleteSelectedRows: () => void;
     expandAllGroups: () => void;
     collapseAllGroups: () => void;
+    showGroupSums: () => void;
+    calculateGroupSums: () => void;
   }
 }
 
@@ -974,3 +1082,5 @@ window.deleteRow = deleteRow;
 window.deleteSelectedRows = deleteSelectedRows;
 window.expandAllGroups = expandAllGroups;
 window.collapseAllGroups = collapseAllGroups;
+window.showGroupSums = showGroupSums;
+window.calculateGroupSums = calculateGroupSums;
