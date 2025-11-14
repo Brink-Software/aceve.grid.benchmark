@@ -1,6 +1,6 @@
-# Test AG Grid Projecten
+# Grid Benchmark Projecten
 
-Welkom bij de AG Grid test projecten collectie.
+Welkom bij de Grid Benchmark projecten collectie. Dit project vergelijkt de prestaties van verschillende grid componenten met grote datasets (200.000+ rijen, 500 kolommen).
 
 ## 📁 Projecten
 
@@ -29,19 +29,62 @@ cd ..
 npx serve -l 8000
 ```
 
-**Belangrijk**: Start de server vanuit de **ROOT directory** (test.AgGrid), niet vanuit Ag-grid!
+**Belangrijk**: Start de server vanuit de **ROOT directory**, niet vanuit Ag-grid!
 
 Ga naar: http://localhost:8000/Ag-grid/index.html
 
 Zie [Ag-grid/README.md](Ag-grid/README.md) voor meer details.
 
+### Wijmo-grid
+
+**Locatie**: `/Wijmo-grid`  
+**URL**: `http://localhost:8000/Wijmo-grid/index.html`
+
+Een Wijmo Grid implementatie met dezelfde functionaliteit als Ag-grid voor performance vergelijking.
+
+**Quick Start**:
+```bash
+# 1. Compileer TypeScript (vanuit root directory)
+npm run build
+
+# 2. Start server vanuit ROOT directory
+npx serve -l 8000
+```
+
+Ga naar: http://localhost:8000/Wijmo-grid/index.html
+
+### Playwright Tests
+
+**Locatie**: `/playwright`  
+**Beschrijving**: Centrale Playwright test setup voor alle projecten.
+
+**Quick Start**:
+```bash
+# 1. Ga naar playwright directory
+cd playwright
+
+# 2. Installeer dependencies (eerste keer)
+npm install
+
+# 3. Voer tests uit
+npm test
+
+# Of vanuit root directory:
+npm test
+```
+
+Zie [playwright/README.md](playwright/README.md) voor meer details.
+
 ## 🚀 Server Starten
 
-**⚠️ BELANGRIJK**: Start de server vanuit de **ROOT directory** (waar deze README staat), niet vanuit Ag-grid!
+**⚠️ BELANGRIJK**: Start de server vanuit de **ROOT directory** (waar deze README staat), niet vanuit de subdirectories!
 
 ```bash
-# Vanuit ROOT directory (test.AgGrid)
+# Vanuit ROOT directory
 npx serve -l 8000
+
+# Of met npm script (vanuit ROOT directory)
+npm run serve
 
 # Of met Python (vanuit ROOT directory)
 python -m http.server 8000
@@ -53,18 +96,29 @@ php -S localhost:8000
 ## 📋 Project Structuur
 
 ```
-test.AgGrid/              # ROOT directory (start server hier!)
-├── Ag-grid/              # AG Grid organisatie project
+aceve.grid.benchmark/     # ROOT directory (start server hier!)
+├── Ag-grid/              # AG Grid project
 │   ├── src/             # TypeScript source
 │   ├── dist/            # Gecompileerde JavaScript
 │   ├── index.html       # Main HTML file
 │   └── README.md        # Project documentatie
-└── README.md            # Deze file
+├── Wijmo-grid/           # Wijmo Grid project
+│   ├── src/             # TypeScript source
+│   ├── index.html       # Main HTML file
+│   └── styles.css       # CSS styling
+├── playwright/           # Playwright tests
+│   ├── Ag-grid/         # AG Grid tests
+│   ├── playwright.config.ts
+│   └── README.md        # Test documentatie
+├── index.html            # Home pagina met project navigatie
+└── README.md             # Deze file
 ```
 
 ## 🔗 URLs
 
+- **Home**: http://localhost:8000/
 - **Ag-grid**: http://localhost:8000/Ag-grid/index.html
+- **Wijmo-grid**: http://localhost:8000/Wijmo-grid/index.html
 
 **Let op**: Gebruik `index.html` (met 'l'), niet `index.htm`!
 
@@ -74,14 +128,36 @@ Om een nieuw project toe te voegen:
 
 1. Maak een nieuwe directory: `mkdir NieuwProject`
 2. Plaats je project bestanden in die directory
-3. Update deze README.md met het nieuwe project
-4. Start de server in de root directory
+3. Compileer TypeScript: `npm run build` (vanuit root)
+4. Update `index.html` met een link naar het nieuwe project
+5. Update deze README.md met het nieuwe project
+6. Start de server in de root directory
 
 ## 🛠️ Vereisten
 
-- Node.js (voor npm scripts)
-- TypeScript (voor TypeScript projecten)
-- Web server (voor het serveren van de bestanden)
+- **Node.js** (voor npm scripts en dependencies)
+- **TypeScript** (voor TypeScript projecten)
+- **Web server** (voor het serveren van de bestanden)
+- **npm** of **yarn** (voor package management)
+
+## 🧪 Tests Uitvoeren
+
+### Alle tests
+```bash
+npm test
+```
+
+### Met UI mode
+```bash
+npm run test:ui
+```
+
+### Met zichtbare browser (headed)
+```bash
+npm run test:headed
+```
+
+Zie [playwright/README.md](playwright/README.md) voor meer test opties.
 
 ## 📚 Documentatie
 
@@ -92,9 +168,10 @@ Elk project heeft zijn eigen README.md met specifieke instructies.
 ### 404 Not Found?
 
 1. **Check URL**: Gebruik `index.html` (met 'l'), niet `index.htm`
-2. **Server locatie**: Start server vanuit ROOT directory, niet vanuit Ag-grid/
-3. **Check bestand**: Zorg dat `Ag-grid/index.html` bestaat
-4. **Check dist folder**: Zorg dat `Ag-grid/dist/app.js` bestaat (run `npm run build` in Ag-grid/)
+2. **Server locatie**: Start server vanuit ROOT directory, niet vanuit subdirectories
+3. **Check bestand**: Zorg dat de `index.html` bestanden bestaan in de project directories
+4. **Check dist folder**: Zorg dat `dist/` folders bestaan (run `npm run build` vanuit root directory)
+5. **Check TypeScript compilatie**: Voer `npm run build` uit vanuit root directory
 
 ### Server werkt niet?
 
