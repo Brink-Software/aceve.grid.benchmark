@@ -1,5 +1,4 @@
 # AG Grid project files (moved to Ag-grid/)
-src/
 dist/
 node_modules/
 package-lock.json
