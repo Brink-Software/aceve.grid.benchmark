@@ -47,5 +47,124 @@
     "timeMs": 3650.2,
     "timestamp": "2025-11-17T12:25:54.456Z",
     "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Knoppen Beschikbaar",
+    "time": "34725.00 ms",
+    "timeMs": 34725,
+    "timestamp": "2025-11-17T14:50:10.683Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "40052.30 ms",
+    "timeMs": 40052.3,
+    "timestamp": "2025-11-17T14:50:13.997Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "5280.10 ms",
+    "timeMs": 5280.1,
+    "timestamp": "2025-11-17T14:50:16.699Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "6698.90 ms",
+    "timeMs": 6698.9,
+    "timestamp": "2025-11-17T14:50:17.791Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "20429.80 ms",
+    "timeMs": 20429.8,
+    "timestamp": "2025-11-17T14:52:02.540Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "25633.60 ms",
+    "timeMs": 25633.6,
+    "timestamp": "2025-11-17T14:54:25.185Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Knoppen Beschikbaar",
+    "time": "25916.70 ms",
+    "timeMs": 25916.7,
+    "timestamp": "2025-11-17T14:54:29.818Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "5639.90 ms",
+    "timeMs": 5639.9,
+    "timestamp": "2025-11-17T14:55:22.394Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "5410.10 ms",
+    "timeMs": 5410.1,
+    "timestamp": "2025-11-17T14:55:25.226Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "25335.50 ms",
+    "timeMs": 25335.5,
+    "timestamp": "2025-11-17T15:06:34.967Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Knoppen Beschikbaar",
+    "time": "24660.70 ms",
+    "timeMs": 24660.7,
+    "timestamp": "2025-11-17T15:06:37.656Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "5656.00 ms",
+    "timeMs": 5656,
+    "timestamp": "2025-11-17T15:07:29.123Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "5507.20 ms",
+    "timeMs": 5507.2,
+    "timestamp": "2025-11-17T15:07:32.701Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "26710.20 ms",
+    "timeMs": 26710.2,
+    "timestamp": "2025-11-17T15:09:10.826Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Knoppen Beschikbaar",
+    "time": "26522.50 ms",
+    "timeMs": 26522.5,
+    "timestamp": "2025-11-17T15:09:13.470Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "5395.50 ms",
+    "timeMs": 5395.5,
+    "timestamp": "2025-11-17T15:10:09.713Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "5120.70 ms",
+    "timeMs": 5120.7,
+    "timestamp": "2025-11-17T15:10:10.891Z",
+    "testFile": "ag-grid.spec.ts"
   }
 ]

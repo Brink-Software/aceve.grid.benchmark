@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabulator Grid - 200.000 Rijen, 500 Kolommen met CRUD</title>
+    <!-- Fluent UI CSS -->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
+    />
+    <!-- Tabulator CSS -->
+    <link
+      href="https://unpkg.com/tabulator-tables@6.3.1/dist/css/tabulator.min.css"
+      rel="stylesheet"
+    />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/Tabulator-grid/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+          "
+        >
+          <a href="/"> ← Back to Home </a>
+        </div>
+        <h1>🏢 Tabulator Grid - 200.000 Rijen, 500 Kolommen</h1>
+        <p>
+          Met Row Grouping en CRUD functionaliteit (Toevoegen, Bewerken,
+          Verwijderen)
+        </p>
+      </header>
+
+      <div class="toolbar">
+        <div class="toolbar-info">
+          <span class="info-badge" data-test="info-badge-medewerkers"
+            >📊
+            <span id="totalEmployees" data-test="total-employees">0</span>
+            Medewerkers</span
+          >
+          <span class="info-badge" data-test="info-badge-afdelingen"
+            >🏢
+            <span id="totalDepartments" data-test="total-departments">0</span>
+            Afdelingen</span
+          >
+          <span class="info-badge" data-test="info-badge-teams"
+            >👥
+            <span id="totalTeams" data-test="total-teams">0</span> Teams</span
+          >
+        </div>
+        <div class="toolbar-actions">
+          <button
+            id="addRowBtn"
+            class="btn-primary"
+            disabled
+            title="Selecteer eerst een rij of groep om een nieuwe rij toe te voegen"
+            data-test="nieuw-rij-toevoegen"
+          >
+            ➕ Nieuwe Rij Toevoegen
+          </button>
+          <button
+            id="expandAllBtn"
+            class="btn-secondary"
+            data-test="alles-uitklappen"
+          >
+            📂 Alles Uitklappen
+          </button>
+          <button
+            id="collapseAllBtn"
+            class="btn-secondary"
+            data-test="alles-inklappen"
+          >
+            📁 Alles Inklappen
+          </button>
+          <button
+            id="deleteRowsBtn"
+            class="btn-danger"
+            disabled
+            data-test="verwijderen-geselecteerde"
+          >
+            🗑️ Verwijder Geselecteerde (<span
+              id="selectedCount"
+              data-test="selected-count"
+              >0</span
+            >)
+          </button>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <p>
+          <strong>💡 Tips:</strong> Dubbelklik op een cel om te bewerken |
+          Selecteer rijen en klik op "Verwijder Geselecteerde" | Gebruik "Nieuwe
+          Rij Toevoegen" om een rij toe te voegen
+        </p>
+      </div>
+
+      <div class="grid-container" data-test="grid-container">
+        <!-- Loading Spinner -->
+        <div
+          id="loadingSpinner"
+          class="loading-spinner"
+          data-test="loading-spinner"
+        >
+          <div class="spinner"></div>
+          <p class="loading-text">
+            Data wordt gegenereerd...<br /><span
+              id="loadingProgress"
+              data-test="loading-progress"
+              >0</span
+            >
+            rijen
+          </p>
+        </div>
+        <div id="myGrid" style="display: none" data-test="tabulator-grid"></div>
+      </div>
+    </div>
+
+    <!-- Tabulator JavaScript -->
+    <script src="https://unpkg.com/tabulator-tables@6.3.1/dist/js/tabulator.min.js"></script>
+    <script>
+      // Verify Tabulator loaded before app script
+      let checkCount = 0;
+      const maxChecks = 100; // 10 seconden timeout
+      (function checkTabulatorLoaded() {
+        checkCount++;
+        if (typeof window.Tabulator === "undefined") {
+          if (checkCount === 1) {
+            console.log("Wachten op Tabulator...");
+          }
+          if (checkCount >= maxChecks) {
+            console.error("❌ Tabulator nicht geladen na 10 seconden!");
+            console.error("Controleer of de CDN URL correct is:");
+            console.error(
+              "- https://unpkg.com/tabulator-tables@6.3.1/dist/js/tabulator.min.js"
+            );
+            return;
+          }
+          setTimeout(checkTabulatorLoaded, 100);
+          return;
+        }
+
+        console.log("✓ Tabulator geladen, start applicatie...");
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "../dist/Tabulator-grid/src/tabulator-grid-app.js";
+        document.body.appendChild(script);
+      })();
+
+      // Error handler voor module loading
+      window.addEventListener("error", function (e) {
+        if (
+          e.filename &&
+          (e.filename.includes("tabulator-grid-app.js") ||
+            e.filename.includes("app.js") ||
+            e.filename.includes("data.js"))
+        ) {
+          console.error("Module loading error:", e.message);
+          console.error("File:", e.filename);
+          console.error("Line:", e.lineno);
+          console.error("Full error:", e);
+        }
+      });
+
+      // Check of module geladen is
+      let moduleCheckCount = 0;
+      const checkInterval = setInterval(function () {
+        moduleCheckCount++;
+        if (typeof window.addNewRow !== "undefined") {
+          console.log(
+            "✓ Module succesvol geladen na " + moduleCheckCount * 500 + "ms"
+          );
+          clearInterval(checkInterval);
+        } else if (moduleCheckCount >= 10) {
+          console.warn("Waarschuwing: addNewRow niet gevonden na 5 seconden");
+          console.log("Controleer browser console voor foutmeldingen");
+          clearInterval(checkInterval);
+        }
+      }, 500);
+    </script>
+  </body>
+</html>

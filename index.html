@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Grid Benchmark - Home</title>
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <!-- Fluent UI CSS -->
     <link
       rel="stylesheet"
@@ -25,6 +27,18 @@
         align-items: center;
         justify-content: center;
         padding: 20px;
+        overflow-x: hidden;
+      }
+
+      /* Animated background */
+      .bg-animation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        z-index: -1;
       }
 
       .container {
@@ -35,6 +49,7 @@
         max-width: 700px;
         width: 100%;
         text-align: center;
+        opacity: 0;
       }
 
       h1 {
@@ -46,6 +61,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        opacity: 0;
       }
 
       .subtitle {
@@ -53,6 +69,7 @@
         color: #605e5c;
         margin-bottom: 40px;
         line-height: 1.6;
+        opacity: 0;
       }
 
       .nav-button {
@@ -65,26 +82,47 @@
         border: none;
         border-radius: 8px;
         text-decoration: none;
-        transition: all 0.3s ease;
         box-shadow: 0 4px 12px rgba(0, 120, 212, 0.4);
         margin: 8px;
         cursor: pointer;
         min-width: 250px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .nav-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        transition: left 0.5s ease;
+        z-index: -1;
       }
 
       .nav-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 120, 212, 0.5);
+        transform: translateY(-8px) scale(1.05);
+        box-shadow: 0 12px 30px rgba(0, 120, 212, 0.6);
         background: linear-gradient(135deg, #106ebe 0%, #005a9e 100%);
       }
 
+      .nav-button:hover::before {
+        left: 100%;
+      }
+
       .nav-button:active {
-        transform: translateY(0);
+        transform: translateY(-4px) scale(0.98);
       }
 
       .features {
         margin-top: 50px;
         text-align: left;
+        opacity: 0;
       }
 
       .features h2 {
@@ -105,6 +143,8 @@
         font-size: 16px;
         display: flex;
         align-items: center;
+        opacity: 0;
+        transform: translateX(-20px);
       }
 
       .feature-list li:before {
@@ -133,6 +173,7 @@
     </style>
   </head>
   <body>
+    <div class="bg-animation"></div>
     <div class="container">
       <h1>🏢 Grid Benchmark</h1>
       <p class="subtitle">
@@ -143,6 +184,9 @@
       <div class="button-group">
         <a href="/Ag-grid/index.html" class="nav-button"> 📊 AG Grid </a>
         <a href="/Wijmo-grid/index.html" class="nav-button"> 📊 Wijmo Grid </a>
+        <a href="/Tabulator-grid/index.html" class="nav-button">
+          📊 Tabulator Grid
+        </a>
       </div>
 
       <div class="features">
@@ -158,5 +202,122 @@
         </ul>
       </div>
     </div>
+
+    <script>
+      // Create a timeline for animations
+      const tl = gsap.timeline();
+
+      // Container fade in and scale
+      tl.to(".container", {
+        opacity: 1,
+        duration: 0.6,
+        ease: "back.out",
+      });
+
+      // Title animation
+      tl.to(
+        "h1",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "elastic.out(1, 0.5)",
+        },
+        "<0.2"
+      );
+
+      // Subtitle animation
+      tl.to(
+        ".subtitle",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        "<0.1"
+      );
+
+      // Buttons animation - staggered
+      tl.to(
+        ".nav-button",
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "back.out(1.5)",
+        },
+        "<0.2"
+      );
+
+      // Features section animation
+      tl.to(
+        ".features",
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "<0.1"
+      );
+
+      // Feature list items animation - staggered
+      tl.to(
+        ".feature-list li",
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "<0.1"
+      );
+
+      // Hover animation for buttons
+      const buttons = document.querySelectorAll(".nav-button");
+      buttons.forEach((button) => {
+        button.addEventListener("mouseenter", function () {
+          gsap.to(this, {
+            scale: 1.05,
+            duration: 0.3,
+            overwrite: "auto",
+          });
+        });
+
+        button.addEventListener("mouseleave", function () {
+          gsap.to(this, {
+            scale: 1,
+            duration: 0.3,
+            overwrite: "auto",
+          });
+        });
+      });
+
+      // Parallax effect on mouse move
+      document.addEventListener("mousemove", (e) => {
+        const container = document.querySelector(".container");
+        const x = (window.innerWidth / 2 - e.clientX) / 50;
+        const y = (window.innerHeight / 2 - e.clientY) / 50;
+
+        gsap.to(container, {
+          rotationY: x,
+          rotationX: -y,
+          transformPerspective: 1000,
+          duration: 0.5,
+          overwrite: "auto",
+        });
+      });
+
+      // Reset perspective on mouse leave
+      document.addEventListener("mouseleave", () => {
+        gsap.to(".container", {
+          rotationY: 0,
+          rotationX: 0,
+          duration: 0.5,
+        });
+      });
+    </script>
   </body>
 </html>

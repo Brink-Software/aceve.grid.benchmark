@@ -1,0 +1,72 @@
+[
+  {
+    "operation": "Knoppen Beschikbaar",
+    "time": "2631.10 ms",
+    "timeMs": 2631.1,
+    "timestamp": "2025-11-17T14:49:35.557Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "2605.20 ms",
+    "timeMs": 2605.2,
+    "timestamp": "2025-11-17T14:49:35.741Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "1331.30 ms",
+    "timeMs": 1331.3,
+    "timestamp": "2025-11-17T14:55:45.537Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Knoppen Beschikbaar",
+    "time": "1482.30 ms",
+    "timeMs": 1482.3,
+    "timestamp": "2025-11-17T14:55:46.763Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "565.40 ms",
+    "timeMs": 565.4,
+    "timestamp": "2025-11-17T14:59:42.909Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "516.30 ms",
+    "timeMs": 516.3,
+    "timestamp": "2025-11-17T15:00:14.379Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "1349.90 ms",
+    "timeMs": 1349.9,
+    "timestamp": "2025-11-17T15:10:31.943Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Knoppen Beschikbaar",
+    "time": "1301.30 ms",
+    "timeMs": 1301.3,
+    "timestamp": "2025-11-17T15:10:32.089Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "547.00 ms",
+    "timeMs": 547,
+    "timestamp": "2025-11-17T15:10:58.141Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "504.80 ms",
+    "timeMs": 504.8,
+    "timestamp": "2025-11-17T15:10:58.286Z",
+    "testFile": "tabulator-grid.spec.ts"
+  }
+]

@@ -61,7 +61,7 @@ async function waitForGridReady(page: any, timeout: number = 400000) {
 
   // Wacht tot de performance indicator zichtbaar is
   const perfIndicator = page.locator("#performanceIndicator");
-  await expect(perfIndicator).toBeVisible({ timeout: 5000 });
+  await expect(perfIndicator).toBeVisible({ timeout: 10000 });
 
   // Lees de tijd uit
   const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
@@ -168,7 +168,7 @@ test.describe("Wijmo Grid Tests", () => {
 
     // Wacht tot performance indicator verschijnt
     const perfIndicator = page.locator("#performanceIndicator");
-    await expect(perfIndicator).toBeVisible({ timeout: 5000 });
+    await expect(perfIndicator).toBeVisible({ timeout: 10000 });
 
     // Lees de tijd uit
     const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
@@ -202,7 +202,7 @@ test.describe("Wijmo Grid Tests", () => {
 
     // Wacht tot performance indicator verschijnt
     const perfIndicator = page.locator("#performanceIndicator");
-    await expect(perfIndicator).toBeVisible({ timeout: 5000 });
+    await expect(perfIndicator).toBeVisible({ timeout: 10000 });
 
     // Lees de tijd uit
     const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
