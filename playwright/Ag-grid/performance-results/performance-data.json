@@ -1,56 +1,51 @@
 [
   {
     "operation": "Grid Stabiel",
-    "time": "17616.90 ms",
-    "timeMs": 17616.9,
-    "timestamp": "2025-11-12T14:34:44.859Z"
-  },
-  {
-    "operation": "Rij Toevoegen",
-    "time": "7758.30 ms",
-    "timeMs": 7758.3,
-    "timestamp": "2025-11-12T14:34:53.457Z"
+    "time": "26155.30 ms",
+    "timeMs": 26155.3,
+    "timestamp": "2025-11-17T12:15:42.695Z",
+    "testFile": "ag-grid.spec.ts"
   },
   {
     "operation": "Rij Verwijderen",
-    "time": "7802.80 ms",
-    "timeMs": 7802.8,
-    "timestamp": "2025-11-12T14:34:54.117Z"
+    "time": "3884.20 ms",
+    "timeMs": 3884.2,
+    "timestamp": "2025-11-17T12:15:48.918Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "6046.60 ms",
+    "timeMs": 6046.6,
+    "timestamp": "2025-11-17T12:24:20.623Z",
+    "testFile": "ag-grid.spec.ts"
   },
   {
     "operation": "Grid Stabiel",
-    "time": "11024.40 ms",
-    "timeMs": 11024.4,
-    "timestamp": "2025-11-12T15:01:29.957Z"
+    "time": "40241.60 ms",
+    "timeMs": 40241.6,
+    "timestamp": "2025-11-17T12:25:50.042Z",
+    "testFile": "ag-grid.spec.ts"
   },
   {
-    "operation": "Rij Verwijderen",
-    "time": "3485.30 ms",
-    "timeMs": 3485.3,
-    "timestamp": "2025-11-12T15:01:33.982Z"
-  },
-  {
-    "operation": "Rij Toevoegen",
-    "time": "3488.10 ms",
-    "timeMs": 3488.1,
-    "timestamp": "2025-11-12T15:01:34.242Z"
-  },
-  {
-    "operation": "Grid Stabiel",
-    "time": "13280.60 ms",
-    "timeMs": 13280.6,
-    "timestamp": "2025-11-12T15:45:50.329Z"
+    "operation": "Knoppen Beschikbaar",
+    "time": "40267.30 ms",
+    "timeMs": 40267.3,
+    "timestamp": "2025-11-17T12:25:50.197Z",
+    "testFile": "ag-grid.spec.ts"
   },
   {
     "operation": "Rij Toevoegen",
-    "time": "4338.20 ms",
-    "timeMs": 4338.2,
-    "timestamp": "2025-11-12T15:45:54.685Z"
+    "time": "3725.50 ms",
+    "timeMs": 3725.5,
+    "timestamp": "2025-11-17T12:25:54.301Z",
+    "testFile": "ag-grid.spec.ts"
   },
   {
     "operation": "Rij Verwijderen",
-    "time": "4310.30 ms",
-    "timeMs": 4310.3,
-    "timestamp": "2025-11-12T15:45:55.022Z"
+    "time": "3650.20 ms",
+    "timeMs": 3650.2,
+    "timestamp": "2025-11-17T12:25:54.456Z",
+    "testFile": "ag-grid.spec.ts"
   }
 ]

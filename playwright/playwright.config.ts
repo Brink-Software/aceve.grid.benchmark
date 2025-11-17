@@ -5,7 +5,8 @@ import { defineConfig, devices } from "@playwright/test";
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  testDir: "./Ag-grid",
+  testDir: "./",
+  testMatch: "**/*.spec.ts",
   /* Maximum tijd voor één test */
   timeout: 30 * 1000,
   expect: {

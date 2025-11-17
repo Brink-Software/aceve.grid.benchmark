@@ -747,18 +747,42 @@ function calculateGroupSums(): void {
   console.log("=== DEPARTMENT SUMMARIES ===");
   Object.entries(deptSummary).forEach(([dept, sums]) => {
     console.log(`\n${dept}:`);
-    console.log(`  Total Salary: €${sums.salary?.toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || 0}`);
+    console.log(
+      `  Total Salary: €${
+        sums.salary?.toLocaleString("nl-NL", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }) || 0
+      }`
+    );
     console.log(`  Total Projects: ${sums.projectsCompleted || 0}`);
     console.log(`  Total Training Hours: ${sums.trainingHours || 0}`);
-    console.log(`  Avg Years Experience: ${(sums.yearsExperience / (rowData.filter((e: any) => e.department === dept).length || 1)).toFixed(1)}`);
-    console.log(`  Avg Performance Score: ${(sums.performanceScore / (rowData.filter((e: any) => e.department === dept).length || 1)).toFixed(1)}`);
+    console.log(
+      `  Avg Years Experience: ${(
+        sums.yearsExperience /
+        (rowData.filter((e: any) => e.department === dept).length || 1)
+      ).toFixed(1)}`
+    );
+    console.log(
+      `  Avg Performance Score: ${(
+        sums.performanceScore /
+        (rowData.filter((e: any) => e.department === dept).length || 1)
+      ).toFixed(1)}`
+    );
   });
 
   // Log team summaries
   console.log("\n=== TEAM SUMMARIES ===");
   Object.entries(groupSummary).forEach(([group, sums]) => {
     console.log(`\n${group}:`);
-    console.log(`  Total Salary: €${sums.salary?.toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || 0}`);
+    console.log(
+      `  Total Salary: €${
+        sums.salary?.toLocaleString("nl-NL", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        }) || 0
+      }`
+    );
     console.log(`  Total Projects: ${sums.projectsCompleted || 0}`);
     console.log(`  Total Training Hours: ${sums.trainingHours || 0}`);
   });
@@ -767,24 +791,33 @@ function calculateGroupSums(): void {
   (window as any).groupSummary = groupSummary;
   (window as any).deptSummary = deptSummary;
 
-  console.log("Group summaries stored in window.groupSummary and window.deptSummary");
+  console.log(
+    "Group summaries stored in window.groupSummary and window.deptSummary"
+  );
 
   return;
 }
 
 export function showGroupSums(): void {
   calculateGroupSums();
-  
+
   // Create a summary report
   if ((window as any).deptSummary) {
     const summary = (window as any).deptSummary;
     const report = Object.entries(summary)
       .map(([dept, sums]: [string, any]) => {
-        const deptCount = rowData.filter((e: any) => e.department === dept).length;
-        return `${dept}: ${deptCount} employees | Salary: €${(sums.salary || 0).toLocaleString("nl-NL", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} | Projects: ${sums.projectsCompleted || 0}`;
+        const deptCount = rowData.filter(
+          (e: any) => e.department === dept
+        ).length;
+        return `${dept}: ${deptCount} employees | Salary: €${(
+          sums.salary || 0
+        ).toLocaleString("nl-NL", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        })} | Projects: ${sums.projectsCompleted || 0}`;
       })
       .join("\n");
-    
+
     console.log("=== QUICK SUMMARY ===\n" + report);
   }
 }
@@ -911,6 +944,30 @@ function initializeGrid(gridInitStartTime?: number) {
     grid = new wijmoGrid.FlexGrid(gridDiv, {
       selectionChanged: selectionChangedHandler,
     });
+    grid.itemFormatter = (
+      panel: any,
+      r: number,
+      _c: number,
+      cel: HTMLElement
+    ) => {
+      const flex = panel.grid;
+      const rowDataItem = flex.getRowDataItem(r);
+
+      if (r >= 0 && rowDataItem) {
+        // Get the row element (parent of the cell)
+        const colIndex = cel.getAttribute("aria-colindex");
+
+        if (colIndex == "3") {
+          // Add data attributes based on row data
+          const rowId = rowDataItem.id || "";
+
+          // Set your custom HTML attributes here
+          if (rowId >= 0) {
+            cel.setAttribute("data-test", `table-rij-${rowId}`);
+          }
+        }
+      }
+    };
     grid.itemsSource = collectionView;
     grid.autoGenerateColumns = false;
     grid.allowSorting = true;
@@ -940,11 +997,12 @@ function initializeGrid(gridInitStartTime?: number) {
         col.allowSorting = colDef.allowSorting;
       if (colDef.allowFiltering !== undefined)
         col.allowFiltering = colDef.allowFiltering;
-      
+
       // Set aggregates for group totals
       if (colDef.aggregate) {
         try {
-          const AggregateEnum = wijmo.Aggregate || (wijmo as any).collections?.Aggregate;
+          const AggregateEnum =
+            wijmo.Aggregate || (wijmo as any).collections?.Aggregate;
           if (AggregateEnum) {
             if (colDef.aggregate === "Sum") {
               col.aggregate = AggregateEnum.Sum;
@@ -953,10 +1011,14 @@ function initializeGrid(gridInitStartTime?: number) {
             }
           }
         } catch (e) {
-          console.warn("Could not set aggregate for column:", colDef.binding, e);
+          console.warn(
+            "Could not set aggregate for column:",
+            colDef.binding,
+            e
+          );
         }
       }
-      
+
       if (colDef.visible !== undefined) col.visible = colDef.visible;
       grid.columns.push(col);
     });

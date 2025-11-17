@@ -8,7 +8,7 @@ function savePerformanceData(
   time: string,
   timestamp: string
 ) {
-  // Performance results directory is in playwright/Ag-grid/performance-results
+  // Performance results directory is in playwright/Wijmo-grid/performance-results
   const dataDir = path.join(__dirname, "performance-results");
 
   // Maak directory aan als deze niet bestaat
@@ -45,7 +45,7 @@ function savePerformanceData(
     time,
     timeMs,
     timestamp,
-    testFile: "ag-grid.spec.ts",
+    testFile: "wijmo-grid.spec.ts",
   });
 
   // Sla data op
@@ -55,50 +55,37 @@ function savePerformanceData(
 
 // Helper functie om te wachten tot de grid ready/stabiel is
 async function waitForGridReady(page: any, timeout: number = 400000) {
-  // Wacht tot de performance indicator zichtbaar is met "Grid Stabiel"
-  const gridStabielIndicator = page.locator(
-    '[data-test="performance-indicator-grid-stabiel"]'
-  );
+  // Wacht tot de grid container zichtbaar is
+  const gridContainer = page.locator('[data-test="wijmo-grid"]');
+  await expect(gridContainer).toBeVisible({ timeout });
 
-  // Wacht tot het element zichtbaar is
-  await expect(gridStabielIndicator).toBeVisible({ timeout });
+  // Wacht tot de performance indicator zichtbaar is
+  const perfIndicator = page.locator("#performanceIndicator");
+  await expect(perfIndicator).toBeVisible({ timeout: 5000 });
 
-  // Verifieer dat de operation tekst "Grid Stabiel" is
-  const operationText = await gridStabielIndicator
-    .locator("div")
-    .first()
-    .textContent();
-  expect(operationText).toContain("Grid Stabiel");
-
-  // Verifieer dat de grid container zichtbaar is
-  const gridContainer = page.locator('[data-test="ag-grid"]');
-  await expect(gridContainer).toBeVisible();
-
-  // Lees de tijd uit (optioneel)
-  const timeElement = gridStabielIndicator.locator(
-    '[data-test="performance-tijd"]'
-  );
+  // Lees de tijd uit
+  const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
   const timeText = await timeElement.textContent();
 
   return {
     ready: true,
     time: timeText ? timeText.trim() : null,
-    indicator: gridStabielIndicator,
+    indicator: perfIndicator,
   };
 }
 
-test.describe("AG Grid Tests", () => {
+test.describe("Wijmo Grid Tests", () => {
   test.beforeEach(async ({ page }) => {
-    // Navigeer naar de AG Grid pagina
-    await page.goto("http://localhost:8000/Ag-grid");
+    // Navigeer naar de Wijmo Grid pagina
+    await page.goto("http://localhost:8000/Wijmo-grid");
   });
 
   test("pagina laadt correct", async ({ page }) => {
     // Check of de pagina geladen is
-    await expect(page).toHaveTitle(/AG Grid/i);
+    await expect(page).toHaveTitle(/Wijmo Grid|Grid Benchmark/i);
   });
 
-  test("AG Grid is zichtbaar", async ({ page }) => {
+  test("Wijmo Grid is zichtbaar", async ({ page }) => {
     // Start tijd meten
     test.slow();
     const startTime = Date.now();
@@ -124,7 +111,7 @@ test.describe("AG Grid Tests", () => {
     // Wacht tot grid ready is
     const result = await waitForGridReady(page);
 
-    // Check of alle knoppen bestaan
+    // Check of alle knoppen bestaan en zichtbaar zijn
     await expect(
       page.locator('[data-test="nieuw-rij-toevoegen"]')
     ).toBeVisible();
@@ -133,6 +120,15 @@ test.describe("AG Grid Tests", () => {
     await expect(
       page.locator('[data-test="verwijderen-geselecteerde"]')
     ).toBeVisible();
+
+    // Check of info badges zichtbaar zijn
+    await expect(
+      page.locator('[data-test="info-badge-medewerkers"]')
+    ).toBeVisible();
+    await expect(
+      page.locator('[data-test="info-badge-afdelingen"]')
+    ).toBeVisible();
+    await expect(page.locator('[data-test="info-badge-teams"]')).toBeVisible();
 
     // Sla performance data op
     if (result.time) {
@@ -147,45 +143,40 @@ test.describe("AG Grid Tests", () => {
     // Wacht tot grid ready is
     await waitForGridReady(page);
 
-    // expant all groups
+    await page.waitForTimeout(3000);
+
+    // Expand all groups first
     await page.locator('[data-test="alles-uitklappen"]').click();
+    await page.waitForTimeout(1000);
 
-    // Wacht tot er rijen zijn
-    const firstRow = page.locator('[data-test^="rij-"]').first();
-    await expect(firstRow).toBeVisible({ timeout: 10000 });
+    // Wacht tot er rijen zijn - zoek naar grid rows
+    const gridRows = page.locator('[data-test="table-rij-1"]');
+    await expect(gridRows.first()).toBeVisible({ timeout: 10000 });
 
-    // Selecteer eerste rij
-    await firstRow.click();
+    // Selecteer eerste rij door erop te klikken
+    await gridRows.first().click();
+    await page.waitForTimeout(500);
 
     // Verifieer dat selected count is bijgewerkt
     const selectedCount = page.locator('[data-test="selected-count"]');
-    await expect(selectedCount).toHaveText("1");
+    const countText = await selectedCount.textContent();
+    expect(countText).toBe("1");
 
-    // Klik op verwijder knop in de rij (gebruik de eerste rij ID)
-    const rowId = await firstRow.getAttribute("data-test");
-    if (rowId) {
-      const rowIdNumber = rowId.replace("rij-", "");
-      const deleteButton = page.locator(
-        `[data-test="verwijder-rij-${rowIdNumber}"]`
-      );
-      await deleteButton.click();
+    // Klik op verwijder button
+    await page.locator('[data-test="verwijderen-geselecteerde"]').click();
+    await page.waitForTimeout(1000);
 
-      // Wacht tot performance indicator verschijnt
-      const perfIndicator = page.locator(
-        '[data-test="performance-indicator-rij-verwijderen"]'
-      );
-      await expect(perfIndicator).toBeVisible({ timeout: 5000 });
+    // Wacht tot performance indicator verschijnt
+    const perfIndicator = page.locator("#performanceIndicator");
+    await expect(perfIndicator).toBeVisible({ timeout: 5000 });
 
-      // Lees de tijd uit
-      const timeElement = perfIndicator.locator(
-        '[data-test="performance-tijd"]'
-      );
-      const timeText = await timeElement.textContent();
-      if (timeText) {
-        const timestamp = new Date().toISOString();
-        savePerformanceData("Rij Verwijderen", timeText.trim(), timestamp);
-        console.log(`Rij Verwijderen tijd: ${timeText.trim()}`);
-      }
+    // Lees de tijd uit
+    const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
+    const timeText = await timeElement.textContent();
+    if (timeText) {
+      const timestamp = new Date().toISOString();
+      savePerformanceData("Rij Verwijderen", timeText.trim(), timestamp);
+      console.log(`Rij Verwijderen tijd: ${timeText.trim()}`);
     }
   });
 
@@ -194,23 +185,24 @@ test.describe("AG Grid Tests", () => {
     // Wacht tot grid ready is
     await waitForGridReady(page);
 
-    // expant all groups
-    await page.locator('[data-test="alles-uitklappen"]').click();
+    await page.waitForTimeout(3000);
 
     // Wacht tot er rijen zijn
-    const firstRow = page.locator('[data-test^="rij-"]').first();
+    const gridRows = page.locator('[data-test="table-rij-1"]');
+    await expect(gridRows.first()).toBeVisible({ timeout: 10000 });
 
     // Selecteer eerste rij
-    await firstRow.click();
+    await gridRows.first().click();
+    await page.waitForTimeout(500);
 
-    // Verifieer dat selected count is bijgewerkt
+    // Klik op toevoegen button
     const addButton = page.locator('[data-test="nieuw-rij-toevoegen"]');
     await addButton.click();
+    await page.waitForTimeout(1000);
 
-    const perfIndicator = page.locator(
-      '[data-test="performance-indicator-rij-toevoegen"]'
-    );
-    await expect(perfIndicator).toBeVisible({ timeout: 20000 });
+    // Wacht tot performance indicator verschijnt
+    const perfIndicator = page.locator("#performanceIndicator");
+    await expect(perfIndicator).toBeVisible({ timeout: 5000 });
 
     // Lees de tijd uit
     const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
