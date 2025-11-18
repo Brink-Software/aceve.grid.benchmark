@@ -31,10 +31,7 @@
           <a href="/"> ← Back to Home </a>
         </div>
         <h1>🏢 Wijmo Grid - 200.000 Rijen, 500 Kolommen</h1>
-        <p>
-          Met Row Grouping en CRUD functionaliteit (Toevoegen, Bewerken,
-          Verwijderen)
-        </p>
+        <p>Met CRUD functionaliteit (Toevoegen, Bewerken, Verwijderen)</p>
       </header>
 
       <div class="toolbar">
@@ -59,24 +56,10 @@
             id="addRowBtn"
             class="btn-primary"
             disabled
-            title="Selecteer eerst een rij of groep om een nieuwe rij toe te voegen"
+            title="Selecteer eerst een rij om een nieuwe rij toe te voegen"
             data-test="nieuw-rij-toevoegen"
           >
             ➕ Nieuwe Rij Toevoegen
-          </button>
-          <button
-            id="expandAllBtn"
-            class="btn-secondary"
-            data-test="alles-uitklappen"
-          >
-            📂 Alles Uitklappen
-          </button>
-          <button
-            id="collapseAllBtn"
-            class="btn-secondary"
-            data-test="alles-inklappen"
-          >
-            📁 Alles Inklappen
           </button>
           <button
             id="deleteRowsBtn"
@@ -125,7 +108,6 @@
     <!-- Wijmo JavaScript - Using cdn.mescius.com CDN -->
     <script src="https://cdn.mescius.com/wijmo/5.latest/controls/wijmo.min.js"></script>
     <script src="https://cdn.mescius.com/wijmo/5.latest/controls/wijmo.grid.min.js"></script>
-    <script src="https://cdn.mescius.com/wijmo/5.latest/controls/wijmo.grid.grouppanel.min.js"></script>
     <script>
       // Error handler voor Wijmo script loading
       window.addEventListener("error", function (e) {
@@ -154,9 +136,6 @@
             );
             console.error(
               "- https://cdn.mescius.com/wijmo/5.latest/controls/wijmo.grid.min.js"
-            );
-            console.error(
-              "- https://cdn.mescius.com/wijmo/5.latest/controls/wijmo.grid.grouppanel.min.js"
             );
             return;
           }

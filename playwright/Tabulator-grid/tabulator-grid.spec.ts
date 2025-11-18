@@ -106,48 +106,12 @@ test.describe("Tabulator Grid Tests", () => {
     }
   });
 
-  test("knoppen zijn beschikbaar", async ({ page }) => {
-    test.slow();
-    // Wacht tot grid ready is
-    const result = await waitForGridReady(page);
-
-    // Check of alle knoppen bestaan en zichtbaar zijn
-    await expect(
-      page.locator('[data-test="nieuw-rij-toevoegen"]')
-    ).toBeVisible();
-    await expect(page.locator('[data-test="alles-uitklappen"]')).toBeVisible();
-    await expect(page.locator('[data-test="alles-inklappen"]')).toBeVisible();
-    await expect(
-      page.locator('[data-test="verwijderen-geselecteerde"]')
-    ).toBeVisible();
-
-    // Check of info badges zichtbaar zijn
-    await expect(
-      page.locator('[data-test="info-badge-medewerkers"]')
-    ).toBeVisible();
-    await expect(
-      page.locator('[data-test="info-badge-afdelingen"]')
-    ).toBeVisible();
-    await expect(page.locator('[data-test="info-badge-teams"]')).toBeVisible();
-
-    // Sla performance data op
-    if (result.time) {
-      const timestamp = new Date().toISOString();
-      savePerformanceData("Knoppen Beschikbaar", result.time, timestamp);
-      console.log(`Knoppen Beschikbaar tijd: ${result.time}`);
-    }
-  });
-
   test("rij selecteren en verwijderen", async ({ page }) => {
     test.slow();
     // Wacht tot grid ready is
     await waitForGridReady(page);
 
     await page.waitForTimeout(3000);
-
-    // Expand all groups first
-    await page.locator('[data-test="alles-uitklappen"]').click();
-    await page.waitForTimeout(1000);
 
     // Wacht tot er rijen zijn - zoek naar grid rows met data-test attribute
     const gridRows = page.locator('[data-test^="selected-rij-"]');

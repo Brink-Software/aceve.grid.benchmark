@@ -1,5 +1,5 @@
 // ============================================
-// Wijmo Grid Organisatie Tabel met CRUD en Row Grouping
+// Wijmo Grid Organisatie Tabel met CRUD
 // ============================================
 
 import {
@@ -191,12 +191,6 @@ async function generateDataWithProgress() {
       "MB"
     );
   }
-
-  showPerformanceResult(
-    "Data Generatie",
-    dataGenerationTime.toFixed(2) + " ms",
-    "data-generatie"
-  );
 
   setTimeout(() => {
     const grid = document.getElementById("myGrid");
@@ -497,166 +491,20 @@ const selectionChangedHandler = () => {
     addRowBtn.disabled = !hasSelection;
     if (!hasSelection) {
       addRowBtn.title =
-        "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
+        "Selecteer eerst een rij om een nieuwe rij toe te voegen";
     } else {
-      addRowBtn.title = "Voeg een nieuwe rij toe in dezelfde groep";
+      addRowBtn.title = "Voeg een nieuwe rij toe";
     }
   }
 };
-
-// ============================================
-// Expand/Collapse Functions
-// ============================================
-
-export function expandAllGroups(): void {
-  console.log("expandAllGroups called");
-
-  if (!grid) {
-    console.error("Grid niet beschikbaar");
-    return;
-  }
-
-  const performanceStart = performance.now();
-  const startMemory = (performance as any).memory
-    ? (performance as any).memory.usedJSHeapSize
-    : 0;
-
-  console.log("=== PERFORMANCE METING: ALLES UITKLAPPEN ===");
-  console.log("Start tijd:", performanceStart);
-  if (startMemory) {
-    console.log(
-      "Start geheugen:",
-      (startMemory / 1024 / 1024).toFixed(2),
-      "MB"
-    );
-  }
-
-  if (collectionView && collectionView.groupDescriptions) {
-    // Expand all groups by refreshing with all groups visible
-    collectionView.refresh();
-    // Wijmo automatically shows groups when groupDescriptions are set
-  }
-
-  setTimeout(() => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const renderEnd = performance.now();
-        const totalTime = renderEnd - performanceStart;
-        const endMemory = (performance as any).memory
-          ? (performance as any).memory.usedJSHeapSize
-          : 0;
-
-        console.log("=== PERFORMANCE RESULTATEN: ALLES UITKLAPPEN ===");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
-
-        if (startMemory && endMemory) {
-          const memoryDiff = endMemory - startMemory;
-          console.log(
-            "Geheugen gebruik:",
-            (memoryDiff / 1024 / 1024).toFixed(2),
-            "MB"
-          );
-        }
-
-        showPerformanceResult(
-          "Alles Uitklappen",
-          totalTime.toFixed(2) + " ms",
-          "alles-uitklappen"
-        );
-      });
-    });
-  }, 200);
-}
-
-export function collapseAllGroups(): void {
-  console.log("collapseAllGroups called");
-
-  if (!grid) {
-    console.error("Grid niet beschikbaar");
-    return;
-  }
-
-  const performanceStart = performance.now();
-  const startMemory = (performance as any).memory
-    ? (performance as any).memory.usedJSHeapSize
-    : 0;
-
-  console.log("=== PERFORMANCE METING: ALLES INKLAPPEN ===");
-  console.log("Start tijd:", performanceStart);
-  if (startMemory) {
-    console.log(
-      "Start geheugen:",
-      (startMemory / 1024 / 1024).toFixed(2),
-      "MB"
-    );
-  }
-
-  if (collectionView && collectionView.groupDescriptions) {
-    const wijmo = (window as any).wijmo;
-    // Clear grouping to collapse
-    collectionView.groupDescriptions.clear();
-    collectionView.refresh();
-    // Re-add grouping to show collapsed state
-    const GroupDescriptionClass = getGroupDescriptionClass(wijmo);
-    const groupDesc = new GroupDescriptionClass((item: any) => item.department);
-    collectionView.groupDescriptions.push(groupDesc);
-    const teamGroupDesc = new GroupDescriptionClass((item: any) => item.team);
-    collectionView.groupDescriptions.push(teamGroupDesc);
-    collectionView.refresh();
-  }
-
-  setTimeout(() => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const renderEnd = performance.now();
-        const totalTime = renderEnd - performanceStart;
-        const endMemory = (performance as any).memory
-          ? (performance as any).memory.usedJSHeapSize
-          : 0;
-
-        console.log("=== PERFORMANCE RESULTATEN: ALLES INKLAPPEN ===");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
-
-        if (startMemory && endMemory) {
-          const memoryDiff = startMemory - endMemory;
-          console.log(
-            "Geheugen vrijgekomen:",
-            (Math.abs(memoryDiff) / 1024 / 1024).toFixed(2),
-            "MB"
-          );
-        }
-
-        showPerformanceResult(
-          "Alles Inklappen",
-          totalTime.toFixed(2) + " ms",
-          "alles-inklappen"
-        );
-      });
-    });
-  }, 200);
-}
 
 // ============================================
 // Event Handlers
 // ============================================
 
 function setupEventHandlers() {
-  const expandAllBtn = document.getElementById("expandAllBtn");
-  const collapseAllBtn = document.getElementById("collapseAllBtn");
   const deleteRowsBtn = document.getElementById("deleteRowsBtn");
   const addRowBtn = document.getElementById("addRowBtn");
-
-  if (expandAllBtn) {
-    expandAllBtn.addEventListener("click", () => {
-      expandAllGroups();
-    });
-  }
-
-  if (collapseAllBtn) {
-    collapseAllBtn.addEventListener("click", () => {
-      collapseAllGroups();
-    });
-  }
 
   if (deleteRowsBtn) {
     deleteRowsBtn.addEventListener("click", () => {
@@ -675,181 +523,6 @@ function setupEventHandlers() {
   } else {
     console.warn("Add row button not found!");
   }
-}
-
-// ============================================
-// Group Sum Calculations
-// ============================================
-
-function calculateGroupSums(): void {
-  console.log("Calculating group sums...");
-
-  if (!collectionView || !rowData || rowData.length === 0) {
-    console.error("CollectionView or rowData not available");
-    return;
-  }
-
-  const groupSummary: Record<string, Record<string, number>> = {};
-
-  // Numeric fields to sum
-  const numericFields = [
-    "salary",
-    "projectsCompleted",
-    "trainingHours",
-    "yearsExperience",
-    "performanceScore",
-  ];
-
-  // Also include all dynamically generated numeric columns
-  for (let i = 1; i <= 400; i++) {
-    numericFields.push(`num_${i}`);
-  }
-
-  // Group data by department and team
-  rowData.forEach((employee: any) => {
-    const dept = employee.department;
-    const team = employee.team;
-    const groupKey = `${dept} > ${team}`;
-
-    if (!groupSummary[groupKey]) {
-      groupSummary[groupKey] = {};
-      numericFields.forEach((field) => {
-        groupSummary[groupKey][field] = 0;
-      });
-    }
-
-    // Add values
-    numericFields.forEach((field) => {
-      const value = parseFloat(employee[field]) || 0;
-      groupSummary[groupKey][field] += value;
-    });
-  });
-
-  // Also calculate department-level totals
-  const deptSummary: Record<string, Record<string, number>> = {};
-  rowData.forEach((employee: any) => {
-    const dept = employee.department;
-
-    if (!deptSummary[dept]) {
-      deptSummary[dept] = {};
-      numericFields.forEach((field) => {
-        deptSummary[dept][field] = 0;
-      });
-    }
-
-    numericFields.forEach((field) => {
-      const value = parseFloat(employee[field]) || 0;
-      deptSummary[dept][field] += value;
-    });
-  });
-
-  // Log department summaries
-  console.log("=== DEPARTMENT SUMMARIES ===");
-  Object.entries(deptSummary).forEach(([dept, sums]) => {
-    console.log(`\n${dept}:`);
-    console.log(
-      `  Total Salary: €${
-        sums.salary?.toLocaleString("nl-NL", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }) || 0
-      }`
-    );
-    console.log(`  Total Projects: ${sums.projectsCompleted || 0}`);
-    console.log(`  Total Training Hours: ${sums.trainingHours || 0}`);
-    console.log(
-      `  Avg Years Experience: ${(
-        sums.yearsExperience /
-        (rowData.filter((e: any) => e.department === dept).length || 1)
-      ).toFixed(1)}`
-    );
-    console.log(
-      `  Avg Performance Score: ${(
-        sums.performanceScore /
-        (rowData.filter((e: any) => e.department === dept).length || 1)
-      ).toFixed(1)}`
-    );
-  });
-
-  // Log team summaries
-  console.log("\n=== TEAM SUMMARIES ===");
-  Object.entries(groupSummary).forEach(([group, sums]) => {
-    console.log(`\n${group}:`);
-    console.log(
-      `  Total Salary: €${
-        sums.salary?.toLocaleString("nl-NL", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        }) || 0
-      }`
-    );
-    console.log(`  Total Projects: ${sums.projectsCompleted || 0}`);
-    console.log(`  Total Training Hours: ${sums.trainingHours || 0}`);
-  });
-
-  // Store in window for console access
-  (window as any).groupSummary = groupSummary;
-  (window as any).deptSummary = deptSummary;
-
-  console.log(
-    "Group summaries stored in window.groupSummary and window.deptSummary"
-  );
-
-  return;
-}
-
-export function showGroupSums(): void {
-  calculateGroupSums();
-
-  // Create a summary report
-  if ((window as any).deptSummary) {
-    const summary = (window as any).deptSummary;
-    const report = Object.entries(summary)
-      .map(([dept, sums]: [string, any]) => {
-        const deptCount = rowData.filter(
-          (e: any) => e.department === dept
-        ).length;
-        return `${dept}: ${deptCount} employees | Salary: €${(
-          sums.salary || 0
-        ).toLocaleString("nl-NL", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })} | Projects: ${sums.projectsCompleted || 0}`;
-      })
-      .join("\n");
-
-    console.log("=== QUICK SUMMARY ===\n" + report);
-  }
-}
-
-// ============================================
-// Helper Functions
-// ============================================
-
-function getGroupDescriptionClass(wijmo: any): any {
-  if (
-    wijmo.grid?.GroupDescription &&
-    typeof wijmo.grid.GroupDescription === "function"
-  ) {
-    return wijmo.grid.GroupDescription;
-  } else if (
-    (wijmo.grid as any)?.collections?.GroupDescription &&
-    typeof (wijmo.grid as any).collections.GroupDescription === "function"
-  ) {
-    return (wijmo.grid as any).collections.GroupDescription;
-  } else if (
-    (wijmo as any)?.collections?.GroupDescription &&
-    typeof (wijmo as any).collections.GroupDescription === "function"
-  ) {
-    return (wijmo as any).collections.GroupDescription;
-  }
-  console.error(
-    "GroupDescription not found. Available wijmo.grid properties:",
-    Object.keys(wijmo.grid || {})
-  );
-  throw new Error(
-    "wijmo.grid.GroupDescription is not a constructor function. Check console for available properties."
-  );
 }
 
 // ============================================
@@ -935,9 +608,7 @@ function initializeGrid(gridInitStartTime?: number) {
       );
     }
 
-    collectionView = new CollectionViewClass(rowData, {
-      groupDescriptions: ["department", "team"],
-    });
+    collectionView = new CollectionViewClass(rowData);
     collectionView.trackChanges = true;
 
     // Create FlexGrid FIRST
@@ -976,7 +647,6 @@ function initializeGrid(gridInitStartTime?: number) {
     grid.allowMerging = wijmo.grid.AllowMerging.None;
     grid.selectionMode = wijmoGrid.SelectionMode.MultiRange;
     grid.isReadOnly = false;
-    grid.showGroups = true;
     grid.alternatingRowStep = 1; // Use alternatingRowStep instead of deprecated showAlternatingRows
 
     // Set columns
@@ -998,33 +668,9 @@ function initializeGrid(gridInitStartTime?: number) {
       if (colDef.allowFiltering !== undefined)
         col.allowFiltering = colDef.allowFiltering;
 
-      // Set aggregates for group totals
-      if (colDef.aggregate) {
-        try {
-          const AggregateEnum =
-            wijmo.Aggregate || (wijmo as any).collections?.Aggregate;
-          if (AggregateEnum) {
-            if (colDef.aggregate === "Sum") {
-              col.aggregate = AggregateEnum.Sum;
-            } else if (colDef.aggregate === "Avg") {
-              col.aggregate = AggregateEnum.Avg;
-            }
-          }
-        } catch (e) {
-          console.warn(
-            "Could not set aggregate for column:",
-            colDef.binding,
-            e
-          );
-        }
-      }
-
       if (colDef.visible !== undefined) col.visible = colDef.visible;
       grid.columns.push(col);
     });
-
-    // Refresh collection view to apply grouping
-    collectionView.refresh();
 
     const gridCreateEnd = performance.now();
     console.log("Grid created successfully");
@@ -1111,7 +757,7 @@ function initializeGrid(gridInitStartTime?: number) {
       if (addRowBtn) {
         addRowBtn.disabled = true;
         addRowBtn.title =
-          "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
+          "Selecteer eerst een rij om een nieuwe rij toe te voegen";
       }
 
       console.log("Event handlers setup complete");
@@ -1132,17 +778,9 @@ declare global {
     addNewRow: () => void;
     deleteRow: (id: number) => void;
     deleteSelectedRows: () => void;
-    expandAllGroups: () => void;
-    collapseAllGroups: () => void;
-    showGroupSums: () => void;
-    calculateGroupSums: () => void;
   }
 }
 
 window.addNewRow = addNewRow;
 window.deleteRow = deleteRow;
 window.deleteSelectedRows = deleteSelectedRows;
-window.expandAllGroups = expandAllGroups;
-window.collapseAllGroups = collapseAllGroups;
-window.showGroupSums = showGroupSums;
-window.calculateGroupSums = calculateGroupSums;

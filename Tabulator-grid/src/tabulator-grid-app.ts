@@ -255,32 +255,24 @@ export function addNewRow(): void {
   }
 
   try {
-    let selectedDept: string | null = null;
-    let selectedTeam: string | null = null;
     let selectedRow: any = null;
 
     const selectedRows = table.getSelectedRows();
 
     if (selectedRows.length > 0) {
       selectedRow = selectedRows[0];
-      const selectedData = selectedRow.getData();
-      selectedDept = selectedData.department;
-      selectedTeam = selectedData.team;
     }
 
-    if (!selectedDept || !selectedTeam) {
-      const dept = departments[Math.floor(Math.random() * departments.length)];
-      const deptTeams = teams[dept.name] || [];
-      selectedDept = dept.name;
-      selectedTeam = deptTeams[Math.floor(Math.random() * deptTeams.length)];
-    }
-
-    const teamRoles = roles[selectedDept] || [];
+    const dept = departments[Math.floor(Math.random() * departments.length)];
+    const deptTeams = teams[dept.name] || [];
+    const selectedTeam =
+      deptTeams[Math.floor(Math.random() * deptTeams.length)];
+    const teamRoles = roles[dept.name] || [];
     const role = teamRoles[Math.floor(Math.random() * teamRoles.length)];
 
     const newEmployee = generateEmployee(
       nextId++,
-      selectedDept,
+      dept.name,
       selectedTeam,
       role
     );
@@ -487,175 +479,14 @@ export function deleteSelectedRows(): void {
 }
 
 // ============================================
-// Expand/Collapse Functions
-// ============================================
-
-export function expandAllGroups(): void {
-  console.log("expandAllGroups called");
-
-  if (!table) {
-    console.error("Grid niet beschikbaar");
-    return;
-  }
-
-  const performanceStart = performance.now();
-  const startMemory = (performance as any).memory
-    ? (performance as any).memory.usedJSHeapSize
-    : 0;
-
-  console.log("=== PERFORMANCE METING: ALLES UITKLAPPEN ===");
-  console.log("Start tijd:", performanceStart);
-  if (startMemory) {
-    console.log(
-      "Start geheugen:",
-      (startMemory / 1024 / 1024).toFixed(2),
-      "MB"
-    );
-  }
-
-  // Expand all groups in Tabulator using setGroupStartOpen
-  try {
-    table.setGroupStartOpen(true);
-    console.log("All groups expanded");
-  } catch (e) {
-    console.error("Error expanding groups:", e);
-    // Fallback: try getting rows and expanding manually
-    const rows = table.getRows();
-    rows.forEach((row: any) => {
-      if (row.isGroup()) {
-        row.toggleGroup();
-        if (!row.isGroupOpen()) {
-          row.toggleGroup();
-        }
-      }
-    });
-  }
-
-  setTimeout(() => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const renderEnd = performance.now();
-        const totalTime = renderEnd - performanceStart;
-        const endMemory = (performance as any).memory
-          ? (performance as any).memory.usedJSHeapSize
-          : 0;
-
-        console.log("=== PERFORMANCE RESULTATEN: ALLES UITKLAPPEN ===");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
-
-        if (startMemory && endMemory) {
-          const memoryDiff = endMemory - startMemory;
-          console.log(
-            "Geheugen gebruik:",
-            (memoryDiff / 1024 / 1024).toFixed(2),
-            "MB"
-          );
-        }
-
-        showPerformanceResult(
-          "Alles Uitklappen",
-          totalTime.toFixed(2) + " ms",
-          "alles-uitklappen"
-        );
-      });
-    });
-  }, 200);
-}
-
-export function collapseAllGroups(): void {
-  console.log("collapseAllGroups called");
-
-  if (!table) {
-    console.error("Grid niet beschikbaar");
-    return;
-  }
-
-  const performanceStart = performance.now();
-  const startMemory = (performance as any).memory
-    ? (performance as any).memory.usedJSHeapSize
-    : 0;
-
-  console.log("=== PERFORMANCE METING: ALLES INKLAPPEN ===");
-  console.log("Start tijd:", performanceStart);
-  if (startMemory) {
-    console.log(
-      "Start geheugen:",
-      (startMemory / 1024 / 1024).toFixed(2),
-      "MB"
-    );
-  }
-
-  // Collapse all groups in Tabulator using setGroupStartOpen
-  try {
-    table.setGroupStartOpen(false);
-    console.log("All groups collapsed");
-  } catch (e) {
-    console.error("Error collapsing groups:", e);
-    // Fallback: try getting rows and collapsing manually
-    const rows = table.getRows();
-    rows.forEach((row: any) => {
-      if (row.isGroup()) {
-        if (row.isGroupOpen()) {
-          row.toggleGroup();
-        }
-      }
-    });
-  }
-
-  setTimeout(() => {
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const renderEnd = performance.now();
-        const totalTime = renderEnd - performanceStart;
-        const endMemory = (performance as any).memory
-          ? (performance as any).memory.usedJSHeapSize
-          : 0;
-
-        console.log("=== PERFORMANCE RESULTATEN: ALLES INKLAPPEN ===");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
-
-        if (startMemory && endMemory) {
-          const memoryDiff = startMemory - endMemory;
-          console.log(
-            "Geheugen vrijgekomen:",
-            (Math.abs(memoryDiff) / 1024 / 1024).toFixed(2),
-            "MB"
-          );
-        }
-
-        showPerformanceResult(
-          "Alles Inklappen",
-          totalTime.toFixed(2) + " ms",
-          "alles-inklappen"
-        );
-      });
-    });
-  }, 200);
-}
-
-// ============================================
 // Event Handlers
 // ============================================
 
 function setupEventHandlers() {
-  const expandAllBtn = document.getElementById("expandAllBtn");
-  const collapseAllBtn = document.getElementById("collapseAllBtn");
   const deleteRowsBtn = document.getElementById("deleteRowsBtn");
   const addRowBtn = document.getElementById("addRowBtn");
 
   console.log("Setting up event handlers");
-
-  if (expandAllBtn) {
-    expandAllBtn.addEventListener("click", () => {
-      expandAllGroups();
-    });
-  }
-
-  if (collapseAllBtn) {
-    collapseAllBtn.addEventListener("click", () => {
-      collapseAllGroups();
-    });
-  }
 
   if (deleteRowsBtn) {
     deleteRowsBtn.addEventListener("click", () => {
@@ -700,9 +531,9 @@ function onSelectionChanged(_e: any, _row: any) {
     addRowBtn.disabled = !hasSelection;
     if (!hasSelection) {
       addRowBtn.title =
-        "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
+        "Selecteer eerst een rij om een nieuwe rij toe te voegen";
     } else {
-      addRowBtn.title = "Voeg een nieuwe rij toe in dezelfde groep";
+      addRowBtn.title = "Voeg een nieuwe rij toe";
     }
   }
 }
@@ -753,8 +584,6 @@ function initializeGrid(gridInitStartTime?: number) {
       reactiveData: false,
       renderVertical: "virtual",
       renderHorizontal: "virtual",
-      groupBy: ["department", "team"],
-      groupStartOpen: true,
       dataLoaded: () => {
         console.log("Data loaded in Tabulator");
       },
@@ -850,7 +679,7 @@ function initializeGrid(gridInitStartTime?: number) {
       if (addRowBtn) {
         addRowBtn.disabled = true;
         addRowBtn.title =
-          "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
+          "Selecteer eerst een rij om een nieuwe rij toe te voegen";
       }
 
       console.log("Event handlers setup complete");
@@ -870,13 +699,9 @@ declare global {
     addNewRow: () => void;
     deleteRow: (id: number) => void;
     deleteSelectedRows: () => void;
-    expandAllGroups: () => void;
-    collapseAllGroups: () => void;
   }
 }
 
 window.addNewRow = addNewRow;
 window.deleteRow = deleteRow;
 window.deleteSelectedRows = deleteSelectedRows;
-window.expandAllGroups = expandAllGroups;
-window.collapseAllGroups = collapseAllGroups;

@@ -206,13 +206,6 @@ async function generateDataWithProgress() {
     );
   }
 
-  // Toon data generatie tijd
-  showPerformanceResult(
-    "Data Generatie",
-    dataGenerationTime.toFixed(2) + " ms",
-    "data-generatie"
-  );
-
   // Wacht even zodat gebruiker de laatste progress update ziet
   setTimeout(() => {
     // Update grid options met gegenereerde data
@@ -931,176 +924,14 @@ const gridOptions: CustomGridOptions = {
 };
 
 // ============================================
-// Expand/Collapse Functions with Performance
-// ============================================
-
-// Expand all groups with performance measurement
-export function expandAllGroups(): void {
-  console.log("expandAllGroups called");
-
-  if (!gridApi) {
-    console.error("Grid API niet beschikbaar");
-    return;
-  }
-
-  // Performance meting start
-  const performanceStart = performance.now();
-  const startMemory = (performance as any).memory
-    ? (performance as any).memory.usedJSHeapSize
-    : 0;
-
-  console.log("=== PERFORMANCE METING: ALLES UITKLAPPEN ===");
-  console.log("Start tijd:", performanceStart);
-  if (startMemory) {
-    console.log(
-      "Start geheugen:",
-      (startMemory / 1024 / 1024).toFixed(2),
-      "MB"
-    );
-  }
-
-  // Voer expandAll uit
-  const expandStart = performance.now();
-  gridApi.expandAll();
-  const expandEnd = performance.now();
-  const expandTime = expandEnd - expandStart;
-  console.log("Expand tijd:", expandTime.toFixed(2), "ms");
-
-  // Wacht tot grid volledig stabiel is
-  const renderStart = performance.now();
-
-  // Wacht even zodat grid kan stabiliseren
-  setTimeout(() => {
-    // Wacht op volgende frames om zeker te zijn dat alles gerenderd en stabiel is
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const renderEnd = performance.now();
-        const renderTime = renderEnd - renderStart;
-        const totalTime = renderEnd - performanceStart;
-        const endMemory = (performance as any).memory
-          ? (performance as any).memory.usedJSHeapSize
-          : 0;
-
-        console.log("=== PERFORMANCE RESULTATEN: ALLES UITKLAPPEN ===");
-        console.log("Expand tijd:", expandTime.toFixed(2), "ms");
-        console.log("Render tijd:", renderTime.toFixed(2), "ms");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
-
-        if (startMemory && endMemory) {
-          const memoryDiff = endMemory - startMemory;
-          console.log(
-            "Geheugen gebruik:",
-            (memoryDiff / 1024 / 1024).toFixed(2),
-            "MB"
-          );
-        }
-
-        // Toon resultaat in UI
-        showPerformanceResult(
-          "Alles Uitklappen",
-          totalTime.toFixed(2) + " ms",
-          "alles-uitklappen"
-        );
-      });
-    });
-  }, 200);
-}
-
-// Collapse all groups with performance measurement
-export function collapseAllGroups(): void {
-  console.log("collapseAllGroups called");
-
-  if (!gridApi) {
-    console.error("Grid API niet beschikbaar");
-    return;
-  }
-
-  // Performance meting start
-  const performanceStart = performance.now();
-  const startMemory = (performance as any).memory
-    ? (performance as any).memory.usedJSHeapSize
-    : 0;
-
-  console.log("=== PERFORMANCE METING: ALLES INKLAPPEN ===");
-  console.log("Start tijd:", performanceStart);
-  if (startMemory) {
-    console.log(
-      "Start geheugen:",
-      (startMemory / 1024 / 1024).toFixed(2),
-      "MB"
-    );
-  }
-
-  // Voer collapseAll uit
-  const collapseStart = performance.now();
-  gridApi.collapseAll();
-  const collapseEnd = performance.now();
-  const collapseTime = collapseEnd - collapseStart;
-  console.log("Collapse tijd:", collapseTime.toFixed(2), "ms");
-
-  // Wacht tot grid volledig stabiel is
-  const renderStart = performance.now();
-
-  // Wacht even zodat grid kan stabiliseren
-  setTimeout(() => {
-    // Wacht op volgende frames om zeker te zijn dat alles gerenderd en stabiel is
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const renderEnd = performance.now();
-        const renderTime = renderEnd - renderStart;
-        const totalTime = renderEnd - performanceStart;
-        const endMemory = (performance as any).memory
-          ? (performance as any).memory.usedJSHeapSize
-          : 0;
-
-        console.log("=== PERFORMANCE RESULTATEN: ALLES INKLAPPEN ===");
-        console.log("Collapse tijd:", collapseTime.toFixed(2), "ms");
-        console.log("Render tijd:", renderTime.toFixed(2), "ms");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
-
-        if (startMemory && endMemory) {
-          const memoryDiff = startMemory - endMemory; // Negatief omdat geheugen vrijkomt
-          console.log(
-            "Geheugen vrijgekomen:",
-            (Math.abs(memoryDiff) / 1024 / 1024).toFixed(2),
-            "MB"
-          );
-        }
-
-        // Toon resultaat in UI
-        showPerformanceResult(
-          "Alles Inklappen",
-          totalTime.toFixed(2) + " ms",
-          "alles-inklappen"
-        );
-      });
-    });
-  }, 200);
-}
-
-// ============================================
 // Event Handlers
 // ============================================
 
 function setupEventHandlers() {
-  const expandAllBtn = document.getElementById("expandAllBtn");
-  const collapseAllBtn = document.getElementById("collapseAllBtn");
   const deleteRowsBtn = document.getElementById("deleteRowsBtn");
   const addRowBtn = document.getElementById("addRowBtn");
 
-  console.log("Setting up event handlers", expandAllBtn);
-
-  if (expandAllBtn) {
-    expandAllBtn.addEventListener("click", () => {
-      expandAllGroups();
-    });
-  }
-
-  if (collapseAllBtn) {
-    collapseAllBtn.addEventListener("click", () => {
-      collapseAllGroups();
-    });
-  }
+  console.log("Setting up event handlers");
 
   if (deleteRowsBtn) {
     deleteRowsBtn.addEventListener("click", () => {
@@ -1374,8 +1205,6 @@ declare global {
     addNewRow: () => void;
     deleteRow: (id: number) => void;
     deleteSelectedRows: () => void;
-    expandAllGroups: () => void;
-    collapseAllGroups: () => void;
   }
 }
 
@@ -1383,8 +1212,6 @@ window.gridOptions = gridOptions;
 window.addNewRow = addNewRow;
 window.deleteRow = deleteRow;
 window.deleteSelectedRows = deleteSelectedRows;
-window.expandAllGroups = expandAllGroups;
-window.collapseAllGroups = collapseAllGroups;
 
 // Grid initialisatie wordt aangeroepen na data generatie
 // (zie generateDataWithProgress functie)

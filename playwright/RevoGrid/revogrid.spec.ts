@@ -8,7 +8,7 @@ function savePerformanceData(
   time: string,
   timestamp: string
 ) {
-  // Performance results directory is in playwright/Ag-grid/performance-results
+  // Performance results directory is in playwright/RevoGrid/performance-results
   const dataDir = path.join(__dirname, "performance-results");
 
   // Maak directory aan als deze niet bestaat
@@ -45,7 +45,7 @@ function savePerformanceData(
     time,
     timeMs,
     timestamp,
-    testFile: "ag-grid.spec.ts",
+    testFile: "revogrid.spec.ts",
   });
 
   // Sla data op
@@ -71,7 +71,7 @@ async function waitForGridReady(page: any, timeout: number = 400000) {
   expect(operationText).toContain("Grid Stabiel");
 
   // Verifieer dat de grid container zichtbaar is
-  const gridContainer = page.locator('[data-test="ag-grid"]');
+  const gridContainer = page.locator('[data-test="revo-grid"]');
   await expect(gridContainer).toBeVisible();
 
   // Lees de tijd uit (optioneel)
@@ -87,18 +87,18 @@ async function waitForGridReady(page: any, timeout: number = 400000) {
   };
 }
 
-test.describe("AG Grid Tests", () => {
+test.describe("RevoGrid Tests", () => {
   test.beforeEach(async ({ page }) => {
-    // Navigeer naar de AG Grid pagina
-    await page.goto("http://localhost:8000/Ag-grid");
+    // Navigeer naar de RevoGrid pagina
+    await page.goto("http://localhost:8000/RevoGrid");
   });
 
   test("pagina laadt correct", async ({ page }) => {
     // Check of de pagina geladen is
-    await expect(page).toHaveTitle(/AG Grid/i);
+    await expect(page).toHaveTitle(/RevoGrid/i);
   });
 
-  test("AG Grid is zichtbaar", async ({ page }) => {
+  test("RevoGrid is zichtbaar", async ({ page }) => {
     // Start tijd meten
     test.slow();
     const startTime = Date.now();
@@ -124,42 +124,40 @@ test.describe("AG Grid Tests", () => {
     // Wacht tot grid ready is
     await waitForGridReady(page);
 
-    // Wacht tot er rijen zijn
-    const firstRow = page.locator('[data-test^="rij-"]').first();
-    await expect(firstRow).toBeVisible({ timeout: 10000 });
+    // Wacht tot het grid geladen is
+    const grid = page.locator('[data-test="revo-grid"]');
+    await expect(grid).toBeVisible({ timeout: 10000 });
 
-    // Selecteer eerste rij
-    await firstRow.click();
+    // Klik op een cel in de grid om een rij te selecteren
+    // RevoGrid gebruikt een shadow DOM, dus we moeten een andere aanpak gebruiken
+    await grid.click({ position: { x: 100, y: 50 } });
+
+    // Wacht even voor de selectie
+    await page.waitForTimeout(5000);
 
     // Verifieer dat selected count is bijgewerkt
     const selectedCount = page.locator('[data-test="selected-count"]');
-    await expect(selectedCount).toHaveText("1");
+    await expect(selectedCount).toHaveText("1", { timeout: 5000 });
 
-    // Klik op verwijder knop in de rij (gebruik de eerste rij ID)
-    const rowId = await firstRow.getAttribute("data-test");
-    if (rowId) {
-      const rowIdNumber = rowId.replace("rij-", "");
-      const deleteButton = page.locator(
-        `[data-test="verwijder-rij-${rowIdNumber}"]`
-      );
-      await deleteButton.click();
+    // Klik op verwijder knop
+    const deleteButton = page.locator(
+      '[data-test="verwijderen-geselecteerde"]'
+    );
+    await deleteButton.click();
 
-      // Wacht tot performance indicator verschijnt
-      const perfIndicator = page.locator(
-        '[data-test="performance-indicator-rij-verwijderen"]'
-      );
-      await expect(perfIndicator).toBeVisible({ timeout: 10000 });
+    // Wacht tot performance indicator verschijnt
+    const perfIndicator = page.locator(
+      '[data-test="performance-indicator-rijen-verwijderen"]'
+    );
+    await expect(perfIndicator).toBeVisible({ timeout: 10000 });
 
-      // Lees de tijd uit
-      const timeElement = perfIndicator.locator(
-        '[data-test="performance-tijd"]'
-      );
-      const timeText = await timeElement.textContent();
-      if (timeText) {
-        const timestamp = new Date().toISOString();
-        savePerformanceData("Rij Verwijderen", timeText.trim(), timestamp);
-        console.log(`Rij Verwijderen tijd: ${timeText.trim()}`);
-      }
+    // Lees de tijd uit
+    const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
+    const timeText = await timeElement.textContent();
+    if (timeText) {
+      const timestamp = new Date().toISOString();
+      savePerformanceData("Rij Verwijderen", timeText.trim(), timestamp);
+      console.log(`Rij Verwijderen tijd: ${timeText.trim()}`);
     }
   });
 
@@ -168,16 +166,25 @@ test.describe("AG Grid Tests", () => {
     // Wacht tot grid ready is
     await waitForGridReady(page);
 
-    // Wacht tot er rijen zijn
-    const firstRow = page.locator('[data-test^="rij-"]').first();
+    // Wacht tot het grid geladen is
+    const grid = page.locator('[data-test="revo-grid"]');
+    await expect(grid).toBeVisible({ timeout: 10000 });
 
-    // Selecteer eerste rij
-    await firstRow.click();
+    // Klik op een cel in de grid om een rij te selecteren
+    await grid.click({ position: { x: 100, y: 50 } });
+
+    // Wacht even voor de selectie
+    await page.waitForTimeout(500);
 
     // Verifieer dat selected count is bijgewerkt
+    const selectedCount = page.locator('[data-test="selected-count"]');
+    await expect(selectedCount).toHaveText("1", { timeout: 5000 });
+
+    // Klik op toevoegen knop
     const addButton = page.locator('[data-test="nieuw-rij-toevoegen"]');
     await addButton.click();
 
+    // Wacht tot performance indicator verschijnt
     const perfIndicator = page.locator(
       '[data-test="performance-indicator-rij-toevoegen"]'
     );

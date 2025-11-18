@@ -56,7 +56,9 @@ function savePerformanceData(
 // Helper functie om te wachten tot de grid ready/stabiel is
 async function waitForGridReady(page: any, timeout: number = 400000) {
   // Wacht tot de grid container zichtbaar is
-  const gridContainer = page.locator('[data-test="wijmo-grid"]');
+  const gridContainer = page.locator(
+    '[data-test="performance-indicator-grid-stabiel"]'
+  );
   await expect(gridContainer).toBeVisible({ timeout });
 
   // Wacht tot de performance indicator zichtbaar is
@@ -106,38 +108,6 @@ test.describe("Wijmo Grid Tests", () => {
     }
   });
 
-  test("knoppen zijn beschikbaar", async ({ page }) => {
-    test.slow();
-    // Wacht tot grid ready is
-    const result = await waitForGridReady(page);
-
-    // Check of alle knoppen bestaan en zichtbaar zijn
-    await expect(
-      page.locator('[data-test="nieuw-rij-toevoegen"]')
-    ).toBeVisible();
-    await expect(page.locator('[data-test="alles-uitklappen"]')).toBeVisible();
-    await expect(page.locator('[data-test="alles-inklappen"]')).toBeVisible();
-    await expect(
-      page.locator('[data-test="verwijderen-geselecteerde"]')
-    ).toBeVisible();
-
-    // Check of info badges zichtbaar zijn
-    await expect(
-      page.locator('[data-test="info-badge-medewerkers"]')
-    ).toBeVisible();
-    await expect(
-      page.locator('[data-test="info-badge-afdelingen"]')
-    ).toBeVisible();
-    await expect(page.locator('[data-test="info-badge-teams"]')).toBeVisible();
-
-    // Sla performance data op
-    if (result.time) {
-      const timestamp = new Date().toISOString();
-      savePerformanceData("Knoppen Beschikbaar", result.time, timestamp);
-      console.log(`Knoppen Beschikbaar tijd: ${result.time}`);
-    }
-  });
-
   test("rij selecteren en verwijderen", async ({ page }) => {
     test.slow();
     // Wacht tot grid ready is
@@ -145,12 +115,8 @@ test.describe("Wijmo Grid Tests", () => {
 
     await page.waitForTimeout(3000);
 
-    // Expand all groups first
-    await page.locator('[data-test="alles-uitklappen"]').click();
-    await page.waitForTimeout(1000);
-
     // Wacht tot er rijen zijn - zoek naar grid rows
-    const gridRows = page.locator('[data-test="table-rij-1"]');
+    const gridRows = page.locator('[data-test="table-rij-6"]');
     await expect(gridRows.first()).toBeVisible({ timeout: 10000 });
 
     // Selecteer eerste rij door erop te klikken
@@ -188,7 +154,7 @@ test.describe("Wijmo Grid Tests", () => {
     await page.waitForTimeout(3000);
 
     // Wacht tot er rijen zijn
-    const gridRows = page.locator('[data-test="table-rij-1"]');
+    const gridRows = page.locator('[data-test="table-rij-6"]');
     await expect(gridRows.first()).toBeVisible({ timeout: 10000 });
 
     // Selecteer eerste rij

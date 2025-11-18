@@ -97,7 +97,7 @@ export function generateColumnDefinitions(): ColDef[] {
     sortable: true,
     filter: true,
     editable: true,
-    rowGroup: true,
+    rowGroup: false,
     hide: true,
   });
 
@@ -109,7 +109,7 @@ export function generateColumnDefinitions(): ColDef[] {
     sortable: true,
     filter: true,
     editable: true,
-    rowGroup: true,
+    rowGroup: false,
     hide: true,
   });
 
