@@ -13,3 +13,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+/organization-data.json
+/organization-data.ndjson

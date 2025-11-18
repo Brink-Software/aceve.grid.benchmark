@@ -17,6 +17,8 @@ console.log("Departments loaded:", departments?.length || 0);
 console.log("Teams loaded:", Object.keys(teams || {}).length);
 console.log("Roles loaded:", Object.keys(roles || {}).length);
 
+let currentSelectedRow = -1;
+
 // ============================================
 // Loading Spinner Functions
 // ============================================
@@ -230,7 +232,7 @@ generateDataWithProgress();
 // CRUD Operations
 // ============================================
 
-export function addNewRow(): void {
+export async function addNewRow(): Promise<void> {
   console.log("addNewRow called");
 
   if (!grid) {
@@ -255,17 +257,21 @@ export function addNewRow(): void {
   }
 
   try {
+    if (currentSelectedRow === -1) {
+      alert(
+        "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen."
+      );
+      return;
+    }
     let selectedDept: string | null = null;
     let selectedTeam: string | null = null;
 
     // Get selected range
-    const range = grid.getSelectedRange();
-    if (range && range.y !== undefined) {
-      const selectedRow = rowData[range.y];
-      if (selectedRow) {
-        selectedDept = selectedRow.department;
-        selectedTeam = selectedRow.team;
-      }
+
+    const selectedRow = rowData[currentSelectedRow];
+    if (selectedRow) {
+      selectedDept = selectedRow.department;
+      selectedTeam = selectedRow.team;
     }
 
     if (!selectedDept || !selectedTeam) {
@@ -285,8 +291,8 @@ export function addNewRow(): void {
       role
     );
 
-    // Add row to data source
-    rowData.push(newEmployee);
+    // Add row to data source directly after the selected row
+    rowData.splice(currentSelectedRow + 1, 0, newEmployee);
 
     // Update grid source
     grid.source = [...rowData];
@@ -394,26 +400,22 @@ export function deleteRow(id: number): void {
   }, 200);
 }
 
-export function deleteSelectedRows(): void {
+export async function deleteSelectedRows(): Promise<void> {
+  if (currentSelectedRow === -1) {
+    alert("Selecteer eerst een rij om te verwijderen.");
+    return;
+  }
+
   console.log("deleteSelectedRows called");
 
-  if (!grid) {
-    console.error("Grid niet beschikbaar");
-    return;
-  }
-
-  const range = grid.getSelectedRange();
-  if (!range || range.y === undefined) {
-    console.warn("Geen rijen geselecteerd voor verwijdering");
-    return;
-  }
-
   const performanceStart = performance.now();
+
   const startMemory = (performance as any).memory
     ? (performance as any).memory.usedJSHeapSize
     : 0;
 
   console.log("=== PERFORMANCE METING: MEERDERE RIJEN VERWIJDEREN ===");
+
   console.log("Start tijd:", performanceStart);
   if (startMemory) {
     console.log(
@@ -423,7 +425,8 @@ export function deleteSelectedRows(): void {
     );
   }
 
-  const selectedRow = rowData[range.y];
+  const selectedRow = rowData[currentSelectedRow];
+  currentSelectedRow = -1;
   if (selectedRow) {
     const index = rowData.findIndex((row: any) => row.id === selectedRow.id);
     if (index !== -1) {
@@ -616,7 +619,7 @@ export function collapseAllGroups(): void {
 // Event Handlers
 // ============================================
 
-function updateSelectedCount() {
+async function updateSelectedCount() {
   const selectedCountEl = document.getElementById("selectedCount");
   const deleteBtn = document.getElementById(
     "deleteRowsBtn"
@@ -625,8 +628,12 @@ function updateSelectedCount() {
 
   if (!grid) return;
 
-  const range = grid.getSelectedRange();
+  const range = await grid.getSelectedRange();
+
+  console.log("Updating selected count, range:", range);
   const hasSelection = range && range.y !== undefined;
+
+  currentSelectedRow = hasSelection ? range.y : -1;
 
   if (selectedCountEl) {
     selectedCountEl.textContent = hasSelection ? "1" : "0";
@@ -704,8 +711,16 @@ function setupEventHandlers() {
 
   // Listen to grid selection changes
   if (grid) {
-    grid.addEventListener("afterselection", () => {
+    grid.addEventListener("beforecellfocus", (event: any) => {
+      console.log("Grid selection changed", event);
       updateSelectedCount();
+    });
+
+    // Give grid focus on click to enable selection
+    grid.addEventListener("click", () => {
+      if (grid && grid.focus) {
+        grid.focus();
+      }
     });
   }
 }
@@ -830,6 +845,11 @@ function initializeGrid(gridInitStartTime?: number) {
           "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
       }
 
+      // Give grid focus after initialization
+      if (grid && grid.focus) {
+        grid.focus();
+      }
+
       console.log("Event handlers setup complete");
     }, 100);
   } catch (error: any) {
@@ -842,18 +862,8 @@ function initializeGrid(gridInitStartTime?: number) {
 }
 
 // Export functions voor gebruik in HTML
-declare global {
-  interface Window {
-    addNewRow: () => void;
-    deleteRow: (id: number) => void;
-    deleteSelectedRows: () => void;
-    expandAllGroups: () => void;
-    collapseAllGroups: () => void;
-  }
-}
-
-window.addNewRow = addNewRow;
-window.deleteRow = deleteRow;
-window.deleteSelectedRows = deleteSelectedRows;
-window.expandAllGroups = expandAllGroups;
-window.collapseAllGroups = collapseAllGroups;
+(window as any).addNewRow = addNewRow;
+(window as any).deleteRow = deleteRow;
+(window as any).deleteSelectedRows = deleteSelectedRows;
+(window as any).expandAllGroups = expandAllGroups;
+(window as any).collapseAllGroups = collapseAllGroups;

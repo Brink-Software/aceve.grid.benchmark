@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Grid - 200.000 Rijen, 500 Kolommen</title>
+    <link rel="stylesheet" href="/Canvas-grid/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+          "
+        >
+          <a href="/" class="back-link">← Terug naar Home</a>
+        </div>
+        <h1>🎨 Canvas Grid - 200.000 Rijen, 500 Kolommen</h1>
+        <p>Custom canvas-gebaseerde grid implementatie met hoge performance</p>
+      </header>
+
+      <div class="toolbar">
+        <div class="toolbar-info">
+          <span class="info-badge">
+            📊 <span id="totalRows" data-test="total-rows">0</span> Rijen
+          </span>
+          <span class="info-badge">
+            📈 <span id="totalCols" data-test="total-cols">0</span> Kolommen
+          </span>
+          <span class="info-badge" id="selectedRowBadge">
+            🎯
+            <span id="selectedRow" data-test="selected-row">Geen selectie</span>
+          </span>
+        </div>
+        <div class="toolbar-actions">
+          <button id="addRowBtn" class="btn-primary" data-test="add-row-btn">
+            ➕ Rij Toevoegen
+          </button>
+          <button
+            id="deleteRowBtn"
+            class="btn-danger"
+            disabled
+            data-test="delete-row-btn"
+          >
+            🗑️ Rij Verwijderen
+          </button>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <p>
+          <strong>💡 Tips:</strong>
+          Klik om rij te selecteren | Dubbelklik om cel te bewerken | Scroll met
+          muiswiel (Shift+Scroll voor horizontaal) | Sleep om te scrollen |
+          Delete toets om rij te verwijderen | Pijltjestoetsen om door rijen te
+          navigeren
+        </p>
+      </div>
+
+      <div class="grid-container" data-test="grid-container">
+        <!-- Loading Spinner -->
+        <div
+          id="loadingSpinner"
+          class="loading-spinner"
+          data-test="loading-spinner"
+        >
+          <div class="spinner"></div>
+          <p class="loading-text">
+            Canvas Grid wordt geladen...<br />
+            <span style="font-size: 14px">Data wordt gegenereerd...</span><br />
+            <span
+              id="loadingProgress"
+              data-test="loading-progress"
+              style="
+                font-size: 18px;
+                font-weight: bold;
+                color: #0078d4;
+                margin-top: 8px;
+                display: inline-block;
+              "
+              >0</span
+            >
+            <span style="font-size: 14px"> rijen</span>
+          </p>
+        </div>
+
+        <!-- Canvas Element -->
+        <canvas
+          id="gridCanvas"
+          data-test="grid-canvas"
+          style="display: none"
+        ></canvas>
+      </div>
+
+      <div class="info-panel" style="margin-top: 20px">
+        <h3>📋 Functionaliteit:</h3>
+        <ul style="margin: 10px 0; padding-left: 25px">
+          <li>✅ 200.000 rijen × 500 kolommen</li>
+          <li>✅ Virtualisatie voor optimale performance</li>
+          <li>✅ Rij selecteren (klik)</li>
+          <li>✅ Rij verwijderen (Delete toets of knop)</li>
+          <li>✅ Cel bewerken (dubbelklik)</li>
+          <li>✅ Kolom sommen boven tabel</li>
+          <li>✅ Rij toevoegen (knop)</li>
+          <li>✅ Smooth scrollen (muiswiel of sleep)</li>
+          <li>✅ Keyboard navigatie (pijltjestoetsen)</li>
+        </ul>
+      </div>
+    </div>
+
+    <script type="module" src="../dist/Canvas-grid/src/app.js"></script>
+  </body>
+</html>
