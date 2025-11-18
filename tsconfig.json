@@ -21,7 +21,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["Ag-grid/src/**/*", "Wijmo-grid/src/**/*", "Tabulator-grid/src/**/*", "src/**/*"],
+  "include": ["Ag-grid/src/**/*", "Wijmo-grid/src/**/*", "Tabulator-grid/src/**/*", "RevoGrid/src/**/*", "src/**/*"],
   "exclude": ["node_modules", "dist", "playwright"]
 }
 
