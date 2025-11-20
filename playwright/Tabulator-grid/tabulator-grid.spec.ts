@@ -56,14 +56,23 @@ function savePerformanceData(
 // Helper functie om te wachten tot de grid ready/stabiel is
 async function waitForGridReady(page: any, timeout: number = 400000) {
   // Wacht tot de grid container zichtbaar is
-  const gridContainer = page.locator('[data-test="tabulator-grid"]');
-  await expect(gridContainer).toBeVisible({ timeout });
+  const gridStabielIndicator = page.locator(
+    '[data-test="performance-indicator-grid-stabiel"]'
+  );
+  await expect(gridStabielIndicator).toBeVisible({ timeout });
 
   // Wacht tot de performance indicator zichtbaar is
-  const perfIndicator = page.locator("#performanceIndicator");
-  await expect(perfIndicator).toBeVisible({ timeout: 10000 });
+
+  const operationText = await gridStabielIndicator
+    .locator("div")
+    .first()
+    .textContent();
+  expect(operationText).toContain("Grid Stabiel");
 
   // Lees de tijd uit
+
+  const perfIndicator = page.locator("#performanceIndicator");
+  await expect(perfIndicator).toBeVisible({ timeout: 10000 });
   const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
   const timeText = await timeElement.textContent();
 

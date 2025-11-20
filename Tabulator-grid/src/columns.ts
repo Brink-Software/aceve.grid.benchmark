@@ -7,42 +7,6 @@ import { TabulatorColumn } from "./types.js";
 export function generateColumnDefinitions(): TabulatorColumn[] {
   const columns: TabulatorColumn[] = [];
 
-  // Actie kolom (voor delete)
-  columns.push({
-    title: "Actions",
-    field: "actions",
-    width: 100,
-    sorter: false,
-    filter: false,
-    headerSort: false,
-    headerFilter: false,
-    frozen: true,
-    formatter: (cell) => {
-      const row = cell.getRow();
-      if (!row.getData().id) return "";
-
-      const button = document.createElement("button");
-      button.innerHTML = "🗑️";
-      button.className = "delete-row-btn";
-      button.title = "Verwijder rij";
-      button.setAttribute("data-test", `verwijder-rij-${row.getData().id}`);
-      button.style.cssText = `
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 16px;
-        padding: 4px 8px;
-      `;
-      button.onclick = (e) => {
-        e.stopPropagation();
-        if ((window as any).deleteRow && row.getData()) {
-          (window as any).deleteRow(row.getData().id);
-        }
-      };
-      return button;
-    },
-  });
-
   // ID kolom
   columns.push({
     title: "ID",

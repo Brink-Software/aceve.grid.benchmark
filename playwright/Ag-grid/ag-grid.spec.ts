@@ -125,7 +125,7 @@ test.describe("AG Grid Tests", () => {
     await waitForGridReady(page);
 
     // Wacht tot er rijen zijn
-    const firstRow = page.locator('[data-test^="rij-"]').first();
+    const firstRow = page.locator('[row-index="12"]').first();
     await expect(firstRow).toBeVisible({ timeout: 10000 });
 
     // Selecteer eerste rij
@@ -135,31 +135,29 @@ test.describe("AG Grid Tests", () => {
     const selectedCount = page.locator('[data-test="selected-count"]');
     await expect(selectedCount).toHaveText("1");
 
-    // Klik op verwijder knop in de rij (gebruik de eerste rij ID)
-    const rowId = await firstRow.getAttribute("data-test");
-    if (rowId) {
-      const rowIdNumber = rowId.replace("rij-", "");
-      const deleteButton = page.locator(
-        `[data-test="verwijder-rij-${rowIdNumber}"]`
-      );
-      await deleteButton.click();
+    const deleteButton = page.locator(
+      `[data-test="verwijderen-geselecteerde"]`
+    );
 
-      // Wacht tot performance indicator verschijnt
-      const perfIndicator = page.locator(
-        '[data-test="performance-indicator-rij-verwijderen"]'
-      );
-      await expect(perfIndicator).toBeVisible({ timeout: 10000 });
+    await page.waitForTimeout(2000);
+    await deleteButton.click();
 
-      // Lees de tijd uit
-      const timeElement = perfIndicator.locator(
-        '[data-test="performance-tijd"]'
-      );
-      const timeText = await timeElement.textContent();
-      if (timeText) {
-        const timestamp = new Date().toISOString();
-        savePerformanceData("Rij Verwijderen", timeText.trim(), timestamp);
-        console.log(`Rij Verwijderen tijd: ${timeText.trim()}`);
-      }
+    // Wacht tot performance indicator verschijnt
+    const perfIndicator = page.locator(
+      '[data-test="performance-indicator-rij-verwijderen"]'
+    );
+    await expect(perfIndicator).toBeVisible({ timeout: 10000 });
+
+    // Lees de tijd uit
+    const timeElement = perfIndicator.locator('[data-test="performance-tijd"]');
+
+    const timeText = await timeElement.textContent();
+
+    console.log("Gevonden rij ID voor verwijdering:", timeElement);
+    if (timeText) {
+      const timestamp = new Date().toISOString();
+      savePerformanceData("Rij Verwijderen", timeText.trim(), timestamp);
+      console.log(`Rij Verwijderen tijd: ${timeText.trim()}`);
     }
   });
 
@@ -173,6 +171,7 @@ test.describe("AG Grid Tests", () => {
 
     // Selecteer eerste rij
     await firstRow.click();
+    await page.waitForTimeout(2000);
 
     // Verifieer dat selected count is bijgewerkt
     const addButton = page.locator('[data-test="nieuw-rij-toevoegen"]');

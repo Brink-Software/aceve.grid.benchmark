@@ -7,40 +7,6 @@ import { RevoGridColumn } from "./types.js";
 export function generateColumnDefinitions(): RevoGridColumn[] {
   const columns: RevoGridColumn[] = [];
 
-  // Actie kolom (voor delete)
-  columns.push({
-    prop: "actions",
-    name: "Actions",
-    size: 100,
-    readonly: true,
-    cellTemplate: (h: any, _column: any, data: any) => {
-      // Skip rendering for group rows or rows without model/id
-      if (!data || !data.model || !data.model.id) return "";
-
-      return h(
-        "button",
-        {
-          class: "delete-row-btn",
-          "data-test": `verwijder-rij-${data.model.id}`,
-          style: {
-            background: "none",
-            border: "none",
-            cursor: "pointer",
-            fontSize: "16px",
-            padding: "4px 8px",
-          },
-          onClick: (e: Event) => {
-            e.stopPropagation();
-            if ((window as any).deleteRow && data.model.id) {
-              (window as any).deleteRow(data.model.id);
-            }
-          },
-        },
-        "🗑️"
-      );
-    },
-  });
-
   // ID kolom
   columns.push({
     prop: "id",

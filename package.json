@@ -11,7 +11,9 @@
     "serve": "npx serve -l 8000",
     "test": "cd playwright && npm run test:ag-grid",
     "test:ui": "cd playwright && npm run test:ag-grid:ui",
-    "test:headed": "cd playwright && npm run test:ag-grid:headed"
+    "test:headed": "cd playwright && npm run test:ag-grid:headed",
+    "merge-performance": "node merge-performance-data.js",
+    "test:continuous": "powershell -ExecutionPolicy Bypass -File ./run-continuous-tests.ps1"
   },
   "keywords": [
     "ag-grid",
@@ -24,7 +26,6 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "@playwright/test": "^1.40.0",
     "@types/node": "^20.10.0",
     "typescript": "^5.3.3"
   },

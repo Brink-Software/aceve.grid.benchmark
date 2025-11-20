@@ -5,8 +5,9 @@ import { defineConfig, devices } from "@playwright/test";
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  testDir: "./",
+  testDir: ".",
   testMatch: "**/*.spec.ts",
+  testIgnore: "**/node_modules/**",
   /* Maximum tijd voor één test */
   timeout: 30 * 1000,
   expect: {

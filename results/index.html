@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Performance Results - Grid Benchmark</title>
+    <!-- GSAP Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <!-- Chart.js with Box Plot Plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/@sgratzl/chartjs-chart-boxplot"></script>
+    <!-- Fluent UI CSS -->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", -apple-system, BlinkMacSystemFont, "Roboto",
+          "Helvetica Neue", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        padding: 40px;
+        opacity: 0;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 40px;
+        opacity: 0;
+      }
+
+      h1 {
+        font-size: 42px;
+        font-weight: 700;
+        color: #323130;
+        margin-bottom: 12px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .subtitle {
+        font-size: 18px;
+        color: #605e5c;
+        margin-bottom: 20px;
+      }
+
+      .back-button {
+        display: inline-block;
+        padding: 12px 24px;
+        background: linear-gradient(135deg, #0078d4 0%, #106ebe 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+      }
+
+      .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 120, 212, 0.4);
+      }
+
+      .controls {
+        display: flex;
+        gap: 16px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        opacity: 0;
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .control-group label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #323130;
+      }
+
+      .control-group select {
+        padding: 10px 16px;
+        border: 2px solid #e1dfdd;
+        border-radius: 6px;
+        font-size: 14px;
+        background: white;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .control-group select:hover {
+        border-color: #0078d4;
+      }
+
+      .control-group select:focus {
+        outline: none;
+        border-color: #0078d4;
+        box-shadow: 0 0 0 1px #0078d4;
+      }
+
+      .chart-container {
+        background: #faf9f8;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+      }
+
+      .chart-title {
+        font-size: 24px;
+        font-weight: 600;
+        color: #323130;
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .chart-wrapper {
+        position: relative;
+        height: 600px;
+        width: 100%;
+      }
+
+      #boxPlotChart {
+        width: 100%;
+        height: 100%;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+        opacity: 0;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-4px);
+      }
+
+      .stat-card h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        opacity: 0.9;
+      }
+
+      .stat-card .value {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 4px;
+      }
+
+      .stat-card .label {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+
+      .data-table-container {
+        background: #faf9f8;
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        overflow-x: auto;
+      }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+      }
+
+      .data-table thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+      }
+
+      .data-table th {
+        padding: 16px;
+        text-align: left;
+        font-weight: 600;
+      }
+
+      .data-table td {
+        padding: 12px 16px;
+        border-bottom: 1px solid #e1dfdd;
+      }
+
+      .data-table tbody tr:hover {
+        background: #f3f2f1;
+      }
+
+      .grid-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .grid-badge.ag-grid {
+        background: #ff6b6b;
+        color: white;
+      }
+
+      .grid-badge.wijmo {
+        background: #4ecdc4;
+        color: white;
+      }
+
+      .grid-badge.revogrid {
+        background: #95e1d3;
+        color: #323130;
+      }
+
+      .grid-badge.tabulator {
+        background: #f38181;
+        color: white;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 60px;
+        font-size: 18px;
+        color: #605e5c;
+      }
+
+      .error {
+        background: #fde7e9;
+        color: #a4262c;
+        padding: 20px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #a4262c;
+      }
+
+      .info-box {
+        background: #e3f2fd;
+        color: #0078d4;
+        padding: 16px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 4px solid #0078d4;
+        font-size: 14px;
+      }
+
+      .info-box code {
+        background: rgba(0, 120, 212, 0.1);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-family: "Consolas", "Monaco", monospace;
+        font-weight: 600;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 32px;
+        }
+
+        .chart-wrapper {
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>📊 Performance Results</h1>
+        <p class="subtitle">
+          Box and Whisker Plot - Grid Performance Comparison
+        </p>
+        <a href="/" class="back-button">← Terug naar Home</a>
+      </header>
+
+      <div class="controls">
+        <div class="control-group">
+          <label for="operationFilter">Operatie Type:</label>
+          <select id="operationFilter">
+            <option value="all">Alle Operaties</option>
+            <option value="Grid Stabiel">Grid Stabiel</option>
+            <option value="Rij Toevoegen">Rij Toevoegen</option>
+            <option value="Rij Verwijderen">Rij Verwijderen</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="gridFilter">Grid Type:</label>
+          <select id="gridFilter">
+            <option value="all">Alle Grids</option>
+            <option value="ag-grid">AG Grid</option>
+            <option value="wijmo">Wijmo Grid</option>
+            <option value="revogrid">RevoGrid</option>
+            <option value="tabulator">Tabulator Grid</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="info-box">
+        💡 <strong>Tip:</strong> Run <code>npm run merge-performance</code> om
+        de laatste performance data te laden van alle grids.
+      </div>
+
+      <div id="statsGrid" class="stats-grid"></div>
+
+      <div class="chart-container">
+        <h2 class="chart-title">
+          Performance Vergelijking - Box & Whisker Plot
+        </h2>
+        <div class="chart-wrapper">
+          <canvas id="boxPlotChart"></canvas>
+        </div>
+      </div>
+
+      <div class="data-table-container">
+        <h2 class="chart-title">Gedetailleerde Data</h2>
+        <table class="data-table" id="dataTable">
+          <thead>
+            <tr>
+              <th>Grid</th>
+              <th>Operatie</th>
+              <th>Tijd (ms)</th>
+              <th>Timestamp</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      let allData = [];
+      let chart = null;
+
+      // Load performance data from merged file
+      async function loadPerformanceData() {
+        try {
+          const response = await fetch("/performance-data-merged.json");
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          allData = await response.json();
+          updateDisplay();
+        } catch (error) {
+          console.error("Error loading performance data:", error);
+          document.querySelector(".container").innerHTML += `<div class="error">
+              Fout bij het laden van performance data. 
+              <br><br>
+              Zorg ervoor dat:
+              <ul style="margin: 10px 0; padding-left: 20px;">
+                <li>De server draait (<code>npm run serve</code>)</li>
+                <li>De merged data bestaat (<code>npm run merge-performance</code>)</li>
+              </ul>
+            </div>`;
+        }
+      }
+
+      // Calculate statistics
+      function calculateStats(data) {
+        if (data.length === 0) return null;
+
+        const times = data.map((d) => d.timeMs).sort((a, b) => a - b);
+        const sum = times.reduce((a, b) => a + b, 0);
+        const avg = sum / times.length;
+        const min = Math.min(...times);
+        const max = Math.max(...times);
+
+        // Calculate quartiles
+        const q1Index = Math.floor(times.length * 0.25);
+        const q2Index = Math.floor(times.length * 0.5);
+        const q3Index = Math.floor(times.length * 0.75);
+
+        return {
+          min,
+          q1: times[q1Index],
+          median: times[q2Index],
+          q3: times[q3Index],
+          max,
+          avg,
+          count: times.length,
+        };
+      }
+
+      // Prepare box plot data
+      function prepareBoxPlotData(data) {
+        const operationFilter =
+          document.getElementById("operationFilter").value;
+        const gridFilter = document.getElementById("gridFilter").value;
+
+        let filteredData = data;
+        if (operationFilter !== "all") {
+          filteredData = filteredData.filter(
+            (d) => d.operation === operationFilter
+          );
+        }
+        if (gridFilter !== "all") {
+          filteredData = filteredData.filter((d) => d.gridKey === gridFilter);
+        }
+
+        // Group by grid and operation
+        const grouped = {};
+        filteredData.forEach((item) => {
+          const key =
+            operationFilter === "all"
+              ? `${item.grid} - ${item.operation}`
+              : item.grid;
+
+          if (!grouped[key]) {
+            grouped[key] = [];
+          }
+          grouped[key].push(item.timeMs);
+        });
+
+        return Object.entries(grouped).map(([label, values]) => {
+          const sorted = values.sort((a, b) => a - b);
+          const stats = calculateStats(values.map((v) => ({ timeMs: v })));
+
+          return {
+            label,
+            ...stats,
+            items: sorted,
+          };
+        });
+      }
+
+      // Update statistics cards
+      function updateStats(data) {
+        const statsGrid = document.getElementById("statsGrid");
+        const operations = ["Grid Stabiel", "Rij Toevoegen", "Rij Verwijderen"];
+
+        statsGrid.innerHTML = operations
+          .map((op) => {
+            const opData = data.filter((d) => d.operation === op);
+            const stats = calculateStats(opData);
+
+            if (!stats) return "";
+
+            return `
+            <div class="stat-card">
+              <h3>${op}</h3>
+              <div class="value">${stats.avg.toFixed(2)} ms</div>
+              <div class="label">Gemiddelde Tijd</div>
+              <div style="margin-top: 12px; font-size: 14px;">
+                <div>Min: ${stats.min.toFixed(2)} ms</div>
+                <div>Max: ${stats.max.toFixed(2)} ms</div>
+                <div>Metingen: ${stats.count}</div>
+              </div>
+            </div>
+          `;
+          })
+          .join("");
+      }
+
+      // Update table
+      function updateTable(data) {
+        const tbody = document.getElementById("tableBody");
+        const operationFilter =
+          document.getElementById("operationFilter").value;
+        const gridFilter = document.getElementById("gridFilter").value;
+
+        let filteredData = data;
+        if (operationFilter !== "all") {
+          filteredData = filteredData.filter(
+            (d) => d.operation === operationFilter
+          );
+        }
+        if (gridFilter !== "all") {
+          filteredData = filteredData.filter((d) => d.gridKey === gridFilter);
+        }
+
+        // Sort by timestamp descending
+        filteredData.sort(
+          (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
+        );
+
+        tbody.innerHTML = filteredData
+          .map(
+            (item) => `
+          <tr>
+            <td><span class="grid-badge ${item.gridKey}">${
+              item.grid
+            }</span></td>
+            <td>${item.operation}</td>
+            <td><strong>${item.timeMs.toFixed(2)} ms</strong></td>
+            <td>${new Date(item.timestamp).toLocaleString("nl-NL")}</td>
+          </tr>
+        `
+          )
+          .join("");
+      }
+
+      // Create box plot chart using Chart.js
+      function createBoxPlot(data) {
+        const boxPlotData = prepareBoxPlotData(data);
+        const ctx = document.getElementById("boxPlotChart");
+
+        if (chart) {
+          chart.destroy();
+        }
+
+        // Prepare data for Chart.js box plot
+        const labels = boxPlotData.map((item) => item.label);
+        const chartData = boxPlotData.map((item) => ({
+          min: item.min,
+          q1: item.q1,
+          median: item.median,
+          q3: item.q3,
+          max: item.max,
+          outliers: [],
+        }));
+
+        // Calculate dynamic y-axis based on Q1 and Q3 only (ignore min/max outliers)
+        const allQ1Values = boxPlotData.map((item) => item.q1);
+        const allQ3Values = boxPlotData.map((item) => item.q3);
+
+        const minQ1 = Math.min(...allQ1Values);
+        const maxQ3 = Math.max(...allQ3Values);
+
+        // Add 10% padding above and below the Q1-Q3 range
+        const range = maxQ3 - minQ1;
+        const padding = range * 0.1;
+
+        const yAxisMin = Math.max(0, minQ1 - padding); // Don't go below 0
+        const yAxisMax = maxQ3 + padding;
+
+        const colors = [
+          "rgba(255, 107, 107, 0.7)",
+          "rgba(78, 205, 196, 0.7)",
+          "rgba(149, 225, 211, 0.7)",
+          "rgba(243, 129, 129, 0.7)",
+          "rgba(102, 126, 234, 0.7)",
+          "rgba(118, 75, 162, 0.7)",
+        ];
+
+        chart = new Chart(ctx, {
+          type: "boxplot",
+          data: {
+            labels: labels,
+            datasets: [
+              {
+                label: "Performance (ms)",
+                data: chartData,
+                backgroundColor: colors,
+                borderColor: colors.map((c) => c.replace("0.7", "1")),
+                borderWidth: 2,
+                outlierColor: "#999999",
+                padding: 10,
+                itemRadius: 0,
+                itemStyle: "circle",
+                itemBackgroundColor: "#999999",
+                itemBorderColor: "#999999",
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            layout: {
+              padding: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (context) {
+                    const item = context.parsed;
+                    return [
+                      `Min: ${item.min.toFixed(2)} ms`,
+                      `Q1: ${item.q1.toFixed(2)} ms`,
+                      `Median: ${item.median.toFixed(2)} ms`,
+                      `Q3: ${item.q3.toFixed(2)} ms`,
+                      `Max: ${item.max.toFixed(2)} ms`,
+                    ];
+                  },
+                },
+              },
+              title: {
+                display: false,
+              },
+            },
+            scales: {
+              y: {
+                min: yAxisMin,
+                max: yAxisMax,
+                title: {
+                  display: true,
+                  text: "Tijd (ms)",
+                  font: {
+                    size: 14,
+                    weight: "bold",
+                  },
+                },
+                ticks: {
+                  callback: function (value) {
+                    return value.toFixed(0) + " ms";
+                  },
+                },
+                grid: {
+                  display: true,
+                  color: "rgba(0, 0, 0, 0.1)",
+                },
+              },
+              x: {
+                title: {
+                  display: true,
+                  text: "Grid / Operatie",
+                  font: {
+                    size: 14,
+                    weight: "bold",
+                  },
+                },
+                ticks: {
+                  autoSkip: false,
+                  maxRotation: 45,
+                  minRotation: 45,
+                  font: {
+                    size: 11,
+                  },
+                },
+                grid: {
+                  display: false,
+                },
+              },
+            },
+          },
+        });
+      }
+
+      // Update all displays
+      function updateDisplay() {
+        updateStats(allData);
+        updateTable(allData);
+        createBoxPlot(allData);
+      }
+
+      // Event listeners
+      document
+        .getElementById("operationFilter")
+        .addEventListener("change", updateDisplay);
+      document
+        .getElementById("gridFilter")
+        .addEventListener("change", updateDisplay);
+
+      // Initialize
+      loadPerformanceData();
+
+      // Animations
+      const tl = gsap.timeline();
+      tl.to(".container", { opacity: 1, duration: 0.6, ease: "power2.out" });
+      tl.to(
+        "header",
+        { opacity: 1, y: 0, duration: 0.5, ease: "back.out" },
+        "<0.2"
+      );
+      tl.to(".controls", { opacity: 1, duration: 0.5 }, "<0.1");
+      tl.to(".stats-grid", { opacity: 1, duration: 0.5 }, "<0.1");
+      tl.to(".chart-container", { opacity: 1, duration: 0.5 }, "<0.1");
+      tl.to(".data-table-container", { opacity: 1, duration: 0.5 }, "<0.1");
+    </script>
+  </body>
+</html>

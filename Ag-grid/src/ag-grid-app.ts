@@ -18,6 +18,7 @@ console.log("Departments loaded:", departments?.length || 0);
 console.log("Teams loaded:", Object.keys(teams || {}).length);
 console.log("Roles loaded:", Object.keys(roles || {}).length);
 
+let memoryGeneration = 0;
 // ============================================
 // Loading Spinner Functions
 // ============================================
@@ -198,10 +199,10 @@ async function generateDataWithProgress() {
   );
 
   if (startMemory && endMemory) {
-    const memoryDiff = endMemory - startMemory;
+     memoryGeneration = endMemory - startMemory;
     console.log(
-      "Geheugen gebruikt:",
-      (memoryDiff / 1024 / 1024).toFixed(2),
+      "Geheugen gebruikt: na Generatie",
+      (memoryGeneration / 1024 / 1024).toFixed(2),
       "MB"
     );
   }
@@ -224,6 +225,9 @@ async function generateDataWithProgress() {
     const gridInitStart = performance.now();
     console.log("=== PERFORMANCE METING: GRID INITIALISATIE ===");
     console.log("Grid init start tijd:", gridInitStart);
+
+
+    //
 
     // Start grid initialisatie
     if (document.readyState === "loading") {
@@ -591,120 +595,6 @@ export function addNewRow(): void {
   }
 }
 
-// Delete row
-export function deleteRow(id: number): void {
-  console.log("deleteRow called");
-  if (!gridApi) {
-    console.error("Grid API niet beschikbaar");
-    return;
-  }
-
-  // Performance meting start
-  const performanceStart = performance.now();
-  const startMemory = (performance as any).memory
-    ? (performance as any).memory.usedJSHeapSize
-    : 0;
-
-  console.log("=== PERFORMANCE METING: RIJ VERWIJDEREN ===");
-  console.log("Start tijd:", performanceStart);
-  if (startMemory) {
-    console.log(
-      "Start geheugen:",
-      (startMemory / 1024 / 1024).toFixed(2),
-      "MB"
-    );
-  }
-
-  let rowToDelete: any = null;
-  const findStart = performance.now();
-  gridApi.forEachNode((node: RowNode) => {
-    if (node.data && node.data.id === id) {
-      rowToDelete = node.data;
-    }
-  });
-  const findEnd = performance.now();
-  const findTime = findEnd - findStart;
-  console.log("Zoek tijd:", findTime.toFixed(2), "ms");
-
-  if (!rowToDelete) {
-    console.warn("Rij niet gevonden voor verwijdering:", id);
-    return;
-  }
-
-  // Definieer alle timing variabelen buiten de callbacks voor correcte scope
-  const transactionStart = performance.now();
-  gridApi.applyTransaction({ remove: [rowToDelete] });
-  const transactionEnd = performance.now();
-  const transactionTime = transactionEnd - transactionStart;
-  console.log("Transaction tijd:", transactionTime.toFixed(2), "ms");
-
-  // Update rowData array
-  const index = rowData.findIndex((row: any) => row.id === id);
-  if (index !== -1) {
-    rowData.splice(index, 1);
-  }
-
-  const totalsStart = performance.now();
-  setTimeout(() => {
-    updateTotalsRow();
-    const totalsEnd = performance.now();
-    console.log(
-      "Totals update tijd:",
-      (totalsEnd - totalsStart).toFixed(2),
-      "ms"
-    );
-  }, 100);
-
-  const refreshStart = performance.now();
-  gridApi.refreshCells({ force: true });
-  const refreshEnd = performance.now();
-  const refreshTime = refreshEnd - refreshStart;
-  console.log("Refresh tijd:", refreshTime.toFixed(2), "ms");
-
-  console.log("Rij verwijderd:", id);
-
-  // Wacht tot grid volledig stabiel is (net zoals bij toevoegen)
-  const renderStart = performance.now();
-
-  // Wacht even zodat grid kan stabiliseren
-  setTimeout(() => {
-    // Wacht op volgende frames om zeker te zijn dat alles gerenderd en stabiel is
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const renderEnd = performance.now();
-        const renderTime = renderEnd - renderStart;
-        const totalTime = renderEnd - performanceStart;
-        const endMemory = (performance as any).memory
-          ? (performance as any).memory.usedJSHeapSize
-          : 0;
-
-        console.log("=== PERFORMANCE RESULTATEN: RIJ VERWIJDEREN ===");
-        console.log("Zoek tijd:", findTime.toFixed(2), "ms");
-        console.log("Transaction tijd:", transactionTime.toFixed(2), "ms");
-        console.log("Refresh tijd:", refreshTime.toFixed(2), "ms");
-        console.log("Render tijd:", renderTime.toFixed(2), "ms");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
-
-        if (startMemory && endMemory) {
-          const memoryDiff = startMemory - endMemory; // Negatief omdat geheugen vrijkomt
-          console.log(
-            "Geheugen vrijgekomen:",
-            (Math.abs(memoryDiff) / 1024 / 1024).toFixed(2),
-            "MB"
-          );
-        }
-
-        // Toon resultaat in UI
-        showPerformanceResult(
-          "Rij Verwijderen",
-          totalTime.toFixed(2) + " ms",
-          "rij-verwijderen"
-        );
-      });
-    });
-  }, 200); // Zelfde delay als bij toevoegen
-}
-
 // Delete selected rows (voor bulk verwijdering)
 export function deleteSelectedRows(): void {
   console.log("deleteSelectedRows called");
@@ -811,7 +701,7 @@ export function deleteSelectedRows(): void {
         showPerformanceResult(
           `Rijen Verwijderen (${selectedRows.length})`,
           totalTime.toFixed(2) + " ms",
-          "rijen-verwijderen"
+          "rij-verwijderen"
         );
       });
     });
@@ -1149,6 +1039,24 @@ function initializeGrid(gridInitStartTime?: number) {
                 totalGridInitTime.toFixed(2),
                 "ms"
               );
+
+                const endMemory = (performance as any).memory
+                ? (performance as any).memory.usedJSHeapSize
+                : 0;
+
+
+                 const numemoty = endMemory ;
+                console.log(
+                  "Geheugen gebruikt: na Generatie",
+                  (numemoty / 1024 / 1024).toFixed(2),
+                  "MB"
+                );
+
+      
+
+
+
+
               console.log("Rijen geladen:", rowCount);
               console.log("Kolommen:", columnDefs.length);
 
@@ -1210,7 +1118,6 @@ declare global {
 
 window.gridOptions = gridOptions;
 window.addNewRow = addNewRow;
-window.deleteRow = deleteRow;
 window.deleteSelectedRows = deleteSelectedRows;
 
 // Grid initialisatie wordt aangeroepen na data generatie

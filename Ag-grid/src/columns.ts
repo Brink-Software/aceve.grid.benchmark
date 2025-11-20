@@ -26,38 +26,6 @@ interface ColDef {
 export function generateColumnDefinitions(): ColDef[] {
   const columns: ColDef[] = [];
 
-  // Actie kolom (voor delete)
-  columns.push({
-    field: "actions",
-    headerName: "Actions",
-    width: 100,
-    sortable: false,
-    filter: false,
-    pinned: "left",
-    cellRenderer: function (params: CustomCellRendererParams) {
-      if (params.node.rowPinned === "bottom") {
-        return "";
-      }
-      if (params.node.group) {
-        return "";
-      }
-      const button = document.createElement("button");
-      button.innerHTML = "🗑️";
-      button.className = "delete-row-btn";
-      button.title = "Verwijder rij";
-      if (params.data && params.data.id) {
-        button.setAttribute("data-test", `verwijder-rij-${params.data.id}`);
-      }
-      button.onclick = function (e: Event) {
-        e.stopPropagation();
-        if ((window as any).deleteRow && params.data) {
-          (window as any).deleteRow(params.data.id);
-        }
-      };
-      return button;
-    },
-  });
-
   // ID kolom
   columns.push({
     field: "id",

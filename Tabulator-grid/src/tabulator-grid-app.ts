@@ -647,6 +647,17 @@ function initializeGrid(gridInitStartTime?: number) {
               console.log("Rijen geladen:", rowData.length);
               console.log("Kolommen:", columnDefs.length);
 
+              const endMemory = (performance as any).memory
+                ? (performance as any).memory.usedJSHeapSize
+                : 0;
+
+              const numemoty = endMemory;
+              console.log(
+                "Geheugen gebruikt: na Generatie",
+                (numemoty / 1024 / 1024).toFixed(2),
+                "MB"
+              );
+
               showPerformanceResult(
                 "Grid Stabiel",
                 totalGridInitTime.toFixed(2) + " ms",
