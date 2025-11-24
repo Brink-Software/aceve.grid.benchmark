@@ -35,6 +35,37 @@ Ga naar: http://localhost:8000/Ag-grid/index.html
 
 Zie [Ag-grid/README.md](Ag-grid/README.md) voor meer details.
 
+### AG Grid Speedup (Optimized)
+
+**Locatie**: `/ag-grid-speedup`  
+**URL**: `http://localhost:3000`
+
+Een geoptimaliseerde React-implementatie van AG Grid zonder row grouping en aggregaties voor maximale performance.
+
+**Quick Start**:
+```bash
+# 1. Ga naar ag-grid-speedup directory
+cd ag-grid-speedup
+
+# 2. Installeer dependencies (eerste keer)
+npm install
+
+# 3. Start Vite dev server
+npm run dev
+```
+
+**Performance Optimizations**:
+- ✅ No row grouping (major performance boost)
+- ✅ No aggregation functions
+- ✅ Simple value formatters (no complex cell renderers)
+- ✅ Column & row virtualization optimized
+- ✅ Transaction-based updates
+- ✅ React with Vite (fast HMR)
+
+Ga naar: http://localhost:3000
+
+Zie [ag-grid-speedup/README.md](ag-grid-speedup/README.md) voor meer details.
+
 ### Wijmo-grid
 
 **Locatie**: `/Wijmo-grid`  
@@ -102,6 +133,11 @@ aceve.grid.benchmark/     # ROOT directory (start server hier!)
 │   ├── dist/            # Gecompileerde JavaScript
 │   ├── index.html       # Main HTML file
 │   └── README.md        # Project documentatie
+├── ag-grid-speedup/      # AG Grid Speedup (React optimized)
+│   ├── src/             # React + TypeScript source
+│   ├── index.html       # Entry point
+│   ├── vite.config.ts   # Vite configuration
+│   └── README.md        # Project documentatie
 ├── Wijmo-grid/           # Wijmo Grid project
 │   ├── src/             # TypeScript source
 │   ├── index.html       # Main HTML file
@@ -118,9 +154,13 @@ aceve.grid.benchmark/     # ROOT directory (start server hier!)
 
 - **Home**: http://localhost:8000/
 - **Ag-grid**: http://localhost:8000/Ag-grid/index.html
+- **AG Grid Speedup**: http://localhost:3000/ (separate Vite dev server)
 - **Wijmo-grid**: http://localhost:8000/Wijmo-grid/index.html
 
-**Let op**: Gebruik `index.html` (met 'l'), niet `index.htm`!
+**Let op**: 
+- AG Grid Speedup runs on its own dev server (port 3000)
+- Other grids use the static file server (port 8000)
+- Gebruik `index.html` (met 'l'), niet `index.htm`!
 
 ## 📝 Toevoegen van Nieuwe Projecten
 
