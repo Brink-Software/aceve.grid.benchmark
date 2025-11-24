@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AG Grid Speedup - 200.000 Rijen, 500 Kolommen (Optimized)</title>
+    <!-- Fluent UI CSS -->
+    <link
+      rel="stylesheet"
+      href="https://static2.sharepointonline.com/files/fabric/office-ui-fabric-core/11.0.0/css/fabric.min.css"
+    />
+    <!-- AG Grid Community CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/styles/ag-grid.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/styles/ag-theme-alpine.css"
+    />
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="/ag-grid-speedup-js/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+          "
+        >
+          <a href="/"> ← Back to Home </a>
+        </div>
+        <h1>🚀 AG Grid Speedup - 200.000 Rijen, 500 Kolommen</h1>
+        <p>
+          Optimized Performance - No Grouping, Simple Formatters, Transaction
+          API
+        </p>
+      </header>
+
+      <div class="toolbar">
+        <div class="toolbar-info">
+          <span class="info-badge">
+            📊 <span id="totalRows">0</span> Rows
+          </span>
+          <span class="info-badge">
+            📋 <span id="totalColumns">0</span> Columns
+          </span>
+          <span class="info-badge">
+            ✓ <span id="selectedCount">0</span> Selected
+          </span>
+        </div>
+        <div class="toolbar-actions">
+          <button
+            id="addRowBtn"
+            class="btn-primary"
+            disabled
+            data-test="nieuw-rij-toevoegen"
+          >
+            ➕ Add Row
+          </button>
+          <button
+            id="deleteRowsBtn"
+            class="btn-danger"
+            disabled
+            data-test="verwijderen-geselecteerde"
+          >
+            🗑️ Delete (<span id="deleteCount">0</span>)
+          </button>
+        </div>
+      </div>
+
+      <div class="info-panel">
+        <p>
+          <strong>💡 Optimizations:</strong> No row grouping • No aggregations •
+          Simple formatters • Column virtualization • Row virtualization • No
+          animations • Transaction-based updates
+        </p>
+      </div>
+
+      <div class="grid-container" data-test="grid-container">
+        <!-- Loading Spinner -->
+        <div
+          id="loadingSpinner"
+          class="loading-spinner"
+          data-test="loading-spinner"
+        >
+          <div class="spinner"></div>
+          <p class="loading-text">
+            Generating data...<br />
+            <span id="loadingProgress" data-test="loading-progress">0</span>
+            rows
+          </p>
+        </div>
+        <div
+          id="myGrid"
+          class="ag-theme-alpine"
+          style="display: none"
+          data-test="ag-grid"
+        ></div>
+      </div>
+    </div>
+
+    <!-- AG Grid Community JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community@31.0.0/dist/ag-grid-community.min.js"></script>
+    <!-- AG Grid Enterprise JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-enterprise@31.0.0/dist/ag-grid-enterprise.min.js"></script>
+    <script>
+      // Verify Enterprise loaded before app script
+      (function checkEnterpriseLoaded() {
+        if (typeof window.agGrid === "undefined") {
+          console.log("Waiting for AG Grid Community...");
+          setTimeout(checkEnterpriseLoaded, 100);
+          return;
+        }
+
+        const agGrid = window.agGrid;
+        let enterpriseLoaded = false;
+
+        if (agGrid.EnterpriseModule) {
+          enterpriseLoaded = true;
+          console.log("✓ AG Grid Enterprise loaded (EnterpriseModule)");
+        } else if (agGrid.LicenseManager) {
+          enterpriseLoaded = true;
+          console.log("✓ AG Grid Enterprise loaded (LicenseManager)");
+        } else {
+          console.warn("⚠ AG Grid Enterprise not detected, waiting...");
+          setTimeout(checkEnterpriseLoaded, 200);
+          return;
+        }
+
+        console.log("✓ All AG Grid modules loaded, starting application...");
+        const script = document.createElement("script");
+        script.type = "module";
+        script.src = "/ag-grid-speedup-js/src/app.js";
+        document.body.appendChild(script);
+      })();
+
+      // Error handler for module loading
+      window.addEventListener("error", function (e) {
+        if (e.filename && e.filename.includes("app.js")) {
+          console.error("Module loading error:", e.message);
+          console.error("File:", e.filename);
+          console.error("Line:", e.lineno);
+          console.error("Full error:", e);
+        }
+      });
+    </script>
+  </body>
+</html>
