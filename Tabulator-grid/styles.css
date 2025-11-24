@@ -184,14 +184,16 @@ header a:hover {
 
 .grid-container {
   flex: 1;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
   background: white;
+  min-height: 0;
 }
 
 #myGrid {
   width: 100%;
   height: 100%;
+  overflow: auto;
 }
 
 /* Loading Spinner */

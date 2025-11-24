@@ -236,5 +236,208 @@
     "timeMs": 638.1,
     "timestamp": "2025-11-24T13:30:55.434Z",
     "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "362.90 ms",
+    "timeMs": 362.9,
+    "timestamp": "2025-11-24T13:31:03.869Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "311.10 ms",
+    "timeMs": 311.1,
+    "timestamp": "2025-11-24T13:31:12.185Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.10 ms",
+    "timeMs": 666.1,
+    "timestamp": "2025-11-24T13:32:26.433Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "345.70 ms",
+    "timeMs": 345.7,
+    "timestamp": "2025-11-24T13:32:35.318Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "312.10 ms",
+    "timeMs": 312.1,
+    "timestamp": "2025-11-24T13:32:43.845Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.00 ms",
+    "timeMs": 650,
+    "timestamp": "2025-11-24T13:33:57.806Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "308.70 ms",
+    "timeMs": 308.7,
+    "timestamp": "2025-11-24T13:34:06.353Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "324.50 ms",
+    "timeMs": 324.5,
+    "timestamp": "2025-11-24T13:34:14.773Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.90 ms",
+    "timeMs": 649.9,
+    "timestamp": "2025-11-24T13:35:28.172Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "296.30 ms",
+    "timeMs": 296.3,
+    "timestamp": "2025-11-24T13:35:36.796Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "322.30 ms",
+    "timeMs": 322.3,
+    "timestamp": "2025-11-24T13:35:45.231Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "633.90 ms",
+    "timeMs": 633.9,
+    "timestamp": "2025-11-24T13:36:58.359Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "325.90 ms",
+    "timeMs": 325.9,
+    "timestamp": "2025-11-24T13:37:06.956Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "306.80 ms",
+    "timeMs": 306.8,
+    "timestamp": "2025-11-24T13:37:15.315Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.70 ms",
+    "timeMs": 649.7,
+    "timestamp": "2025-11-24T13:38:27.867Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "296.70 ms",
+    "timeMs": 296.7,
+    "timestamp": "2025-11-24T13:38:36.296Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "327.50 ms",
+    "timeMs": 327.5,
+    "timestamp": "2025-11-24T13:38:44.610Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.00 ms",
+    "timeMs": 666,
+    "timestamp": "2025-11-24T13:39:55.974Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "278.60 ms",
+    "timeMs": 278.6,
+    "timestamp": "2025-11-24T13:40:04.161Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "278.40 ms",
+    "timeMs": 278.4,
+    "timestamp": "2025-11-24T13:40:12.482Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.90 ms",
+    "timeMs": 650.9,
+    "timestamp": "2025-11-24T13:41:28.418Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "297.20 ms",
+    "timeMs": 297.2,
+    "timestamp": "2025-11-24T13:41:36.819Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "329.70 ms",
+    "timeMs": 329.7,
+    "timestamp": "2025-11-24T13:41:45.228Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "652.90 ms",
+    "timeMs": 652.9,
+    "timestamp": "2025-11-24T13:42:57.464Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "288.00 ms",
+    "timeMs": 288,
+    "timestamp": "2025-11-24T13:43:05.643Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "329.60 ms",
+    "timeMs": 329.6,
+    "timestamp": "2025-11-24T13:43:13.894Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.70 ms",
+    "timeMs": 649.7,
+    "timestamp": "2025-11-24T13:44:26.918Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "340.90 ms",
+    "timeMs": 340.9,
+    "timestamp": "2025-11-24T13:44:35.493Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "281.20 ms",
+    "timeMs": 281.2,
+    "timestamp": "2025-11-24T13:44:43.935Z",
+    "testFile": "tabulator-grid.spec.ts"
   }
 ]

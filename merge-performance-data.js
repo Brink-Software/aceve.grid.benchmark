@@ -2,28 +2,32 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const performanceFiles = [
-  {
-    path: './playwright/Ag-grid/performance-results/performance-data.json',
-    gridName: 'AG Grid',
-    gridKey: 'ag-grid'
-  },
-  {
-    path: './playwright/Wijmo-grid/performance-results/performance-data.json',
-    gridName: 'Wijmo Grid',
-    gridKey: 'wijmo'
-  },
-  {
-    path: './playwright/RevoGrid/performance-results/performance-data.json',
-    gridName: 'RevoGrid',
-    gridKey: 'revogrid'
-  },
-  {
-    path: './playwright/Tabulator-grid/performance-results/performance-data.json',
-    gridName: 'Tabulator Grid',
-    gridKey: 'tabulator'
-  }
+const datasetSizes = [
+  { size: '200000', fileName: 'performance-data.json', label: '200K Rijen' },
+  { size: '10000', fileName: 'performance-data-10000Rijen.json', label: '10K Rijen' },
+  { size: '3000', fileName: 'performance-data-3000Rijen.json', label: '3K Rijen' }
 ];
+
+const gridConfigs = [
+  { gridName: 'AG Grid', gridKey: 'ag-grid', folder: 'Ag-grid' },
+  { gridName: 'Wijmo Grid', gridKey: 'wijmo', folder: 'Wijmo-grid' },
+  { gridName: 'RevoGrid', gridKey: 'revogrid', folder: 'RevoGrid' },
+  { gridName: 'Tabulator Grid', gridKey: 'tabulator', folder: 'Tabulator-grid' }
+];
+
+// Generate performance files for all combinations
+const performanceFiles = [];
+gridConfigs.forEach(grid => {
+  datasetSizes.forEach(dataset => {
+    performanceFiles.push({
+      path: `./playwright/${grid.folder}/performance-results/${dataset.fileName}`,
+      gridName: grid.gridName,
+      gridKey: grid.gridKey,
+      datasetSize: dataset.size,
+      datasetLabel: dataset.label
+    });
+  });
+});
 
 const outputFile = './performance-data-merged.json';
 
@@ -56,7 +60,9 @@ function mergePerformanceData() {
       const enrichedData = data.map(record => ({
         ...record,
         grid: config.gridName,
-        gridKey: config.gridKey
+        gridKey: config.gridKey,
+        datasetSize: config.datasetSize,
+        datasetLabel: config.datasetLabel
       }));
 
       allData.push(...enrichedData);
@@ -79,20 +85,21 @@ function mergePerformanceData() {
     fs.writeFileSync(outputPath, JSON.stringify(allData, null, 2), 'utf8');
     console.log(`\n📊 Successfully merged ${totalRecords} records from ${totalFiles} files`);
     console.log(`📁 Output file: ${outputFile}`);
-    console.log(`\n📈 Summary by Grid:`);
+    console.log(`\n📈 Summary by Grid and Dataset Size:`);
 
     // Print summary
     const summary = {};
     allData.forEach(record => {
-      if (!summary[record.grid]) {
-        summary[record.grid] = { count: 0, operations: {} };
+      const key = `${record.grid} (${record.datasetLabel})`;
+      if (!summary[key]) {
+        summary[key] = { count: 0, operations: {} };
       }
-      summary[record.grid].count++;
+      summary[key].count++;
       
-      if (!summary[record.grid].operations[record.operation]) {
-        summary[record.grid].operations[record.operation] = 0;
+      if (!summary[key].operations[record.operation]) {
+        summary[key].operations[record.operation] = 0;
       }
-      summary[record.grid].operations[record.operation]++;
+      summary[key].operations[record.operation]++;
     });
 
     Object.entries(summary).forEach(([grid, stats]) => {

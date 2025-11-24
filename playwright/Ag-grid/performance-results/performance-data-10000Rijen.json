@@ -250,5 +250,215 @@
     "timeMs": 254.4,
     "timestamp": "2025-11-24T13:30:32.277Z",
     "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "699.60 ms",
+    "timeMs": 699.6,
+    "timestamp": "2025-11-24T13:31:49.804Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "240.10 ms",
+    "timeMs": 240.1,
+    "timestamp": "2025-11-24T13:31:55.814Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "258.80 ms",
+    "timeMs": 258.8,
+    "timestamp": "2025-11-24T13:32:01.844Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "783.20 ms",
+    "timeMs": 783.2,
+    "timestamp": "2025-11-24T13:33:21.338Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "250.70 ms",
+    "timeMs": 250.7,
+    "timestamp": "2025-11-24T13:33:27.644Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "237.60 ms",
+    "timeMs": 237.6,
+    "timestamp": "2025-11-24T13:33:33.907Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "757.20 ms",
+    "timeMs": 757.2,
+    "timestamp": "2025-11-24T13:34:51.986Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "248.70 ms",
+    "timeMs": 248.7,
+    "timestamp": "2025-11-24T13:34:58.175Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "284.90 ms",
+    "timeMs": 284.9,
+    "timestamp": "2025-11-24T13:35:04.297Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "703.40 ms",
+    "timeMs": 703.4,
+    "timestamp": "2025-11-24T13:36:22.188Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "248.20 ms",
+    "timeMs": 248.2,
+    "timestamp": "2025-11-24T13:36:28.362Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "251.70 ms",
+    "timeMs": 251.7,
+    "timestamp": "2025-11-24T13:36:34.481Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "766.40 ms",
+    "timeMs": 766.4,
+    "timestamp": "2025-11-24T13:37:51.753Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "252.20 ms",
+    "timeMs": 252.2,
+    "timestamp": "2025-11-24T13:37:57.945Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "258.50 ms",
+    "timeMs": 258.5,
+    "timestamp": "2025-11-24T13:38:04.054Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "706.70 ms",
+    "timeMs": 706.7,
+    "timestamp": "2025-11-24T13:39:20.835Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "239.90 ms",
+    "timeMs": 239.9,
+    "timestamp": "2025-11-24T13:39:26.839Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "242.20 ms",
+    "timeMs": 242.2,
+    "timestamp": "2025-11-24T13:39:32.792Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "699.80 ms",
+    "timeMs": 699.8,
+    "timestamp": "2025-11-24T13:40:48.973Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "237.50 ms",
+    "timeMs": 237.5,
+    "timestamp": "2025-11-24T13:40:55.058Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "241.00 ms",
+    "timeMs": 241,
+    "timestamp": "2025-11-24T13:41:01.010Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "706.50 ms",
+    "timeMs": 706.5,
+    "timestamp": "2025-11-24T13:42:22.150Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "253.10 ms",
+    "timeMs": 253.1,
+    "timestamp": "2025-11-24T13:42:28.377Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "242.70 ms",
+    "timeMs": 242.7,
+    "timestamp": "2025-11-24T13:42:34.474Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "700.60 ms",
+    "timeMs": 700.6,
+    "timestamp": "2025-11-24T13:43:51.103Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "238.80 ms",
+    "timeMs": 238.8,
+    "timestamp": "2025-11-24T13:43:57.185Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "238.30 ms",
+    "timeMs": 238.3,
+    "timestamp": "2025-11-24T13:44:03.143Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "699.70 ms",
+    "timeMs": 699.7,
+    "timestamp": "2025-11-24T13:45:21.081Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "237.50 ms",
+    "timeMs": 237.5,
+    "timestamp": "2025-11-24T13:45:27.046Z",
+    "testFile": "ag-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "239.70 ms",
+    "timeMs": 239.7,
+    "timestamp": "2025-11-24T13:45:32.964Z",
+    "testFile": "ag-grid.spec.ts"
   }
 ]

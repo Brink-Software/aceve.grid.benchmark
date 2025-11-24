@@ -313,6 +313,24 @@
 
       <div class="controls">
         <div class="control-group">
+          <label for="viewMode">Weergave Mode:</label>
+          <select id="viewMode">
+            <option value="per-grid">Per Grid Aanbieder</option>
+            <option value="per-dataset">Per Dataset Grootte</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="datasetFilter">Dataset Grootte:</label>
+          <select id="datasetFilter">
+            <option value="all">Alle Dataset Groottes</option>
+            <option value="200000">200K Rijen</option>
+            <option value="10000">10K Rijen</option>
+            <option value="3000">3K Rijen</option>
+          </select>
+        </div>
+
+        <div class="control-group">
           <label for="operationFilter">Operatie Type:</label>
           <select id="operationFilter">
             <option value="all">Alle Operaties</option>
@@ -342,7 +360,7 @@
       <div id="statsGrid" class="stats-grid"></div>
 
       <div class="chart-container">
-        <h2 class="chart-title">
+        <h2 class="chart-title" id="chartTitle">
           Performance Vergelijking - Box & Whisker Plot
         </h2>
         <div class="chart-wrapper">
@@ -356,6 +374,7 @@
           <thead>
             <tr>
               <th>Grid</th>
+              <th>Dataset</th>
               <th>Operatie</th>
               <th>Tijd (ms)</th>
               <th>Timestamp</th>
@@ -425,6 +444,8 @@
         const operationFilter =
           document.getElementById("operationFilter").value;
         const gridFilter = document.getElementById("gridFilter").value;
+        const datasetFilter = document.getElementById("datasetFilter").value;
+        const viewMode = document.getElementById("viewMode").value;
 
         let filteredData = data;
         if (operationFilter !== "all") {
@@ -435,20 +456,42 @@
         if (gridFilter !== "all") {
           filteredData = filteredData.filter((d) => d.gridKey === gridFilter);
         }
+        if (datasetFilter !== "all") {
+          filteredData = filteredData.filter(
+            (d) => d.datasetSize === datasetFilter
+          );
+        }
 
-        // Group by grid and operation
+        // Group by view mode
         const grouped = {};
-        filteredData.forEach((item) => {
-          const key =
-            operationFilter === "all"
-              ? `${item.grid} - ${item.operation}`
-              : item.grid;
 
-          if (!grouped[key]) {
-            grouped[key] = [];
-          }
-          grouped[key].push(item.timeMs);
-        });
+        if (viewMode === "per-grid") {
+          // Group by grid, then by dataset size
+          filteredData.forEach((item) => {
+            const key =
+              datasetFilter === "all"
+                ? `${item.grid} - ${item.datasetLabel}`
+                : item.grid;
+
+            if (!grouped[key]) {
+              grouped[key] = [];
+            }
+            grouped[key].push(item.timeMs);
+          });
+        } else {
+          // Group by dataset size, then by grid
+          filteredData.forEach((item) => {
+            const key =
+              gridFilter === "all"
+                ? `${item.datasetLabel} - ${item.grid}`
+                : item.datasetLabel;
+
+            if (!grouped[key]) {
+              grouped[key] = [];
+            }
+            grouped[key].push(item.timeMs);
+          });
+        }
 
         return Object.entries(grouped).map(([label, values]) => {
           const sorted = values.sort((a, b) => a - b);
@@ -466,17 +509,29 @@
       function updateStats(data) {
         const statsGrid = document.getElementById("statsGrid");
         const operations = ["Grid Stabiel", "Rij Toevoegen", "Rij Verwijderen"];
+        const datasetFilter = document.getElementById("datasetFilter").value;
 
         statsGrid.innerHTML = operations
           .map((op) => {
-            const opData = data.filter((d) => d.operation === op);
+            let opData = data.filter((d) => d.operation === op);
+
+            // Apply dataset filter if set
+            if (datasetFilter !== "all") {
+              opData = opData.filter((d) => d.datasetSize === datasetFilter);
+            }
+
             const stats = calculateStats(opData);
 
             if (!stats) return "";
 
+            const datasetLabel =
+              datasetFilter !== "all"
+                ? ` (${opData[0]?.datasetLabel || ""})`
+                : "";
+
             return `
             <div class="stat-card">
-              <h3>${op}</h3>
+              <h3>${op}${datasetLabel}</h3>
               <div class="value">${stats.avg.toFixed(2)} ms</div>
               <div class="label">Gemiddelde Tijd</div>
               <div style="margin-top: 12px; font-size: 14px;">
@@ -496,6 +551,7 @@
         const operationFilter =
           document.getElementById("operationFilter").value;
         const gridFilter = document.getElementById("gridFilter").value;
+        const datasetFilter = document.getElementById("datasetFilter").value;
 
         let filteredData = data;
         if (operationFilter !== "all") {
@@ -505,6 +561,11 @@
         }
         if (gridFilter !== "all") {
           filteredData = filteredData.filter((d) => d.gridKey === gridFilter);
+        }
+        if (datasetFilter !== "all") {
+          filteredData = filteredData.filter(
+            (d) => d.datasetSize === datasetFilter
+          );
         }
 
         // Sort by timestamp descending
@@ -519,6 +580,7 @@
             <td><span class="grid-badge ${item.gridKey}">${
               item.grid
             }</span></td>
+            <td>${item.datasetLabel || "N/A"}</td>
             <td>${item.operation}</td>
             <td><strong>${item.timeMs.toFixed(2)} ms</strong></td>
             <td>${new Date(item.timestamp).toLocaleString("nl-NL")}</td>
@@ -674,12 +736,40 @@
 
       // Update all displays
       function updateDisplay() {
+        const viewMode = document.getElementById("viewMode").value;
+        const datasetFilter = document.getElementById("datasetFilter").value;
+        const operationFilter =
+          document.getElementById("operationFilter").value;
+
+        // Update chart title based on view mode
+        const chartTitle = document.getElementById("chartTitle");
+        if (viewMode === "per-grid") {
+          if (datasetFilter === "all") {
+            chartTitle.textContent =
+              "Performance per Grid Aanbieder - Alle Dataset Groottes";
+          } else {
+            const label =
+              allData.find((d) => d.datasetSize === datasetFilter)
+                ?.datasetLabel || datasetFilter;
+            chartTitle.textContent = `Performance per Grid Aanbieder - ${label}`;
+          }
+        } else {
+          chartTitle.textContent =
+            "Performance per Dataset Grootte - Vergelijking tussen Grids";
+        }
+
         updateStats(allData);
         updateTable(allData);
         createBoxPlot(allData);
       }
 
       // Event listeners
+      document
+        .getElementById("viewMode")
+        .addEventListener("change", updateDisplay);
+      document
+        .getElementById("datasetFilter")
+        .addEventListener("change", updateDisplay);
       document
         .getElementById("operationFilter")
         .addEventListener("change", updateDisplay);

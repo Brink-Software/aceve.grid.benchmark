@@ -250,5 +250,208 @@
     "timeMs": 227.9,
     "timestamp": "2025-11-24T13:30:50.332Z",
     "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "668.30 ms",
+    "timeMs": 668.3,
+    "timestamp": "2025-11-24T13:32:06.890Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.80 ms",
+    "timeMs": 229.8,
+    "timestamp": "2025-11-24T13:32:15.770Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "243.40 ms",
+    "timeMs": 243.4,
+    "timestamp": "2025-11-24T13:32:20.313Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "634.10 ms",
+    "timeMs": 634.1,
+    "timestamp": "2025-11-24T13:33:39.159Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.30 ms",
+    "timeMs": 228.3,
+    "timestamp": "2025-11-24T13:33:48.078Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "231.00 ms",
+    "timeMs": 231,
+    "timestamp": "2025-11-24T13:33:52.525Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "658.70 ms",
+    "timeMs": 658.7,
+    "timestamp": "2025-11-24T13:35:09.301Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "242.90 ms",
+    "timeMs": 242.9,
+    "timestamp": "2025-11-24T13:35:18.317Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.40 ms",
+    "timeMs": 228.4,
+    "timestamp": "2025-11-24T13:35:22.842Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.90 ms",
+    "timeMs": 649.9,
+    "timestamp": "2025-11-24T13:36:39.488Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "241.30 ms",
+    "timeMs": 241.3,
+    "timestamp": "2025-11-24T13:36:48.664Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.30 ms",
+    "timeMs": 229.3,
+    "timestamp": "2025-11-24T13:36:53.117Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.30 ms",
+    "timeMs": 666.3,
+    "timestamp": "2025-11-24T13:38:09.137Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "237.30 ms",
+    "timeMs": 237.3,
+    "timestamp": "2025-11-24T13:38:18.066Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "246.10 ms",
+    "timeMs": 246.1,
+    "timestamp": "2025-11-24T13:38:22.529Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.90 ms",
+    "timeMs": 649.9,
+    "timestamp": "2025-11-24T13:39:37.694Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "244.20 ms",
+    "timeMs": 244.2,
+    "timestamp": "2025-11-24T13:39:46.530Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.80 ms",
+    "timeMs": 230.8,
+    "timestamp": "2025-11-24T13:39:50.934Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "655.20 ms",
+    "timeMs": 655.2,
+    "timestamp": "2025-11-24T13:41:05.933Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "245.30 ms",
+    "timeMs": 245.3,
+    "timestamp": "2025-11-24T13:41:14.756Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.80 ms",
+    "timeMs": 229.8,
+    "timestamp": "2025-11-24T13:41:19.170Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.60 ms",
+    "timeMs": 649.6,
+    "timestamp": "2025-11-24T13:42:39.375Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "227.90 ms",
+    "timeMs": 227.9,
+    "timestamp": "2025-11-24T13:42:48.152Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.30 ms",
+    "timeMs": 230.3,
+    "timestamp": "2025-11-24T13:42:52.455Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.00 ms",
+    "timeMs": 649,
+    "timestamp": "2025-11-24T13:44:08.191Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "223.40 ms",
+    "timeMs": 223.4,
+    "timestamp": "2025-11-24T13:44:17.092Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.40 ms",
+    "timeMs": 228.4,
+    "timestamp": "2025-11-24T13:44:21.570Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "645.30 ms",
+    "timeMs": 645.3,
+    "timestamp": "2025-11-24T13:45:37.755Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.10 ms",
+    "timeMs": 230.1,
+    "timestamp": "2025-11-24T13:45:46.698Z",
+    "testFile": "revogrid.spec.ts"
   }
 ]
