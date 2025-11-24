@@ -736,18 +736,18 @@ const gridOptions: CustomGridOptions = {
   columnTypes: {
     numberColumn: {
       filter: "agNumberColumnFilter",
-      sortable: true,
-      editable: true,
-      resizable: true,
+      sortable: false,
+      editable: false,
+      resizable: false,
     },
   },
   defaultColDef: {
-    resizable: true,
-    sortable: true,
-    filter: true,
-    editable: true,
-    autoHeaderHeight: true,
-    wrapHeaderText: true,
+    resizable: false,
+    sortable: false,
+    filter: false,
+    editable: false,
+    autoHeaderHeight: false,
+    wrapHeaderText: false,
     minWidth: 80,
     maxWidth: 300,
   },
@@ -760,11 +760,11 @@ const gridOptions: CustomGridOptions = {
   // Grouping instellingen
   groupDefaultExpanded: -1, // Alle groepen standaard uitgeklapt (toon alle rijen)
   groupDisplayType: "multipleColumns",
-  suppressRowGroupHidesColumns: true,
+  suppressRowGroupHidesColumns: false,
   autoGroupColumnDef: {
     hide: true,
   },
-  animateRows: true,
+  animateRows: false,
   rowSelection: "multiple",
   enableRangeSelection: true,
   onSelectionChanged: function () {
