@@ -68,7 +68,7 @@ async function waitForGridReady(page: any, timeout: number = 400000) {
     .locator("div")
     .first()
     .textContent();
-  expect(operationText).toContain("Grid Stabiel");
+  expect(operationText).toContain("Grid Stable");
 
   // Verifieer dat de grid container zichtbaar is
   const gridContainer = page.locator('[data-test="ag-grid"]');
@@ -89,6 +89,7 @@ async function waitForGridReady(page: any, timeout: number = 400000) {
 
 test.describe("AG Grid Tests", () => {
   test.beforeEach(async ({ page }) => {
+    // Navigeer naar de AG Grid pagina
     // Navigeer naar de AG Grid pagina
     await page.goto("http://localhost:8000/Ag-grid");
   });
@@ -144,7 +145,7 @@ test.describe("AG Grid Tests", () => {
 
     // Wacht tot performance indicator verschijnt
     const perfIndicator = page.locator(
-      '[data-test="performance-indicator-rij-verwijderen"]'
+      '[data-test="performance-indicator-rijen-verwijderen"]'
     );
     await expect(perfIndicator).toBeVisible({ timeout: 10000 });
 
@@ -167,7 +168,7 @@ test.describe("AG Grid Tests", () => {
     await waitForGridReady(page);
 
     // Wacht tot er rijen zijn
-    const firstRow = page.locator('[data-test^="rij-"]').first();
+    const firstRow = page.locator('[data-test="rij-1"]');
 
     // Selecteer eerste rij
     await firstRow.click();

@@ -2,7 +2,7 @@
 // AG Grid Organisatie Tabel met CRUD en Row Grouping
 // ============================================
 
-import { TotalsRow, CustomGridOptions, RowNode } from "./types.js";
+import { CustomGridOptions, RowNode } from "./types.js";
 import {
   departments,
   teams,
@@ -248,48 +248,21 @@ async function generateDataWithProgress() {
 generateDataWithProgress();
 
 // ============================================
-// Totals Berekenen
+// Statistics Update
 // ============================================
 
-function calculateTotals(): TotalsRow {
-  const totals: TotalsRow = {
-    _rowCount: 0,
-    _isTotalRow: true,
-  };
-
-  if (!gridApi) return totals;
-
-  let rowCount = 0;
+function updateStatistics() {
+  const allNodes: any[] = [];
   gridApi.forEachNode((node: RowNode) => {
-    if (node.data && !node.group && !node.groupData) {
-      rowCount++;
-      const data = node.data;
-
-      columnDefs.forEach((col) => {
-        if (
-          col.type === "numberColumn" &&
-          col.field &&
-          data[col.field] !== undefined
-        ) {
-          const field = col.field;
-          if (!totals[field]) {
-            totals[field] = 0;
-          }
-          totals[field] = (totals[field] as number) + (data[field] || 0);
-        }
-      });
+    if (node.data && !node.group) {
+      allNodes.push(node.data);
     }
   });
 
-  totals._rowCount = rowCount;
-  return totals;
-}
-
-function updateTotalsRow() {
-  if (!gridApi) return;
-
-  const totals = calculateTotals();
-  gridApi.setGridOption("pinnedBottomRowData", [totals]);
+  const totalEmployeesEl = document.getElementById("totalEmployees");
+  if (totalEmployeesEl) {
+    totalEmployeesEl.textContent = allNodes.length.toString();
+  }
 }
 
 // ============================================
@@ -323,106 +296,14 @@ export function addNewRow(): void {
   }
 
   try {
-    let selectedDept: string | null = null;
-    let selectedTeam: string | null = null;
-
-    // Check of er een geselecteerde rij is
     const selectedRows = gridApi.getSelectedRows();
-    const selectedNodes = gridApi.getSelectedNodes();
+    let selectedDept = "Engineering";
+    let selectedTeam = "Frontend Team";
 
-    // Verplicht: er moet een selectie zijn
-    if (selectedNodes.length === 0) {
-      alert(
-        "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen."
-      );
-      return;
-    }
-
-    if (selectedNodes.length > 0) {
-      const selectedNode = selectedNodes[0];
-
-      if (selectedNode.group) {
-        // Group row is geselecteerd - gebruik group data
-        console.log("Group row geselecteerd:", selectedNode);
-
-        // Probeer department en team uit group key te halen
-        if (selectedNode.key) {
-          // Check of dit department of team level is
-          const allNodes: any[] = [];
-          gridApi.forEachNode((node: RowNode) => {
-            if (node.data && !node.group) {
-              allNodes.push(node.data);
-            }
-          });
-
-          // Zoek een rij in deze group om department/team te bepalen
-          if (
-            selectedNode.childrenAfterGroup &&
-            selectedNode.childrenAfterGroup.length > 0
-          ) {
-            const firstChild = selectedNode.childrenAfterGroup[0];
-            if (firstChild.data) {
-              selectedDept = firstChild.data.department;
-              selectedTeam = firstChild.data.team;
-              console.log("Group info gevonden:", selectedDept, selectedTeam);
-            }
-          } else {
-            // Probeer via group key
-            const matchingNode = allNodes.find((node: any) => {
-              if (selectedNode.level === 0) {
-                return node.department === selectedNode.key;
-              } else if (selectedNode.level === 1) {
-                return node.team === selectedNode.key;
-              }
-              return false;
-            });
-
-            if (matchingNode) {
-              if (selectedNode.level === 0) {
-                selectedDept = matchingNode.department;
-                // Neem eerste team van dit department
-                if (selectedDept) {
-                  const deptTeams = teams[selectedDept] || [];
-                  selectedTeam = deptTeams[0] || null;
-                }
-              } else {
-                selectedDept = matchingNode.department;
-                selectedTeam = matchingNode.team;
-              }
-              console.log(
-                "Group info via matching:",
-                selectedDept,
-                selectedTeam
-              );
-            }
-          }
-        }
-      } else if (selectedNode.data) {
-        // Normale rij is geselecteerd - gebruik department en team van die rij
-        selectedDept = selectedNode.data.department;
-        selectedTeam = selectedNode.data.team;
-        console.log("Rij geselecteerd:", selectedDept, selectedTeam);
-      }
-    } else if (selectedRows.length > 0 && selectedRows[0]) {
-      // Fallback: gebruik eerste geselecteerde rij data
+    // Use selected row's department/team if available
+    if (selectedRows.length > 0 && selectedRows[0]) {
       selectedDept = selectedRows[0].department;
       selectedTeam = selectedRows[0].team;
-      console.log("Geselecteerde rij data:", selectedDept, selectedTeam);
-    }
-
-    // Als geen selectie, gebruik random (fallback)
-    if (!selectedDept || !selectedTeam) {
-      const dept = departments[Math.floor(Math.random() * departments.length)];
-      const deptTeams = teams[dept.name] || [];
-      selectedDept = dept.name;
-      selectedTeam = deptTeams[Math.floor(Math.random() * deptTeams.length)];
-      console.log("Geen selectie, gebruik random:", selectedDept, selectedTeam);
-    }
-
-    // Genereer nieuwe employee in dezelfde groep
-    if (!selectedDept || !selectedTeam) {
-      console.error("Kan geen department of team bepalen");
-      return;
     }
 
     const teamRoles = roles[selectedDept] || [];
@@ -435,120 +316,16 @@ export function addNewRow(): void {
       role
     );
 
-    console.log("Nieuwe employee gegenereerd in groep:", newEmployee);
-
-    // Vind de index van de geselecteerde rij in rowData
-    let insertIndex = -1;
-    const selectedNode = selectedNodes[0];
-
-    if (selectedNode.data) {
-      // Normale rij - vind index in rowData
-      insertIndex = rowData.findIndex(
-        (row: any) => row.id === selectedNode.data.id
-      );
-      if (insertIndex !== -1) {
-        insertIndex += 1; // Voeg toe direct na de geselecteerde rij
-      }
-    } else if (selectedNode.group) {
-      // Group row - vind eerste child en gebruik die index
-      if (
-        selectedNode.childrenAfterGroup &&
-        selectedNode.childrenAfterGroup.length > 0
-      ) {
-        const firstChild = selectedNode.childrenAfterGroup[0];
-        if (firstChild.data) {
-          insertIndex = rowData.findIndex(
-            (row: any) => row.id === firstChild.data.id
-          );
-          if (insertIndex !== -1) {
-            // Voeg toe na de laatste child in deze group
-            let lastIndexInGroup = insertIndex;
-            for (let i = insertIndex; i < rowData.length; i++) {
-              const row = rowData[i];
-              if (selectedNode.level === 0) {
-                // Department level - check of nog inzelfde department
-                if (row.department !== selectedDept) {
-                  break;
-                }
-                lastIndexInGroup = i;
-              } else if (selectedNode.level === 1) {
-                // Team level - check of nog inzelfde team
-                if (
-                  row.team !== selectedTeam ||
-                  row.department !== selectedDept
-                ) {
-                  break;
-                }
-                lastIndexInGroup = i;
-              }
-            }
-            insertIndex = lastIndexInGroup + 1;
-          }
-        }
-      }
-    }
-
-    // Als index niet gevonden, voeg toe aan einde
-    if (insertIndex === -1) {
-      insertIndex = rowData.length;
-    }
-
-    console.log("Insert index:", insertIndex);
-
-    // Voeg toe aan rowData array op de juiste positie
-    rowData.splice(insertIndex, 0, newEmployee);
-
-    // Update grid met nieuwe data
-    const transactionStart = performance.now();
-    const result = gridApi.applyTransaction({
+    // Use transaction API for optimal performance
+    const transaction = gridApi.applyTransaction({
       add: [newEmployee],
-      addIndex: insertIndex,
+      addIndex: 0, // Add at top for visibility
     });
-    const transactionEnd = performance.now();
-    const transactionTime = transactionEnd - transactionStart;
 
-    console.log("Transaction tijd:", transactionTime.toFixed(2), "ms");
-    console.log("Transaction result:", result);
+    // Add to rowData array
+    rowData.unshift(newEmployee);
 
-    // Update totals
-    const totalsStart = performance.now();
     setTimeout(() => {
-      updateTotalsRow();
-      const totalsEnd = performance.now();
-      console.log(
-        "Totals update tijd:",
-        (totalsEnd - totalsStart).toFixed(2),
-        "ms"
-      );
-    }, 100);
-
-    // Refresh grid om nieuwe rij te tonen
-    const refreshStart = performance.now();
-    gridApi.refreshCells({ force: true });
-    const refreshEnd = performance.now();
-    console.log("Refresh tijd:", (refreshEnd - refreshStart).toFixed(2), "ms");
-
-    console.log(
-      "Nieuwe rij toegevoegd op index:",
-      insertIndex,
-      "in groep:",
-      selectedDept,
-      selectedTeam
-    );
-
-    // Wacht tot grid volledig gerenderd is
-    const renderStart = performance.now();
-
-    // Selecteer de nieuwe rij en scroll ernaar
-    setTimeout(() => {
-      gridApi.forEachNode((node: RowNode) => {
-        if (node.data && node.data.id === newEmployee.id) {
-          node.setSelected(true);
-          gridApi.ensureNodeVisible(node, "middle");
-        }
-      });
-
-      // Wacht op volgende frame om zeker te zijn dat alles gerenderd is
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
           const renderEnd = performance.now();
@@ -557,35 +334,32 @@ export function addNewRow(): void {
             ? (performance as any).memory.usedJSHeapSize
             : 0;
 
-          console.log("=== PERFORMANCE RESULTATEN: RIJ TOEVOEGEN ===");
-          console.log("Transaction tijd:", transactionTime.toFixed(2), "ms");
-          console.log(
-            "Refresh tijd:",
-            (refreshEnd - refreshStart).toFixed(2),
-            "ms"
-          );
-          console.log(
-            "Render tijd:",
-            (renderEnd - renderStart).toFixed(2),
-            "ms"
-          );
-          console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
+          console.log("=== PERFORMANCE: ADD ROW COMPLETE ===");
+          console.log("TOTAL TIME:", totalTime.toFixed(2), "ms");
 
           if (startMemory && endMemory) {
             const memoryDiff = endMemory - startMemory;
             console.log(
-              "Geheugen gebruik:",
+              "Memory used:",
               (memoryDiff / 1024 / 1024).toFixed(2),
               "MB"
             );
           }
 
-          // Toon resultaat in UI
           showPerformanceResult(
-            "Rij Toevoegen",
+            "Add Row",
             totalTime.toFixed(2) + " ms",
             "rij-toevoegen"
           );
+
+          // Select the new row
+          if (transaction && transaction.add && transaction.add.length > 0) {
+            transaction.add[0].setSelected(true);
+            gridApi.ensureNodeVisible(transaction.add[0], "top");
+          }
+
+          // Update statistics
+          updateStatistics();
         });
       });
     }, 200);
@@ -645,64 +419,36 @@ export function deleteSelectedRows(): void {
     }
   });
 
-  const totalsStart = performance.now();
   setTimeout(() => {
-    updateTotalsRow();
-    const totalsEnd = performance.now();
-    console.log(
-      "Totals update tijd:",
-      (totalsEnd - totalsStart).toFixed(2),
-      "ms"
-    );
-  }, 100);
-
-  const refreshStart = performance.now();
-  gridApi.refreshCells({ force: true });
-  const refreshEnd = performance.now();
-  const refreshTime = refreshEnd - refreshStart;
-  console.log("Refresh tijd:", refreshTime.toFixed(2), "ms");
-
-  console.log("Rijen verwijderd:", selectedRows.length);
-
-  // Wacht tot grid volledig stabiel is
-  const renderStart = performance.now();
-
-  // Wacht even zodat grid kan stabiliseren
-  setTimeout(() => {
-    // Wacht op volgende frames om zeker te zijn dat alles gerenderd en stabiel is
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         const renderEnd = performance.now();
-        const renderTime = renderEnd - renderStart;
         const totalTime = renderEnd - performanceStart;
         const endMemory = (performance as any).memory
           ? (performance as any).memory.usedJSHeapSize
           : 0;
 
-        console.log(
-          "=== PERFORMANCE RESULTATEN: MEERDERE RIJEN VERWIJDEREN ==="
-        );
-        console.log("Aantal rijen:", selectedRows.length);
-        console.log("Transaction tijd:", transactionTime.toFixed(2), "ms");
-        console.log("Refresh tijd:", refreshTime.toFixed(2), "ms");
-        console.log("Render tijd:", renderTime.toFixed(2), "ms");
-        console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
+        console.log("=== PERFORMANCE: DELETE ROWS COMPLETE ===");
+        console.log("Number of rows:", selectedRows.length);
+        console.log("TOTAL TIME:", totalTime.toFixed(2), "ms");
 
         if (startMemory && endMemory) {
-          const memoryDiff = startMemory - endMemory; // Negatief omdat geheugen vrijkomt
+          const memoryDiff = startMemory - endMemory;
           console.log(
-            "Geheugen vrijgekomen:",
+            "Memory freed:",
             (Math.abs(memoryDiff) / 1024 / 1024).toFixed(2),
             "MB"
           );
         }
 
-        // Toon resultaat in UI
         showPerformanceResult(
-          `Rijen Verwijderen (${selectedRows.length})`,
+          `Delete Rows (${selectedRows.length})`,
           totalTime.toFixed(2) + " ms",
-          "rij-verwijderen"
+          "rijen-verwijderen"
         );
+
+        // Update statistics
+        updateStatistics();
       });
     });
   }, 200);
@@ -716,14 +462,6 @@ function onCellValueChanged(params: any): void {
     params.colDef.field,
     params.newValue
   );
-  setTimeout(updateTotalsRow, 100);
-
-  // Auto-size de kolom waarvan de waarde is gewijzigd
-  if (gridApi && params.column) {
-    setTimeout(() => {
-      gridApi.autoSizeColumns([params.column]);
-    }, 50);
-  }
 }
 
 // ============================================
@@ -742,12 +480,10 @@ const gridOptions: CustomGridOptions = {
     },
   },
   defaultColDef: {
-    resizable: false,
-    sortable: false,
-    filter: false,
-    editable: false,
-    autoHeaderHeight: false,
-    wrapHeaderText: false,
+    resizable: true,
+    sortable: true,
+    filter: true,
+    editable: true,
     minWidth: 80,
     maxWidth: 300,
   },
@@ -755,53 +491,40 @@ const gridOptions: CustomGridOptions = {
   suppressColumnVirtualisation: false, // Column virtualization AAN
   suppressRowVirtualisation: false, // Row virtualization AAN (standaard al aan)
   // Performance optimalisaties
-  debounceVerticalScrollbar: true,
+  debounceVerticalScrollbar: false,
   suppressScrollOnNewData: false,
-  // Grouping instellingen
-  groupDefaultExpanded: -1, // Alle groepen standaard uitgeklapt (toon alle rijen)
-  groupDisplayType: "multipleColumns",
-  suppressRowGroupHidesColumns: false,
-  autoGroupColumnDef: {
-    hide: true,
-  },
+  rowBuffer: 10,
   animateRows: false,
   rowSelection: "multiple",
-  enableRangeSelection: true,
+  suppressRowClickSelection: false,
+  enableCellTextSelection: true,
+  ensureDomOrder: false,
+  suppressRowHoverHighlight: false,
   onSelectionChanged: function () {
     const selectedRows = gridApi?.getSelectedRows() || [];
-    const selectedNodes = gridApi?.getSelectedNodes() || [];
     const selectedCountEl = document.getElementById("selectedCount");
+    const deleteCountEl = document.getElementById("deleteCount");
     const deleteBtn = document.getElementById(
       "deleteRowsBtn"
     ) as HTMLButtonElement;
     const addRowBtn = document.getElementById("addRowBtn") as HTMLButtonElement;
 
-    // Check of er een selectie is (rij of group row)
-    const hasSelection = selectedNodes.length > 0;
+    const hasSelection = selectedRows.length > 0;
 
     if (selectedCountEl) {
       selectedCountEl.textContent = selectedRows.length.toString();
     }
+    if (deleteCountEl) {
+      deleteCountEl.textContent = selectedRows.length.toString();
+    }
     if (deleteBtn) {
-      deleteBtn.disabled = selectedRows.length === 0;
+      deleteBtn.disabled = !hasSelection;
     }
     if (addRowBtn) {
-      addRowBtn.disabled = !hasSelection;
-      if (!hasSelection) {
-        addRowBtn.title =
-          "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
-      } else {
-        addRowBtn.title = "Voeg een nieuwe rij toe in dezelfde groep";
-      }
+      addRowBtn.disabled = false; // Always enabled
     }
   },
   onCellValueChanged: onCellValueChanged,
-  getRowStyle: function (params: any) {
-    if (params.node.rowPinned === "bottom") {
-      return { fontWeight: "bold", backgroundColor: "#f0f0f0" };
-    }
-    return null;
-  },
   processRowPostCreate: function (params: any) {
     // Voeg data-test attribuut toe aan de rij voor test automation
     if (params.node.data && params.node.data.id && !params.node.group) {
@@ -811,6 +534,7 @@ const gridOptions: CustomGridOptions = {
       }
     }
   },
+  getRowId: (params: any) => params.data.id.toString(),
 };
 
 // ============================================
@@ -923,160 +647,63 @@ function initializeGrid(gridInitStartTime?: number) {
         console.log("Grid API beschikbaar");
         console.log("RowData length:", rowData.length);
 
-        // Zet data via API om zeker te zijn dat het werkt
-        if (rowData && rowData.length > 0) {
-          console.log("Setting rowData via API...");
-          gridApi.setGridOption("rowData", rowData);
-          console.log("RowData set via API");
+        // Update statistics
+        updateStatistics();
 
-          // Expand alle groepen om rijen zichtbaar te maken
-          setTimeout(() => {
-            gridApi.expandAll();
-            console.log("All groups expanded");
-
-            // Auto-size kolommen na expand
-            setTimeout(() => {
-              gridApi.autoSizeAllColumns();
-              console.log("Kolommen aangepast na expand");
-            }, 200);
-          }, 100);
-        } else {
-          console.warn("Geen rowData beschikbaar!");
+        const totalColumnsEl = document.getElementById("totalColumns");
+        if (totalColumnsEl) {
+          totalColumnsEl.textContent = columnDefs.length.toString();
         }
 
-        // Zorg ervoor dat grid zichtbaar is en correct gerenderd
-        const gridDiv = document.querySelector("#myGrid") as HTMLElement;
-        if (gridDiv) {
-          gridDiv.style.display = "block";
-          gridDiv.style.visibility = "visible";
-          gridDiv.style.opacity = "1";
-        }
+        console.log("########Waiting for grid to stabilize...#########");
 
-        // Auto-size kolommen op basis van celinhoud (alleen zichtbare kolommen voor performance)
-        setTimeout(() => {
-          // Auto-size alleen zichtbare kolommen voor betere performance met 500 kolommen
-          const allColumns = gridApi.getColumns();
-          if (allColumns) {
-            // Auto-size alle kolommen, maar met skipHeader voor snellere performance
-            gridApi.autoSizeAllColumns({ skipHeader: false });
-            console.log("Kolommen aangepast aan celinhoud");
-          }
-        }, 300);
-
-        // Check hoeveel rijen er zijn
-        const rowCount = gridApi.getDisplayedRowCount();
-        const modelRowCount = gridApi.getModel()?.getRowCount() || 0;
-        console.log("Displayed rows:", rowCount);
-        console.log("Model row count:", modelRowCount);
-
-        // Log group informatie
-        let groupCount = 0;
-        let dataRowCount = 0;
-        gridApi.forEachNode((node: any) => {
-          if (node.group) {
-            groupCount++;
-          } else if (node.data) {
-            dataRowCount++;
-          }
-        });
-        console.log("Group nodes:", groupCount);
-        console.log("Data nodes:", dataRowCount);
-
-        const totalsStart = performance.now();
-        updateTotalsRow();
-        const totalsEnd = performance.now();
-        console.log(
-          "Initial totals update tijd:",
-          (totalsEnd - totalsStart).toFixed(2),
-          "ms"
-        );
-
-        // Update statistieken
-        const allNodes: any[] = [];
-        gridApi.forEachNode((node: RowNode) => {
-          if (node.data && !node.group) {
-            allNodes.push(node.data);
-          }
-        });
-
-        const departmentsSet = new Set(allNodes.map((e: any) => e.department));
-        const teamsSet = new Set(allNodes.map((e: any) => e.team));
-
-        const totalEmployeesEl = document.getElementById("totalEmployees");
-        const totalDepartmentsEl = document.getElementById("totalDepartments");
-        const totalTeamsEl = document.getElementById("totalTeams");
-
-        if (totalEmployeesEl) {
-          totalEmployeesEl.textContent = allNodes.length.toString();
-        }
-        if (totalDepartmentsEl) {
-          totalDepartmentsEl.textContent = departmentsSet.size.toString();
-        }
-        if (totalTeamsEl) {
-          totalTeamsEl.textContent = teamsSet.size.toString();
-        }
-
-        // Wacht tot grid volledig stabiel is
+        // Wait for grid to stabilize
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
             requestAnimationFrame(() => {
               const gridStableEnd = performance.now();
               const totalGridInitTime = gridStableEnd - initStart;
 
-              console.log("=== PERFORMANCE RESULTATEN: GRID INITIALISATIE ===");
+              console.log("=== PERFORMANCE: GRID INITIALIZATION COMPLETE ===");
               console.log(
-                "Grid creation tijd:",
+                "Grid creation time:",
                 (gridCreateEnd - gridCreateStart).toFixed(2),
                 "ms"
               );
               console.log(
-                "Totals update tijd:",
-                (totalsEnd - totalsStart).toFixed(2),
-                "ms"
-              );
-              console.log(
-                "TOTALE GRID STABIEL TIJD:",
+                "TOTAL GRID STABLE TIME:",
                 totalGridInitTime.toFixed(2),
                 "ms"
               );
+              console.log("Rows loaded:", rowData.length);
+              console.log("Columns:", columnDefs.length);
 
-                const endMemory = (performance as any).memory
+              const endMemory = (performance as any).memory
                 ? (performance as any).memory.usedJSHeapSize
                 : 0;
 
+              const numemoty = endMemory;
+              console.log(
+                "Memory used after generation:",
+                (numemoty / 1024 / 1024).toFixed(2),
+                "MB"
+              );
 
-                 const numemoty = endMemory ;
-                console.log(
-                  "Geheugen gebruikt: na Generatie",
-                  (numemoty / 1024 / 1024).toFixed(2),
-                  "MB"
-                );
-
-      
-
-
-
-
-              console.log("Rijen geladen:", rowCount);
-              console.log("Kolommen:", columnDefs.length);
-
-              // Toon grid init tijd
               showPerformanceResult(
-                "Grid Stabiel",
+                "Grid Stable",
                 totalGridInitTime.toFixed(2) + " ms",
                 "grid-stabiel"
               );
 
-              // Totale tijd (data generatie + grid init)
               const totalStartTime =
                 dataGenerationStart > 0 ? dataGenerationStart : initStart;
               const totalTime = gridStableEnd - totalStartTime;
-              console.log("=== TOTALE TIJD: DATA GENERATIE + GRID STABIEL ===");
-              console.log("TOTALE TIJD:", totalTime.toFixed(2), "ms");
+              console.log("=== TOTAL TIME: DATA GENERATION + GRID STABLE ===");
+              console.log("TOTAL TIME:", totalTime.toFixed(2), "ms");
               console.log(
-                "Totaal snelheid:",
+                "Total speed:",
                 (rowData.length / (totalTime / 1000)).toFixed(0),
-                "rijen/seconde"
+                "rows/second"
               );
             });
           });
@@ -1084,19 +711,13 @@ function initializeGrid(gridInitStartTime?: number) {
       }
     }, 500);
 
-    // Setup event handlers na een korte delay om zeker te zijn dat DOM klaar is
     setTimeout(() => {
       console.log("Setting up event handlers after 100ms");
       setupEventHandlers();
 
-      // Initialiseer add row button als disabled (geen selectie)
-      const addRowBtn = document.getElementById(
-        "addRowBtn"
-      ) as HTMLButtonElement;
+      const addRowBtn = document.getElementById("addRowBtn") as HTMLButtonElement;
       if (addRowBtn) {
-        addRowBtn.disabled = true;
-        addRowBtn.title =
-          "Selecteer eerst een rij of groep om een nieuwe rij toe te voegen";
+        addRowBtn.disabled = false;
       }
 
       console.log("Event handlers setup complete");

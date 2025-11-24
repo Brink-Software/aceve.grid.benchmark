@@ -65,7 +65,6 @@ export function generateColumnDefinitions(): ColDef[] {
     sortable: true,
     filter: true,
     editable: true,
-    rowGroup: false,
     hide: true,
   });
 
@@ -77,7 +76,6 @@ export function generateColumnDefinitions(): ColDef[] {
     sortable: true,
     filter: true,
     editable: true,
-    rowGroup: false,
     hide: true,
   });
 
