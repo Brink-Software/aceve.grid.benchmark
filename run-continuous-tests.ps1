@@ -56,7 +56,7 @@ try {
         
         # Run Playwright tests
         Set-Location -Path ".\playwright"
-        npx playwright test playwright/Ag-grid/ag-grid.spec.ts --workers=1 --headed
+        npx playwright test --workers=1 --headed
         $testExitCode = $LASTEXITCODE
         Set-Location -Path ".."
         

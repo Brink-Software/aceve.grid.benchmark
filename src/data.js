@@ -340,7 +340,7 @@ export async function generateChunk(rowData, targetRows, nextIdState, updateProg
 export function generateOrganizationData() {
     const data = [];
     let id = 1;
-    const targetRows = 200000;
+    const targetRows = 10000;
     while (data.length < targetRows) {
         departments.forEach((dept) => {
             if (data.length >= targetRows)

@@ -133,7 +133,7 @@ async function generateDataWithProgress() {
     );
   }
 
-  const targetRows = 200000;
+  const targetRows = 10000;
   const chunkSize = 10000;
 
   const nextIdState: NextIdState = {

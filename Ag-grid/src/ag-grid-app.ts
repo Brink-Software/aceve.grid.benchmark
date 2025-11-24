@@ -145,7 +145,7 @@ async function generateDataWithProgress() {
     );
   }
 
-  const targetRows = 200000;
+  const targetRows = 10000;
   const chunkSize = 10000; // Genereer in chunks van 10000
 
   // Maak een nextId state object

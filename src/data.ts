@@ -292,24 +292,22 @@ export function generateEmployee(
     startDate: startDate,
   };
 
-  // Genereer 490 numerieke kolommen (totaal 500 kolommen: 10 default + 490 extra)
-  for (let i = 1; i <= 490; i++) {
+  // Genereer 80 numerieke kolommen
+  for (let i = 1; i <= 80; i++) {
     const fieldName = `num_${i}`;
-    if (i <= 123) {
+    if (i <= 20) {
       employee[fieldName] = Math.round(Math.random() * 1000 * 100) / 100;
-    } else if (i <= 246) {
+    } else if (i <= 40) {
       employee[fieldName] = Math.round(Math.random() * 10000 * 100) / 100;
-    } else if (i <= 369) {
+    } else if (i <= 60) {
       employee[fieldName] = Math.round(Math.random() * 100000 * 100) / 100;
     } else {
       employee[fieldName] = Math.round(Math.random() * 1000000 * 100) / 100;
     }
   }
 
-  // Genereer 50 tekst kolommen (al toegevoegd in de 490, dus we hebben nu 500 kolommen totaal)
-  // We hebben al 10 default kolommen, dus we hebben 490 extra nodig
-  // Laat me dit aanpassen: 400 numeriek + 90 tekst = 490 extra = 500 totaal
-  for (let i = 1; i <= 90; i++) {
+  // Genereer 10 tekst kolommen (totaal met defaults = 100 kolommen)
+  for (let i = 1; i <= 10; i++) {
     const fieldName = `text_${i}`;
     employee[fieldName] =
       textSampleData[Math.floor(Math.random() * textSampleData.length)];
@@ -417,7 +415,7 @@ export async function generateChunk(
 export function generateOrganizationData(): any[] {
   const data: any[] = [];
   let id = 1;
-  const targetRows = 200000;
+  const targetRows = 10000;
 
   while (data.length < targetRows) {
     departments.forEach((dept) => {
@@ -443,8 +441,6 @@ export function generateOrganizationData(): any[] {
   console.log(
     `Generated ${data.length} employees across ${departments.length} departments`
   );
-  console.log(
-    `Total columns: 10 default + 400 numeric + 90 text = 500 columns`
-  );
+  console.log(`Total columns: 10 default + 80 numeric + 10 text = 100 columns`);
   return data;
 }

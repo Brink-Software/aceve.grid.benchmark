@@ -115,8 +115,8 @@ export function generateColumnDefinitions(): RevoGridColumn[] {
     readonly: false,
   });
 
-  // Genereer 400 numerieke kolommen
-  for (let i = 1; i <= 400; i++) {
+  // Genereer 80 numerieke kolommen
+  for (let i = 1; i <= 80; i++) {
     const propName = `num_${i}`;
     const headerName = `Nummer ${i}`;
 
@@ -129,8 +129,8 @@ export function generateColumnDefinitions(): RevoGridColumn[] {
     });
   }
 
-  // Genereer 87 tekst kolommen
-  for (let i = 1; i <= 87; i++) {
+  // Genereer 10 tekst kolommen
+  for (let i = 1; i <= 10; i++) {
     const propName = `text_${i}`;
     const headerName = `Tekst ${i}`;
 

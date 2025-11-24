@@ -117,7 +117,7 @@ async function generateDataWithProgress() {
     console.log("Start memory:", (startMemory / 1024 / 1024).toFixed(2), "MB");
   }
 
-  const targetRows = 200000;
+  const targetRows = 10000;
   const chunkSize = 10000;
 
   const nextIdState = {

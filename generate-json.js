@@ -18,7 +18,7 @@ const writeStream = fs.createWriteStream(outputPath, { encoding: 'utf8' });
 writeStream.write('[');
 
 let count = 0;
-const targetRows = 200000;
+const targetRows = 10000;
 let id = 1;
 
 const departments = dataModule.departments;

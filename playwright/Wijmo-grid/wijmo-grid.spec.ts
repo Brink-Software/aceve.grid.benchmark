@@ -16,7 +16,7 @@ function savePerformanceData(
     fs.mkdirSync(dataDir, { recursive: true });
   }
 
-  const filePath = path.join(dataDir, "performance-data.json");
+  const filePath = path.join(dataDir, "performance-data-10000Rijen.json");
 
   // Lees bestaande data of maak nieuwe array
   let data: Array<{

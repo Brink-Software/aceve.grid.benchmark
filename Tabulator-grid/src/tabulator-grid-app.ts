@@ -132,7 +132,7 @@ async function generateDataWithProgress() {
     );
   }
 
-  const targetRows = 200000;
+  const targetRows = 10000;
   const chunkSize = 10000;
 
   const nextIdState: NextIdState = {
@@ -575,7 +575,7 @@ function initializeGrid(gridInitStartTime?: number) {
     table = new Tabulator(gridDiv, {
       data: rowData,
       columns: columnDefs,
-      layout: "fitColumns",
+      layout: "fitData",
       height: "100%",
       virtualDomBuffer: 10,
       selectable: true,
