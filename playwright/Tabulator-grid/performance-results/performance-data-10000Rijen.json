@@ -439,5 +439,89 @@
     "timeMs": 281.2,
     "timestamp": "2025-11-24T13:44:43.935Z",
     "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "642.10 ms",
+    "timeMs": 642.1,
+    "timestamp": "2025-11-24T13:45:56.530Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "311.60 ms",
+    "timeMs": 311.6,
+    "timestamp": "2025-11-24T13:46:04.931Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "345.40 ms",
+    "timeMs": 345.4,
+    "timestamp": "2025-11-24T13:46:13.325Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "685.40 ms",
+    "timeMs": 685.4,
+    "timestamp": "2025-11-24T13:47:27.768Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "312.50 ms",
+    "timeMs": 312.5,
+    "timestamp": "2025-11-24T13:47:36.355Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "295.10 ms",
+    "timeMs": 295.1,
+    "timestamp": "2025-11-24T13:47:44.774Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "660.60 ms",
+    "timeMs": 660.6,
+    "timestamp": "2025-11-24T13:48:57.563Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "295.50 ms",
+    "timeMs": 295.5,
+    "timestamp": "2025-11-24T13:49:06.057Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "296.90 ms",
+    "timeMs": 296.9,
+    "timestamp": "2025-11-24T13:49:14.415Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.10 ms",
+    "timeMs": 650.1,
+    "timestamp": "2025-11-24T13:50:26.651Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "295.10 ms",
+    "timeMs": 295.1,
+    "timestamp": "2025-11-24T13:50:34.865Z",
+    "testFile": "tabulator-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "306.50 ms",
+    "timeMs": 306.5,
+    "timestamp": "2025-11-24T13:50:43.078Z",
+    "testFile": "tabulator-grid.spec.ts"
   }
 ]

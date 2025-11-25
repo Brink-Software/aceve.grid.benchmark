@@ -131,8 +131,8 @@ export function generateColumnDefinitions() {
     editable: true,
   });
 
-  // Generate 80 numeric columns - simple, no formatters for performance
-  for (let i = 1; i <= 80; i++) {
+  // Generate 25 numeric columns - simple, no formatters for performance
+  for (let i = 1; i <= 25; i++) {
     columns.push({
       field: `num_${i}`,
       headerName: `Nummer ${i}`,
@@ -147,8 +147,8 @@ export function generateColumnDefinitions() {
     });
   }
 
-  // Generate 10 text columns - minimal config
-  for (let i = 1; i <= 10; i++) {
+  // Generate 5 text columns - minimal config
+  for (let i = 1; i <= 5; i++) {
     columns.push({
       field: `text_${i}`,
       headerName: `Tekst ${i}`,

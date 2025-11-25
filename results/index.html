@@ -315,15 +315,15 @@
         <div class="control-group">
           <label for="viewMode">Weergave Mode:</label>
           <select id="viewMode">
-            <option value="per-grid">Per Grid Aanbieder</option>
-            <option value="per-dataset">Per Dataset Grootte</option>
+            <option value="per-grid" selected>Per Grid Aanbieder (alle datasets)</option>
+            <option value="per-dataset">Per Dataset Grootte (alle grids)</option>
+            <option value="single-dataset">Enkele Dataset Grootte</option>
           </select>
         </div>
 
-        <div class="control-group">
+        <div class="control-group" id="datasetFilterGroup" style="display: none;">
           <label for="datasetFilter">Dataset Grootte:</label>
           <select id="datasetFilter">
-            <option value="all">Alle Dataset Groottes</option>
             <option value="200000">200K Rijen</option>
             <option value="10000">10K Rijen</option>
             <option value="3000">3K Rijen</option>
@@ -456,36 +456,35 @@
         if (gridFilter !== "all") {
           filteredData = filteredData.filter((d) => d.gridKey === gridFilter);
         }
-        if (datasetFilter !== "all") {
-          filteredData = filteredData.filter(
-            (d) => d.datasetSize === datasetFilter
-          );
-        }
 
         // Group by view mode
         const grouped = {};
 
         if (viewMode === "per-grid") {
-          // Group by grid, then by dataset size
+          // Show each grid with all its datasets
           filteredData.forEach((item) => {
-            const key =
-              datasetFilter === "all"
-                ? `${item.grid} - ${item.datasetLabel}`
-                : item.grid;
-
+            const key = `${item.grid} - ${item.datasetLabel}`;
             if (!grouped[key]) {
               grouped[key] = [];
             }
             grouped[key].push(item.timeMs);
           });
-        } else {
-          // Group by dataset size, then by grid
+        } else if (viewMode === "per-dataset") {
+          // Show each dataset with all grids
           filteredData.forEach((item) => {
-            const key =
-              gridFilter === "all"
-                ? `${item.datasetLabel} - ${item.grid}`
-                : item.datasetLabel;
-
+            const key = `${item.datasetLabel} - ${item.grid}`;
+            if (!grouped[key]) {
+              grouped[key] = [];
+            }
+            grouped[key].push(item.timeMs);
+          });
+        } else if (viewMode === "single-dataset") {
+          // Show only grids for selected dataset
+          filteredData = filteredData.filter(
+            (d) => d.datasetSize === datasetFilter
+          );
+          filteredData.forEach((item) => {
+            const key = item.grid;
             if (!grouped[key]) {
               grouped[key] = [];
             }
@@ -510,13 +509,14 @@
         const statsGrid = document.getElementById("statsGrid");
         const operations = ["Grid Stabiel", "Rij Toevoegen", "Rij Verwijderen"];
         const datasetFilter = document.getElementById("datasetFilter").value;
+        const viewMode = document.getElementById("viewMode").value;
 
         statsGrid.innerHTML = operations
           .map((op) => {
             let opData = data.filter((d) => d.operation === op);
 
-            // Apply dataset filter if set
-            if (datasetFilter !== "all") {
+            // Apply dataset filter only in single-dataset mode
+            if (viewMode === "single-dataset") {
               opData = opData.filter((d) => d.datasetSize === datasetFilter);
             }
 
@@ -525,7 +525,7 @@
             if (!stats) return "";
 
             const datasetLabel =
-              datasetFilter !== "all"
+              viewMode === "single-dataset"
                 ? ` (${opData[0]?.datasetLabel || ""})`
                 : "";
 
@@ -552,6 +552,7 @@
           document.getElementById("operationFilter").value;
         const gridFilter = document.getElementById("gridFilter").value;
         const datasetFilter = document.getElementById("datasetFilter").value;
+        const viewMode = document.getElementById("viewMode").value;
 
         let filteredData = data;
         if (operationFilter !== "all") {
@@ -562,7 +563,7 @@
         if (gridFilter !== "all") {
           filteredData = filteredData.filter((d) => d.gridKey === gridFilter);
         }
-        if (datasetFilter !== "all") {
+        if (viewMode === "single-dataset") {
           filteredData = filteredData.filter(
             (d) => d.datasetSize === datasetFilter
           );
@@ -741,21 +742,27 @@
         const operationFilter =
           document.getElementById("operationFilter").value;
 
+        // Show/hide dataset filter based on view mode
+        const datasetFilterGroup = document.getElementById("datasetFilterGroup");
+        if (viewMode === "single-dataset") {
+          datasetFilterGroup.style.display = "flex";
+        } else {
+          datasetFilterGroup.style.display = "none";
+        }
+
         // Update chart title based on view mode
         const chartTitle = document.getElementById("chartTitle");
         if (viewMode === "per-grid") {
-          if (datasetFilter === "all") {
-            chartTitle.textContent =
-              "Performance per Grid Aanbieder - Alle Dataset Groottes";
-          } else {
-            const label =
-              allData.find((d) => d.datasetSize === datasetFilter)
-                ?.datasetLabel || datasetFilter;
-            chartTitle.textContent = `Performance per Grid Aanbieder - ${label}`;
-          }
-        } else {
+          chartTitle.textContent =
+            "Performance per Grid Aanbieder - Alle Dataset Groottes";
+        } else if (viewMode === "per-dataset") {
           chartTitle.textContent =
             "Performance per Dataset Grootte - Vergelijking tussen Grids";
+        } else if (viewMode === "single-dataset") {
+          const label =
+            allData.find((d) => d.datasetSize === datasetFilter)
+              ?.datasetLabel || datasetFilter;
+          chartTitle.textContent = `Performance Vergelijking - ${label}`;
         }
 
         updateStats(allData);

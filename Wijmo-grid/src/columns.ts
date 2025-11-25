@@ -166,3 +166,4 @@ export function generateColumnDefinitions(): WijmoColumn[] {
   console.log(`Generated ${columns.length} columns (target: 500)`);
   return columns;
 }
+

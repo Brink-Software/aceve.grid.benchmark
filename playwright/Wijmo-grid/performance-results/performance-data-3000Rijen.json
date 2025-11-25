@@ -1,0 +1,1612 @@
+[
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.20 ms",
+    "timeMs": 649.2,
+    "timestamp": "2025-11-24T14:07:41.148Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.90 ms",
+    "timeMs": 229.9,
+    "timestamp": "2025-11-24T14:07:49.228Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.80 ms",
+    "timeMs": 228.8,
+    "timestamp": "2025-11-24T14:07:57.334Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "658.70 ms",
+    "timeMs": 658.7,
+    "timestamp": "2025-11-24T14:09:07.611Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.90 ms",
+    "timeMs": 228.9,
+    "timestamp": "2025-11-24T14:09:15.620Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.40 ms",
+    "timeMs": 228.4,
+    "timestamp": "2025-11-24T14:09:23.636Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "670.90 ms",
+    "timeMs": 670.9,
+    "timestamp": "2025-11-24T14:10:33.457Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "241.80 ms",
+    "timeMs": 241.8,
+    "timestamp": "2025-11-24T14:10:41.538Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.20 ms",
+    "timeMs": 228.2,
+    "timestamp": "2025-11-24T14:10:49.510Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.60 ms",
+    "timeMs": 650.6,
+    "timestamp": "2025-11-24T14:11:58.765Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "242.10 ms",
+    "timeMs": 242.1,
+    "timestamp": "2025-11-24T14:12:06.811Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.70 ms",
+    "timeMs": 245.7,
+    "timestamp": "2025-11-24T14:12:14.857Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.70 ms",
+    "timeMs": 649.7,
+    "timestamp": "2025-11-24T14:13:24.170Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.30 ms",
+    "timeMs": 230.3,
+    "timestamp": "2025-11-24T14:13:32.139Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "237.80 ms",
+    "timeMs": 237.8,
+    "timestamp": "2025-11-24T14:13:40.204Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.80 ms",
+    "timeMs": 650.8,
+    "timestamp": "2025-11-24T14:15:01.594Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.60 ms",
+    "timeMs": 230.6,
+    "timestamp": "2025-11-24T14:15:09.636Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "227.40 ms",
+    "timeMs": 227.4,
+    "timestamp": "2025-11-24T14:15:17.719Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "651.30 ms",
+    "timeMs": 651.3,
+    "timestamp": "2025-11-24T14:16:28.183Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "227.80 ms",
+    "timeMs": 227.8,
+    "timestamp": "2025-11-24T14:16:36.185Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.80 ms",
+    "timeMs": 228.8,
+    "timestamp": "2025-11-24T14:16:44.262Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.70 ms",
+    "timeMs": 649.7,
+    "timestamp": "2025-11-24T14:17:54.587Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.80 ms",
+    "timeMs": 228.8,
+    "timestamp": "2025-11-24T14:18:02.628Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.60 ms",
+    "timeMs": 229.6,
+    "timestamp": "2025-11-24T14:18:10.606Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.70 ms",
+    "timeMs": 666.7,
+    "timestamp": "2025-11-24T14:19:21.666Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.30 ms",
+    "timeMs": 229.3,
+    "timestamp": "2025-11-24T14:19:29.709Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.80 ms",
+    "timeMs": 230.8,
+    "timestamp": "2025-11-24T14:19:37.742Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.50 ms",
+    "timeMs": 650.5,
+    "timestamp": "2025-11-24T14:20:47.514Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.10 ms",
+    "timeMs": 229.1,
+    "timestamp": "2025-11-24T14:20:55.535Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.30 ms",
+    "timeMs": 230.3,
+    "timestamp": "2025-11-24T14:21:03.597Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.00 ms",
+    "timeMs": 650,
+    "timestamp": "2025-11-24T14:22:14.091Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.60 ms",
+    "timeMs": 228.6,
+    "timestamp": "2025-11-24T14:22:22.113Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "239.10 ms",
+    "timeMs": 239.1,
+    "timestamp": "2025-11-24T14:22:30.254Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "667.70 ms",
+    "timeMs": 667.7,
+    "timestamp": "2025-11-24T14:23:41.083Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "242.40 ms",
+    "timeMs": 242.4,
+    "timestamp": "2025-11-24T14:23:49.116Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.50 ms",
+    "timeMs": 230.5,
+    "timestamp": "2025-11-24T14:23:57.269Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "668.20 ms",
+    "timeMs": 668.2,
+    "timestamp": "2025-11-24T14:25:07.203Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "243.70 ms",
+    "timeMs": 243.7,
+    "timestamp": "2025-11-24T14:25:15.218Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "227.80 ms",
+    "timeMs": 227.8,
+    "timestamp": "2025-11-24T14:25:23.225Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.40 ms",
+    "timeMs": 649.4,
+    "timestamp": "2025-11-24T14:26:32.497Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.70 ms",
+    "timeMs": 230.7,
+    "timestamp": "2025-11-24T14:26:40.509Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "244.50 ms",
+    "timeMs": 244.5,
+    "timestamp": "2025-11-24T14:26:48.533Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "653.90 ms",
+    "timeMs": 653.9,
+    "timestamp": "2025-11-24T14:27:58.607Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "245.90 ms",
+    "timeMs": 245.9,
+    "timestamp": "2025-11-24T14:28:06.612Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "239.80 ms",
+    "timeMs": 239.8,
+    "timestamp": "2025-11-24T14:28:14.667Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "671.70 ms",
+    "timeMs": 671.7,
+    "timestamp": "2025-11-24T14:29:24.414Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "248.50 ms",
+    "timeMs": 248.5,
+    "timestamp": "2025-11-24T14:29:32.398Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.00 ms",
+    "timeMs": 229,
+    "timestamp": "2025-11-24T14:29:40.552Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "647.30 ms",
+    "timeMs": 647.3,
+    "timestamp": "2025-11-24T14:30:49.862Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.20 ms",
+    "timeMs": 228.2,
+    "timestamp": "2025-11-24T14:30:57.852Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "225.40 ms",
+    "timeMs": 225.4,
+    "timestamp": "2025-11-24T14:31:05.892Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.80 ms",
+    "timeMs": 666.8,
+    "timestamp": "2025-11-24T14:32:15.837Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "243.40 ms",
+    "timeMs": 243.4,
+    "timestamp": "2025-11-24T14:32:23.939Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.50 ms",
+    "timeMs": 230.5,
+    "timestamp": "2025-11-24T14:32:32.137Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "671.90 ms",
+    "timeMs": 671.9,
+    "timestamp": "2025-11-24T14:33:41.248Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "246.30 ms",
+    "timeMs": 246.3,
+    "timestamp": "2025-11-24T14:33:49.321Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "244.40 ms",
+    "timeMs": 244.4,
+    "timestamp": "2025-11-24T14:33:57.430Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.60 ms",
+    "timeMs": 649.6,
+    "timestamp": "2025-11-24T14:35:06.695Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "241.90 ms",
+    "timeMs": 241.9,
+    "timestamp": "2025-11-24T14:35:14.669Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.10 ms",
+    "timeMs": 229.1,
+    "timestamp": "2025-11-24T14:35:22.739Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.60 ms",
+    "timeMs": 649.6,
+    "timestamp": "2025-11-24T14:36:32.179Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.00 ms",
+    "timeMs": 230,
+    "timestamp": "2025-11-24T14:36:40.181Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.60 ms",
+    "timeMs": 245.6,
+    "timestamp": "2025-11-24T14:36:48.377Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.50 ms",
+    "timeMs": 650.5,
+    "timestamp": "2025-11-24T14:37:57.866Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.20 ms",
+    "timeMs": 229.2,
+    "timestamp": "2025-11-24T14:38:05.903Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "243.00 ms",
+    "timeMs": 243,
+    "timestamp": "2025-11-24T14:38:14.077Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.50 ms",
+    "timeMs": 649.5,
+    "timestamp": "2025-11-24T14:39:23.412Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.60 ms",
+    "timeMs": 228.6,
+    "timestamp": "2025-11-24T14:39:31.385Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.50 ms",
+    "timeMs": 230.5,
+    "timestamp": "2025-11-24T14:39:39.446Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "654.40 ms",
+    "timeMs": 654.4,
+    "timestamp": "2025-11-24T14:40:48.967Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.20 ms",
+    "timeMs": 230.2,
+    "timestamp": "2025-11-24T14:40:56.962Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "227.20 ms",
+    "timeMs": 227.2,
+    "timestamp": "2025-11-24T14:41:05.032Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.50 ms",
+    "timeMs": 649.5,
+    "timestamp": "2025-11-24T14:42:14.436Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.30 ms",
+    "timeMs": 229.3,
+    "timestamp": "2025-11-24T14:42:22.449Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "238.10 ms",
+    "timeMs": 238.1,
+    "timestamp": "2025-11-24T14:42:30.570Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "660.40 ms",
+    "timeMs": 660.4,
+    "timestamp": "2025-11-24T14:43:40.821Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.80 ms",
+    "timeMs": 228.8,
+    "timestamp": "2025-11-24T14:43:48.937Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.00 ms",
+    "timeMs": 230,
+    "timestamp": "2025-11-24T14:43:56.964Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.20 ms",
+    "timeMs": 650.2,
+    "timestamp": "2025-11-24T14:45:07.119Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.70 ms",
+    "timeMs": 230.7,
+    "timestamp": "2025-11-24T14:45:15.103Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.50 ms",
+    "timeMs": 229.5,
+    "timestamp": "2025-11-24T14:45:23.132Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "644.50 ms",
+    "timeMs": 644.5,
+    "timestamp": "2025-11-24T14:46:33.267Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.90 ms",
+    "timeMs": 229.9,
+    "timestamp": "2025-11-24T14:46:41.271Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "243.20 ms",
+    "timeMs": 243.2,
+    "timestamp": "2025-11-24T14:46:49.274Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "651.60 ms",
+    "timeMs": 651.6,
+    "timestamp": "2025-11-24T14:47:58.930Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "246.10 ms",
+    "timeMs": 246.1,
+    "timestamp": "2025-11-24T14:48:06.939Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.30 ms",
+    "timeMs": 245.3,
+    "timestamp": "2025-11-24T14:48:14.921Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "674.00 ms",
+    "timeMs": 674,
+    "timestamp": "2025-11-24T14:49:25.154Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "256.90 ms",
+    "timeMs": 256.9,
+    "timestamp": "2025-11-24T14:49:33.235Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "239.90 ms",
+    "timeMs": 239.9,
+    "timestamp": "2025-11-24T14:49:41.257Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.80 ms",
+    "timeMs": 649.8,
+    "timestamp": "2025-11-24T14:50:51.577Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "227.40 ms",
+    "timeMs": 227.4,
+    "timestamp": "2025-11-24T14:50:59.598Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.50 ms",
+    "timeMs": 245.5,
+    "timestamp": "2025-11-24T14:51:07.658Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.30 ms",
+    "timeMs": 666.3,
+    "timestamp": "2025-11-24T14:52:17.111Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "226.90 ms",
+    "timeMs": 226.9,
+    "timestamp": "2025-11-24T14:52:25.098Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "240.50 ms",
+    "timeMs": 240.5,
+    "timestamp": "2025-11-24T14:52:33.086Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "659.80 ms",
+    "timeMs": 659.8,
+    "timestamp": "2025-11-24T14:53:43.293Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.30 ms",
+    "timeMs": 229.3,
+    "timestamp": "2025-11-24T14:53:51.275Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.10 ms",
+    "timeMs": 230.1,
+    "timestamp": "2025-11-24T14:53:59.286Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "653.40 ms",
+    "timeMs": 653.4,
+    "timestamp": "2025-11-24T14:55:09.494Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "231.10 ms",
+    "timeMs": 231.1,
+    "timestamp": "2025-11-24T14:55:17.552Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "240.60 ms",
+    "timeMs": 240.6,
+    "timestamp": "2025-11-24T14:55:25.681Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.90 ms",
+    "timeMs": 649.9,
+    "timestamp": "2025-11-24T14:56:36.133Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "238.40 ms",
+    "timeMs": 238.4,
+    "timestamp": "2025-11-24T14:56:44.178Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.20 ms",
+    "timeMs": 230.2,
+    "timestamp": "2025-11-24T14:56:52.362Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.80 ms",
+    "timeMs": 666.8,
+    "timestamp": "2025-11-24T14:58:02.880Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "247.40 ms",
+    "timeMs": 247.4,
+    "timestamp": "2025-11-24T14:58:10.903Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "237.20 ms",
+    "timeMs": 237.2,
+    "timestamp": "2025-11-24T14:58:18.974Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.80 ms",
+    "timeMs": 649.8,
+    "timestamp": "2025-11-24T14:59:28.921Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.80 ms",
+    "timeMs": 229.8,
+    "timestamp": "2025-11-24T14:59:36.899Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.60 ms",
+    "timeMs": 229.6,
+    "timestamp": "2025-11-24T14:59:44.930Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "673.90 ms",
+    "timeMs": 673.9,
+    "timestamp": "2025-11-24T15:00:55.654Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "242.70 ms",
+    "timeMs": 242.7,
+    "timestamp": "2025-11-24T15:01:03.720Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.20 ms",
+    "timeMs": 230.2,
+    "timestamp": "2025-11-24T15:01:11.857Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "641.90 ms",
+    "timeMs": 641.9,
+    "timestamp": "2025-11-24T15:02:21.467Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.90 ms",
+    "timeMs": 229.9,
+    "timestamp": "2025-11-24T15:02:29.463Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.20 ms",
+    "timeMs": 229.2,
+    "timestamp": "2025-11-24T15:02:37.576Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "656.50 ms",
+    "timeMs": 656.5,
+    "timestamp": "2025-11-24T15:03:48.404Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.60 ms",
+    "timeMs": 230.6,
+    "timestamp": "2025-11-24T15:03:56.433Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "242.00 ms",
+    "timeMs": 242,
+    "timestamp": "2025-11-24T15:04:04.478Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.50 ms",
+    "timeMs": 650.5,
+    "timestamp": "2025-11-24T15:05:15.994Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "226.60 ms",
+    "timeMs": 226.6,
+    "timestamp": "2025-11-24T15:05:24.170Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "234.20 ms",
+    "timeMs": 234.2,
+    "timestamp": "2025-11-24T15:05:32.333Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "669.00 ms",
+    "timeMs": 669,
+    "timestamp": "2025-11-24T15:06:44.101Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.60 ms",
+    "timeMs": 228.6,
+    "timestamp": "2025-11-24T15:06:52.133Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.10 ms",
+    "timeMs": 230.1,
+    "timestamp": "2025-11-24T15:07:00.217Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.40 ms",
+    "timeMs": 666.4,
+    "timestamp": "2025-11-24T15:08:11.178Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "241.00 ms",
+    "timeMs": 241,
+    "timestamp": "2025-11-24T15:08:19.213Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "243.90 ms",
+    "timeMs": 243.9,
+    "timestamp": "2025-11-24T15:08:27.294Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "680.40 ms",
+    "timeMs": 680.4,
+    "timestamp": "2025-11-24T15:09:38.485Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "240.70 ms",
+    "timeMs": 240.7,
+    "timestamp": "2025-11-24T15:09:46.580Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "234.00 ms",
+    "timeMs": 234,
+    "timestamp": "2025-11-24T15:09:54.638Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "658.80 ms",
+    "timeMs": 658.8,
+    "timestamp": "2025-11-24T15:11:05.564Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.00 ms",
+    "timeMs": 230,
+    "timestamp": "2025-11-24T15:11:13.580Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.10 ms",
+    "timeMs": 245.1,
+    "timestamp": "2025-11-24T15:11:21.694Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.60 ms",
+    "timeMs": 650.6,
+    "timestamp": "2025-11-24T15:12:33.308Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "242.90 ms",
+    "timeMs": 242.9,
+    "timestamp": "2025-11-24T15:12:41.356Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "244.90 ms",
+    "timeMs": 244.9,
+    "timestamp": "2025-11-24T15:12:49.386Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "663.90 ms",
+    "timeMs": 663.9,
+    "timestamp": "2025-11-24T15:14:01.485Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "246.20 ms",
+    "timeMs": 246.2,
+    "timestamp": "2025-11-24T15:14:09.550Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "231.30 ms",
+    "timeMs": 231.3,
+    "timestamp": "2025-11-24T15:14:17.657Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "685.90 ms",
+    "timeMs": 685.9,
+    "timestamp": "2025-11-24T15:15:28.965Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "237.20 ms",
+    "timeMs": 237.2,
+    "timestamp": "2025-11-24T15:15:37.084Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.80 ms",
+    "timeMs": 228.8,
+    "timestamp": "2025-11-24T15:15:45.107Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.30 ms",
+    "timeMs": 650.3,
+    "timestamp": "2025-11-24T15:16:56.230Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "240.90 ms",
+    "timeMs": 240.9,
+    "timestamp": "2025-11-24T15:17:04.244Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "226.50 ms",
+    "timeMs": 226.5,
+    "timestamp": "2025-11-24T15:17:12.321Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.40 ms",
+    "timeMs": 666.4,
+    "timestamp": "2025-11-24T15:18:23.626Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "246.40 ms",
+    "timeMs": 246.4,
+    "timestamp": "2025-11-24T15:18:31.727Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "227.90 ms",
+    "timeMs": 227.9,
+    "timestamp": "2025-11-24T15:18:39.838Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "647.20 ms",
+    "timeMs": 647.2,
+    "timestamp": "2025-11-24T15:19:51.270Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.20 ms",
+    "timeMs": 228.2,
+    "timestamp": "2025-11-24T15:19:59.305Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.10 ms",
+    "timeMs": 230.1,
+    "timestamp": "2025-11-24T15:20:07.355Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "673.10 ms",
+    "timeMs": 673.1,
+    "timestamp": "2025-11-24T15:21:18.518Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "246.20 ms",
+    "timeMs": 246.2,
+    "timestamp": "2025-11-24T15:21:26.509Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.30 ms",
+    "timeMs": 228.3,
+    "timestamp": "2025-11-24T15:21:34.598Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "659.20 ms",
+    "timeMs": 659.2,
+    "timestamp": "2025-11-24T15:22:45.456Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "226.00 ms",
+    "timeMs": 226,
+    "timestamp": "2025-11-24T15:22:53.531Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.30 ms",
+    "timeMs": 228.3,
+    "timestamp": "2025-11-24T15:23:01.606Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "667.30 ms",
+    "timeMs": 667.3,
+    "timestamp": "2025-11-24T15:24:13.922Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.40 ms",
+    "timeMs": 228.4,
+    "timestamp": "2025-11-24T15:24:21.978Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.30 ms",
+    "timeMs": 229.3,
+    "timestamp": "2025-11-24T15:24:30.033Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "655.60 ms",
+    "timeMs": 655.6,
+    "timestamp": "2025-11-24T15:25:41.611Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "241.00 ms",
+    "timeMs": 241,
+    "timestamp": "2025-11-24T15:25:49.684Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "234.20 ms",
+    "timeMs": 234.2,
+    "timestamp": "2025-11-24T15:25:57.708Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "675.90 ms",
+    "timeMs": 675.9,
+    "timestamp": "2025-11-24T15:27:19.453Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "243.20 ms",
+    "timeMs": 243.2,
+    "timestamp": "2025-11-24T15:27:27.523Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "231.30 ms",
+    "timeMs": 231.3,
+    "timestamp": "2025-11-24T15:27:35.583Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "670.30 ms",
+    "timeMs": 670.3,
+    "timestamp": "2025-11-24T15:28:46.746Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.00 ms",
+    "timeMs": 229,
+    "timestamp": "2025-11-24T15:28:54.759Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.60 ms",
+    "timeMs": 245.6,
+    "timestamp": "2025-11-24T15:29:02.868Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.80 ms",
+    "timeMs": 649.8,
+    "timestamp": "2025-11-24T15:30:14.680Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "238.20 ms",
+    "timeMs": 238.2,
+    "timestamp": "2025-11-24T15:30:22.787Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "243.90 ms",
+    "timeMs": 243.9,
+    "timestamp": "2025-11-24T15:30:30.829Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.20 ms",
+    "timeMs": 649.2,
+    "timestamp": "2025-11-24T15:31:41.807Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "241.90 ms",
+    "timeMs": 241.9,
+    "timestamp": "2025-11-24T15:31:49.807Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.00 ms",
+    "timeMs": 228,
+    "timestamp": "2025-11-24T15:31:57.851Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "659.00 ms",
+    "timeMs": 659,
+    "timestamp": "2025-11-24T15:33:08.205Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.10 ms",
+    "timeMs": 228.1,
+    "timestamp": "2025-11-24T15:33:16.277Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "244.40 ms",
+    "timeMs": 244.4,
+    "timestamp": "2025-11-24T15:33:24.264Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.40 ms",
+    "timeMs": 650.4,
+    "timestamp": "2025-11-24T15:34:34.683Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "227.00 ms",
+    "timeMs": 227,
+    "timestamp": "2025-11-24T15:34:42.738Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.00 ms",
+    "timeMs": 228,
+    "timestamp": "2025-11-24T15:34:50.732Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.70 ms",
+    "timeMs": 666.7,
+    "timestamp": "2025-11-24T15:36:02.103Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "278.10 ms",
+    "timeMs": 278.1,
+    "timestamp": "2025-11-24T15:36:10.121Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.40 ms",
+    "timeMs": 245.4,
+    "timestamp": "2025-11-24T15:36:18.199Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "672.20 ms",
+    "timeMs": 672.2,
+    "timestamp": "2025-11-24T15:37:29.634Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "245.00 ms",
+    "timeMs": 245,
+    "timestamp": "2025-11-24T15:37:37.708Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "242.90 ms",
+    "timeMs": 242.9,
+    "timestamp": "2025-11-24T15:37:45.772Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "664.30 ms",
+    "timeMs": 664.3,
+    "timestamp": "2025-11-24T15:38:57.311Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "244.30 ms",
+    "timeMs": 244.3,
+    "timestamp": "2025-11-24T15:39:05.359Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "244.30 ms",
+    "timeMs": 244.3,
+    "timestamp": "2025-11-24T15:39:13.362Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.00 ms",
+    "timeMs": 650,
+    "timestamp": "2025-11-24T15:40:24.105Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.00 ms",
+    "timeMs": 230,
+    "timestamp": "2025-11-24T15:40:32.102Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "230.30 ms",
+    "timeMs": 230.3,
+    "timestamp": "2025-11-24T15:40:40.075Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "642.90 ms",
+    "timeMs": 642.9,
+    "timestamp": "2025-11-24T15:41:50.758Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "242.20 ms",
+    "timeMs": 242.2,
+    "timestamp": "2025-11-24T15:41:58.790Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.60 ms",
+    "timeMs": 229.6,
+    "timestamp": "2025-11-24T15:42:06.806Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "652.30 ms",
+    "timeMs": 652.3,
+    "timestamp": "2025-11-24T15:43:17.854Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.70 ms",
+    "timeMs": 228.7,
+    "timestamp": "2025-11-24T15:43:25.866Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "245.00 ms",
+    "timeMs": 245,
+    "timestamp": "2025-11-24T15:43:33.940Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "654.70 ms",
+    "timeMs": 654.7,
+    "timestamp": "2025-11-24T15:44:48.044Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.80 ms",
+    "timeMs": 228.8,
+    "timestamp": "2025-11-24T15:44:56.069Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.10 ms",
+    "timeMs": 229.1,
+    "timestamp": "2025-11-24T15:45:04.100Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "652.30 ms",
+    "timeMs": 652.3,
+    "timestamp": "2025-11-24T15:46:14.741Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "225.70 ms",
+    "timeMs": 225.7,
+    "timestamp": "2025-11-24T15:46:22.789Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "246.60 ms",
+    "timeMs": 246.6,
+    "timestamp": "2025-11-24T15:46:30.800Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "652.10 ms",
+    "timeMs": 652.1,
+    "timestamp": "2025-11-24T15:47:41.217Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "246.50 ms",
+    "timeMs": 246.5,
+    "timestamp": "2025-11-24T15:47:49.236Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.70 ms",
+    "timeMs": 228.7,
+    "timestamp": "2025-11-24T15:47:57.261Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.70 ms",
+    "timeMs": 666.7,
+    "timestamp": "2025-11-24T15:49:07.476Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.80 ms",
+    "timeMs": 228.8,
+    "timestamp": "2025-11-24T15:49:15.535Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.60 ms",
+    "timeMs": 229.6,
+    "timestamp": "2025-11-24T15:49:23.630Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "649.80 ms",
+    "timeMs": 649.8,
+    "timestamp": "2025-11-24T15:50:34.107Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "230.40 ms",
+    "timeMs": 230.4,
+    "timestamp": "2025-11-24T15:50:42.198Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "242.30 ms",
+    "timeMs": 242.3,
+    "timestamp": "2025-11-24T15:50:50.212Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "659.00 ms",
+    "timeMs": 659,
+    "timestamp": "2025-11-24T15:52:02.043Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "231.70 ms",
+    "timeMs": 231.7,
+    "timestamp": "2025-11-24T15:52:10.356Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "235.00 ms",
+    "timeMs": 235,
+    "timestamp": "2025-11-24T15:52:18.412Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.00 ms",
+    "timeMs": 650,
+    "timestamp": "2025-11-24T15:53:29.338Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "235.90 ms",
+    "timeMs": 235.9,
+    "timestamp": "2025-11-24T15:53:37.429Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.70 ms",
+    "timeMs": 228.7,
+    "timestamp": "2025-11-24T15:53:45.527Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "650.40 ms",
+    "timeMs": 650.4,
+    "timestamp": "2025-11-24T15:54:56.765Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "220.70 ms",
+    "timeMs": 220.7,
+    "timestamp": "2025-11-24T15:55:04.823Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "231.30 ms",
+    "timeMs": 231.3,
+    "timestamp": "2025-11-24T15:55:13.054Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "666.70 ms",
+    "timeMs": 666.7,
+    "timestamp": "2025-11-24T15:56:24.318Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "228.30 ms",
+    "timeMs": 228.3,
+    "timestamp": "2025-11-24T15:56:32.384Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "243.70 ms",
+    "timeMs": 243.7,
+    "timestamp": "2025-11-24T15:56:40.547Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "654.90 ms",
+    "timeMs": 654.9,
+    "timestamp": "2025-11-24T15:57:51.834Z",
+    "testFile": "wijmo-grid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "238.50 ms",
+    "timeMs": 238.5,
+    "timestamp": "2025-11-24T15:57:59.861Z",
+    "testFile": "wijmo-grid.spec.ts"
+  }
+]

@@ -1,5 +1,5 @@
 // ============================================
-// Kolom Definities - 500 Kolommen
+// Kolom Definities - 40 Kolommen
 // ============================================
 
 import { CustomCellRendererParams } from "./types.js";
@@ -302,8 +302,8 @@ export function generateColumnDefinitions(): ColDef[] {
     },
   });
 
-  // Genereer 80 numerieke kolommen
-  for (let i = 1; i <= 80; i++) {
+  // Genereer 25 numerieke kolommen
+  for (let i = 1; i <= 25; i++) {
     const fieldName = `num_${i}`;
     const headerName = `Nummer ${i}`;
 
@@ -356,8 +356,8 @@ export function generateColumnDefinitions(): ColDef[] {
     });
   }
 
-  // Genereer 10 tekst kolommen
-  for (let i = 1; i <= 10; i++) {
+  // Genereer 5 tekst kolommen
+  for (let i = 1; i <= 5; i++) {
     const fieldName = `text_${i}`;
     const headerName = `Tekst ${i}`;
 
@@ -376,6 +376,6 @@ export function generateColumnDefinitions(): ColDef[] {
     });
   }
 
-  console.log(`Generated ${columns.length} columns (target: 100)`);
+  console.log(`Generated ${columns.length} columns (target: 40)`);
   return columns;
 }

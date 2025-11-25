@@ -453,5 +453,82 @@
     "timeMs": 230.1,
     "timestamp": "2025-11-24T13:45:46.698Z",
     "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "227.10 ms",
+    "timeMs": 227.1,
+    "timestamp": "2025-11-24T13:45:51.145Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "640.90 ms",
+    "timeMs": 640.9,
+    "timestamp": "2025-11-24T13:47:08.753Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "227.00 ms",
+    "timeMs": 227,
+    "timestamp": "2025-11-24T13:47:17.742Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "228.30 ms",
+    "timeMs": 228.3,
+    "timestamp": "2025-11-24T13:47:22.232Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "652.60 ms",
+    "timeMs": 652.6,
+    "timestamp": "2025-11-24T13:48:39.042Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "229.50 ms",
+    "timeMs": 229.5,
+    "timestamp": "2025-11-24T13:48:47.900Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "243.80 ms",
+    "timeMs": 243.8,
+    "timestamp": "2025-11-24T13:48:52.351Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "654.30 ms",
+    "timeMs": 654.3,
+    "timestamp": "2025-11-24T13:50:08.420Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Verwijderen",
+    "time": "242.50 ms",
+    "timeMs": 242.5,
+    "timestamp": "2025-11-24T13:50:17.272Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Rij Toevoegen",
+    "time": "229.50 ms",
+    "timeMs": 229.5,
+    "timestamp": "2025-11-24T13:50:21.590Z",
+    "testFile": "revogrid.spec.ts"
+  },
+  {
+    "operation": "Grid Stabiel",
+    "time": "636.20 ms",
+    "timeMs": 636.2,
+    "timestamp": "2025-11-24T13:51:37.540Z",
+    "testFile": "revogrid.spec.ts"
   }
 ]

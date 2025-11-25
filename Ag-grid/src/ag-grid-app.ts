@@ -145,8 +145,8 @@ async function generateDataWithProgress() {
     );
   }
 
-  const targetRows = 10000;
-  const chunkSize = 10000; // Genereer in chunks van 10000
+  const targetRows = 3000;
+  const chunkSize = 3000; // Genereer in chunks van 3000
 
   // Maak een nextId state object
   const nextIdState: NextIdState = {
