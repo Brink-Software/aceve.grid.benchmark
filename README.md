@@ -12,6 +12,7 @@ Welkom bij de Grid Benchmark projecten collectie. Dit project vergelijkt de pres
 Een geavanceerde AG Grid tabel met row grouping voor organisatie data.
 
 **Quick Start**:
+
 ```bash
 # 1. Ga naar Ag-grid directory
 cd Ag-grid
@@ -43,6 +44,7 @@ Zie [Ag-grid/README.md](Ag-grid/README.md) voor meer details.
 Een geoptimaliseerde React-implementatie van AG Grid zonder row grouping en aggregaties voor maximale performance.
 
 **Quick Start**:
+
 ```bash
 # 1. Ga naar ag-grid-speedup directory
 cd ag-grid-speedup
@@ -55,6 +57,7 @@ npm run dev
 ```
 
 **Performance Optimizations**:
+
 - ✅ No row grouping (major performance boost)
 - ✅ No aggregation functions
 - ✅ Simple value formatters (no complex cell renderers)
@@ -74,6 +77,7 @@ Zie [ag-grid-speedup/README.md](ag-grid-speedup/README.md) voor meer details.
 Een Wijmo Grid implementatie met dezelfde functionaliteit als Ag-grid voor performance vergelijking.
 
 **Quick Start**:
+
 ```bash
 # 1. Compileer TypeScript (vanuit root directory)
 npm run build
@@ -84,12 +88,53 @@ npx serve -l 8000
 
 Ga naar: http://localhost:8000/Wijmo-grid/index.html
 
+### MudBlazor-grid
+
+**Locatie**: `/MudBlazor-grid`  
+**URL**: `http://localhost:8001`
+
+Een Blazor WebAssembly implementatie met MudBlazor DataGrid. Dit is de enige .NET/C# implementatie in het benchmark project, alle andere zijn JavaScript-gebaseerd.
+
+**Quick Start**:
+
+```bash
+# 1. Ga naar MudBlazor-grid directory
+cd MudBlazor-grid
+
+# 2. Restore NuGet packages (eerste keer)
+dotnet restore
+
+# 3. Build project
+dotnet build
+
+# 4. Run project
+dotnet run
+```
+
+**Technologie**:
+
+- ✅ Blazor WebAssembly (.NET 10)
+- ✅ MudBlazor DataGrid v7.8.0
+- ✅ Virtualisatie enabled
+- ✅ 100.000 rijen × 500 kolommen
+
+**Performance**:
+
+- Verwacht 15-35 seconden load tijd (WASM overhead)
+- 3-10x langzamer dan JavaScript grids (acceptabel voor .NET)
+- Memory usage: 300MB-600MB
+
+Ga naar: http://localhost:8001
+
+Zie [MudBlazor-grid/README.md](MudBlazor-grid/README.md) voor meer details.
+
 ### Playwright Tests
 
 **Locatie**: `/playwright`  
 **Beschrijving**: Centrale Playwright test setup voor alle projecten.
 
 **Quick Start**:
+
 ```bash
 # 1. Ga naar playwright directory
 cd playwright
@@ -157,7 +202,8 @@ aceve.grid.benchmark/     # ROOT directory (start server hier!)
 - **AG Grid Speedup**: http://localhost:3000/ (separate Vite dev server)
 - **Wijmo-grid**: http://localhost:8000/Wijmo-grid/index.html
 
-**Let op**: 
+**Let op**:
+
 - AG Grid Speedup runs on its own dev server (port 3000)
 - Other grids use the static file server (port 8000)
 - Gebruik `index.html` (met 'l'), niet `index.htm`!
@@ -183,16 +229,19 @@ Om een nieuw project toe te voegen:
 ## 🧪 Tests Uitvoeren
 
 ### Alle tests
+
 ```bash
 npm test
 ```
 
 ### Met UI mode
+
 ```bash
 npm run test:ui
 ```
 
 ### Met zichtbare browser (headed)
+
 ```bash
 npm run test:headed
 ```

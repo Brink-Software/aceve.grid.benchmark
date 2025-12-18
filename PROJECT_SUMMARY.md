@@ -313,3 +313,4 @@ Dit project is gemaakt om:
 **Laatste Update**: Project gebruikt TypeScript strict mode, ES2020 modules, en ondersteunt zowel AG Grid als Wijmo Grid met identieke functionaliteit voor eerlijke performance vergelijking.
 
 
+

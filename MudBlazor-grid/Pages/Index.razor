@@ -1,0 +1,287 @@
+@page "/"
+@using MudBlazor_grid.Models
+@using MudBlazor_grid.Services
+@using System.Diagnostics
+@using System.Reflection
+@inject DataGenerationService DataService
+@inject PerformanceService PerfService
+
+<PageTitle>MudBlazor DataGrid - 100K Rows Benchmark</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.False" Style="padding: 0; height: 100vh; display: flex; flex-direction: column;">
+
+    @* Loading Overlay *@
+    @if (_isLoading)
+    {
+        <div class="loading-overlay" data-test="loading-spinner">
+            <div class="loading-content">
+                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+                <div class="loading-progress" data-test="loading-progress">@_loadedRows.ToString("N0")</div>
+                <div class="loading-text">Rijen geladen...</div>
+                <MudText Typo="Typo.body2" Color="Color.Default" Style="margin-top: 8px;">
+                    Data wordt gegenereerd, even geduld...
+                </MudText>
+            </div>
+        </div>
+    }
+
+    @* Performance Indicator *@
+    @if (_showPerformanceIndicator)
+    {
+        <MudPaper Class="performance-indicator" Elevation="3">
+            <MudAlert Severity="Severity.Success" Variant="Variant.Filled">
+                <MudText Typo="Typo.body2">@_lastOperation</MudText>
+                <MudText Typo="Typo.h6" data-test="performance-tijd">@_lastPerformanceTime</MudText>
+            </MudAlert>
+        </MudPaper>
+    }
+
+    @* Header *@
+    <MudPaper Elevation="2" Style="padding: 16px; margin-bottom: 8px;">
+        <MudText Typo="Typo.h4" Color="Color.Primary">MudBlazor DataGrid - Performance Benchmark</MudText>
+        <MudText Typo="Typo.body2" Color="Color.Default">100.000 rijen × 500 kolommen met virtualisatie</MudText>
+    </MudPaper>
+
+    @* Statistics Panel *@
+    <MudPaper Elevation="1" Style="padding: 16px; margin-bottom: 8px;">
+        <div class="statistics-panel">
+            <MudPaper Class="stat-card" Elevation="0">
+                <MudText Typo="Typo.overline">Total Employees</MudText>
+                <MudText Typo="Typo.h5" Color="Color.Primary" id="totalEmployees">@_employees.Count</MudText>
+            </MudPaper>
+
+            <MudPaper Class="stat-card" Elevation="0">
+                <MudText Typo="Typo.overline">Total Columns</MudText>
+                <MudText Typo="Typo.h5" Color="Color.Secondary" id="totalColumns">500</MudText>
+            </MudPaper>
+
+            <MudPaper Class="stat-card" Elevation="0">
+                <MudText Typo="Typo.overline">Selected</MudText>
+                <MudText Typo="Typo.h5" Color="Color.Info" id="selectedCount">@_selectedEmployees.Count</MudText>
+            </MudPaper>
+        </div>
+    </MudPaper>
+
+    @* Action Buttons *@
+    <MudPaper Elevation="1" Style="padding: 12px; margin-bottom: 8px; display: flex; gap: 12px;">
+        <MudButton Variant="Variant.Filled" Color="Color.Success" StartIcon="@Icons.Material.Filled.Add"
+            OnClick="AddNewRow" Disabled="@_isLoading" data-test="add-row-btn" id="addRowBtn">
+            Nieuwe Rij Toevoegen
+        </MudButton>
+
+        <MudButton Variant="Variant.Filled" Color="Color.Error" StartIcon="@Icons.Material.Filled.Delete"
+            OnClick="DeleteSelectedRows" Disabled="@(_selectedEmployees.Count == 0 || _isLoading)"
+            data-test="delete-rows-btn" id="deleteRowsBtn">
+            Verwijder Geselecteerde (@_selectedEmployees.Count)
+        </MudButton>
+    </MudPaper>
+
+    @* MudDataGrid with Virtualization *@
+    <MudPaper Elevation="2" Style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
+        <MudDataGrid T="Employee" Items="@_employees" @bind-SelectedItems="_selectedEmployees" MultiSelection="true"
+            Virtualize="true" FixedHeader="true" Height="calc(100vh - 350px)" 
+            ItemSize="40" OverscanCount="5"
+            Filterable="false" SortMode="SortMode.None" Hover="false" Dense="true"
+            data-test="mudblazor-datagrid" id="myGrid">
+
+            <Columns>
+                @* Selection Column *@
+                <SelectColumn T="Employee" />
+
+                @* Core Columns *@
+                <PropertyColumn Property="x => x.Id" Title="ID" />
+                <PropertyColumn Property="x => x.Name" Title="Naam" />
+                <PropertyColumn Property="x => x.Email" Title="Email" />
+                <PropertyColumn Property="x => x.Department" Title="Afdeling" />
+                <PropertyColumn Property="x => x.Team" Title="Team" />
+                <PropertyColumn Property="x => x.Role" Title="Rol" />
+                <PropertyColumn Property="x => x.Salary" Title="Salaris" Format="C0" />
+                <PropertyColumn Property="x => x.Experience" Title="Ervaring" />
+                <PropertyColumn Property="x => x.Projects" Title="Projecten" />
+                <PropertyColumn Property="x => x.Performance" Title="Performance" Format="F1" />
+
+                @* Numeric Columns (490 columns) - Using TemplateColumn with cached reflection *@
+                @for (int i = 1; i <= 490; i++)
+                {
+                    var columnIndex = i;
+                    var propName = $"Num_{columnIndex}";
+                    <TemplateColumn Title="@propName">
+                        <CellTemplate>
+                            @{
+                                try
+                                {
+                                    if (!_propertyCache.TryGetValue(propName, out var prop))
+                                    {
+                                        prop = typeof(Employee).GetProperty(propName);
+                                        if (prop != null)
+                                        {
+                                            _propertyCache[propName] = prop;
+                                        }
+                                    }
+                                    
+                                    if (prop != null)
+                                    {
+                                        var value = prop.GetValue(context, null);
+                                        if (value is double dblValue)
+                                        {
+                                            @dblValue.ToString("F2")
+                                        }
+                                        else
+                                        {
+                                            @("0.00")
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @("0.00")
+                                    }
+                                }
+                                catch
+                                {
+                                    @("0.00")
+                                }
+                            }
+                        </CellTemplate>
+                    </TemplateColumn>
+                }
+            </Columns>
+        </MudDataGrid>
+    </MudPaper>
+
+</MudContainer>
+
+@code {
+    private List<Employee> _employees = new();
+    private HashSet<Employee> _selectedEmployees = new();
+    private bool _isLoading = true;
+    private int _loadedRows = 0;
+
+    // Performance indicator state
+    private bool _showPerformanceIndicator = false;
+    private string _lastOperation = "";
+    private string _lastPerformanceTime = "";
+    private string _performanceDataTest = "";
+
+    // Property cache for faster reflection access
+    private static readonly Dictionary<string, PropertyInfo> _propertyCache = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Start total performance measurement
+            var totalStart = Stopwatch.GetTimestamp();
+
+            // Start data generation measurement
+            PerfService.StartMeasurement();
+            Console.WriteLine("=== PERFORMANCE METING: DATA GENERATIE (C#) ===");
+
+            _employees = await DataService.GenerateDataAsync(
+            targetRows: 1000,
+            progressCallback: (count) =>
+            {
+                _loadedRows = count;
+                InvokeAsync(StateHasChanged);
+            },
+            chunkSize: 10000
+            );
+
+            var dataGenTime = await PerfService.StopMeasurementAsync("Data Generation");
+            Console.WriteLine($"Generated {_employees.Count} employees");
+            Console.WriteLine($"Data generation speed: {(_employees.Count / (dataGenTime / 1000)):F0} rows/second");
+
+            // Grid initialization
+            PerfService.StartMeasurement();
+            Console.WriteLine("=== PERFORMANCE METING: GRID INITIALISATIE ===");
+
+            _isLoading = false;
+            await InvokeAsync(StateHasChanged);
+
+            // Wait for grid to render
+            await Task.Delay(500);
+
+            var gridInitTime = await PerfService.StopMeasurementAsync("Grid Initialization");
+
+            // Wait for grid to stabilize
+            await Task.Delay(1000);
+            var totalTime = Stopwatch.GetElapsedTime(totalStart).TotalMilliseconds;
+
+            Console.WriteLine("=== PERFORMANCE: GRID STABLE ===");
+            Console.WriteLine($"TOTAL TIME (Generation + Init): {totalTime:F2} ms");
+
+            await ShowPerformanceIndicatorAsync("Grid Stable", $"{totalTime:F2} ms", "grid-stabiel");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during initialization: {ex.Message}");
+            _isLoading = false;
+        }
+    }
+
+    private async Task AddNewRow()
+    {
+        PerfService.StartMeasurement();
+        Console.WriteLine("=== PERFORMANCE METING: RIJ TOEVOEGEN ===");
+
+        try
+        {
+            var newEmployee = DataService.GenerateEmployee("Engineering", "Frontend Team", "Developer");
+            _employees.Insert(0, newEmployee);
+
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(200); // Wait for render
+
+            var time = await PerfService.StopMeasurementAsync("Add Row");
+            await ShowPerformanceIndicatorAsync("Add Row", $"{time:F2} ms", "rij-toevoegen");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding row: {ex.Message}");
+        }
+    }
+
+    private async Task DeleteSelectedRows()
+    {
+        if (_selectedEmployees.Count == 0) return;
+
+        PerfService.StartMeasurement();
+        Console.WriteLine($"=== PERFORMANCE METING: {_selectedEmployees.Count} RIJEN VERWIJDEREN ===");
+
+        try
+        {
+            var toDelete = _selectedEmployees.ToList();
+
+            foreach (var employee in toDelete)
+            {
+                _employees.Remove(employee);
+            }
+
+            _selectedEmployees.Clear();
+
+            await InvokeAsync(StateHasChanged);
+            await Task.Delay(200); // Wait for render
+
+            var time = await PerfService.StopMeasurementAsync($"Delete Rows ({toDelete.Count})");
+            await ShowPerformanceIndicatorAsync($"Delete Rows ({toDelete.Count})", $"{time:F2} ms", "rijen-verwijderen");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting rows: {ex.Message}");
+        }
+    }
+
+    private async Task ShowPerformanceIndicatorAsync(string operation, string time, string dataTest)
+    {
+        _lastOperation = operation;
+        _lastPerformanceTime = time;
+        _performanceDataTest = dataTest;
+        _showPerformanceIndicator = true;
+
+        await InvokeAsync(StateHasChanged);
+
+        // Hide after 3 seconds
+        await Task.Delay(3000);
+        _showPerformanceIndicator = false;
+        await InvokeAsync(StateHasChanged);
+    }
+}

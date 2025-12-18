@@ -12,7 +12,8 @@ const gridConfigs = [
   { gridName: 'AG Grid', gridKey: 'ag-grid', folder: 'Ag-grid' },
   { gridName: 'Wijmo Grid', gridKey: 'wijmo', folder: 'Wijmo-grid' },
   { gridName: 'RevoGrid', gridKey: 'revogrid', folder: 'RevoGrid' },
-  { gridName: 'Tabulator Grid', gridKey: 'tabulator', folder: 'Tabulator-grid' }
+  { gridName: 'Tabulator Grid', gridKey: 'tabulator', folder: 'Tabulator-grid' },
+  { gridName: 'MudBlazor DataGrid', gridKey: 'mudblazor-grid', folder: 'MudBlazor-grid' }
 ];
 
 // Generate performance files for all combinations

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MudBlazor Grid - 100K Rows Benchmark</title>
+    <base href="/" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <link href="css/app.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <div id="app">
+      <div
+        style="
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          text-align: center;
+        "
+      >
+        <div
+          style="
+            font-size: 24px;
+            color: #594ae2;
+            font-weight: bold;
+            margin-bottom: 20px;
+          "
+        >
+          MudBlazor Grid Laden...
+        </div>
+        <div style="width: 100px; height: 100px; margin: 0 auto">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+            <circle
+              cx="50"
+              cy="50"
+              r="40"
+              stroke="#594AE2"
+              stroke-width="8"
+              fill="none"
+              stroke-dasharray="160"
+              stroke-dashoffset="0"
+              style="animation: spin 1.5s linear infinite"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="251"
+                dur="1.5s"
+                repeatCount="indefinite"
+              />
+            </circle>
+          </svg>
+        </div>
+        <div style="margin-top: 20px; color: #666; font-size: 14px">
+          Blazor WebAssembly wordt geïnitialiseerd...
+        </div>
+      </div>
+    </div>
+
+    <div id="blazor-error-ui">
+      An unhandled error has occurred.
+      <a href="" class="reload">Reload</a>
+      <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+  </body>
+</html>
