@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MudBlazor-grid")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dfe7acd1de7609300f04ce9a8c3bd0563c345b2c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fc5bc59e7e99212e3f32c4a767c58e98965ddbdd")]
 [assembly: System.Reflection.AssemblyProductAttribute("MudBlazor-grid")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MudBlazor-grid")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

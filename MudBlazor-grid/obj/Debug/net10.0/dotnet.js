@@ -5,7 +5,7 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
   "mainAssemblyName": "MudBlazor-grid",
   "applicationEnvironment": "Development",
   "resources": {
-    "hash": "sha256-115NjML7e4An3xEAzD8ROTe0ecLlZJ+nEbT+8w3PHFg=",
+    "hash": "sha256-S0sn9M1JVOtP5FLhbN3lJhxmK0p8dpgHkzR1QSDhFfg=",
     "jsModuleNative": [
       {
         "name": "dotnet.native.xanz2e7ksm.js"
@@ -1054,15 +1054,15 @@ var e=!1;const t=async()=>WebAssembly.validate(new Uint8Array([0,97,115,109,1,0,
       },
       {
         "virtualPath": "MudBlazor-grid.wasm",
-        "name": "MudBlazor-grid.bu3ay2xs8t.wasm",
-        "integrity": "sha256-DRQQc5mwdturZQQztbBNYWRA+RvDSgvxEnFXfeebmJE="
+        "name": "MudBlazor-grid.dxrvzwr69x.wasm",
+        "integrity": "sha256-IVJVH985NLAnFae4eaOh8wzdgyIxI6YMbJeLFSCV28w="
       }
     ],
     "pdb": [
       {
         "virtualPath": "MudBlazor-grid.pdb",
-        "name": "MudBlazor-grid.3pb62gnhkj.pdb",
-        "integrity": "sha256-t7K+Ydm14ttpiO9bsoL74EQWBHZlUUUvp7RdevCV1n4="
+        "name": "MudBlazor-grid.8fpizzyrw4.pdb",
+        "integrity": "sha256-NKBDcSv6+slOsOlkSZsQ6TqbNl+GIQYRDrhaMFDvCMI="
       }
     ],
     "libraryInitializers": [

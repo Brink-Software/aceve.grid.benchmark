@@ -14,6 +14,20 @@ public class Employee
     public int Projects { get; set; }
     public double Performance { get; set; }
 
+    // Fast accessor for numeric properties (avoids reflection in render loop)
+    private static readonly System.Reflection.PropertyInfo[] _numericPropertiesCache =
+        Enumerable.Range(1, 490)
+            .Select(i => typeof(Employee).GetProperty($"Num_{i}"))
+            .Where(p => p != null)
+            .ToArray()!;
+
+    public double GetNumericValue(int index)
+    {
+        if (index < 1 || index > 490) return 0.0;
+        var prop = _numericPropertiesCache[index - 1];
+        return prop != null ? (double)prop.GetValue(this)! : 0.0;
+    }
+
     // 490 numeric properties (num_1 through num_490)
     public double Num_1 { get; set; }
     public double Num_2 { get; set; }

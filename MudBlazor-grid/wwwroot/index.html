@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MudBlazor Grid - 100K Rows Benchmark</title>
+    <title>MudBlazor Grid - 1K Rows Benchmark</title>
     <base href="/" />
     <link
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -71,5 +71,104 @@
 
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    
+    <script>
+      // Performance measurement helpers
+      window.gridPerformance = {
+        marks: {},
+        
+        // Start a performance measurement
+        startMeasure: function(name) {
+          const markName = `${name}-start`;
+          performance.mark(markName);
+          this.marks[name] = markName;
+          console.log(`⏱️ Started measuring: ${name}`);
+        },
+        
+        // Stop measurement and return elapsed time
+        stopMeasure: function(name) {
+          const startMark = this.marks[name];
+          if (!startMark) {
+            console.warn(`No start mark found for: ${name}`);
+            return 0;
+          }
+          
+          const endMark = `${name}-end`;
+          performance.mark(endMark);
+          
+          const measureName = `${name}-measure`;
+          performance.measure(measureName, startMark, endMark);
+          
+          const entries = performance.getEntriesByName(measureName);
+          const duration = entries.length > 0 ? entries[0].duration : 0;
+          
+          console.log(`⏱️ ${name}: ${duration.toFixed(2)} ms`);
+          
+          // Cleanup
+          delete this.marks[name];
+          
+          return duration;
+        },
+        
+        // Wait for grid to be rendered (checks for grid element and rows)
+        waitForGridRender: async function(gridId, maxWaitMs = 10000) {
+          const startTime = performance.now();
+          
+          return new Promise((resolve, reject) => {
+            let checkCount = 0;
+            const maxChecks = maxWaitMs / 50; // Check every 50ms
+            
+            const checkGrid = () => {
+              checkCount++;
+              
+              const grid = document.getElementById(gridId);
+              if (!grid) {
+                if (checkCount >= maxChecks) {
+                  reject(new Error('Grid element not found'));
+                  return;
+                }
+                setTimeout(checkGrid, 50);
+                return;
+              }
+              
+              // Check if grid has rendered rows
+              const rows = grid.querySelectorAll('tr[class*="mud-table-row"]');
+              
+              if (rows.length > 0) {
+                // Wait one more frame to ensure render is complete
+                requestAnimationFrame(() => {
+                  const elapsed = performance.now() - startTime;
+                  console.log(`✅ Grid rendered with ${rows.length} rows in ${elapsed.toFixed(2)} ms`);
+                  resolve(elapsed);
+                });
+              } else {
+                if (checkCount >= maxChecks) {
+                  reject(new Error('Grid rows not rendered within timeout'));
+                  return;
+                }
+                setTimeout(checkGrid, 50);
+              }
+            };
+            
+            // Start checking after a short delay to let Blazor start rendering
+            setTimeout(checkGrid, 50);
+          });
+        },
+        
+        // Get memory usage (if available)
+        getMemoryUsage: function() {
+          if (performance.memory) {
+            return {
+              usedJSHeapSize: performance.memory.usedJSHeapSize,
+              totalJSHeapSize: performance.memory.totalJSHeapSize,
+              jsHeapSizeLimit: performance.memory.jsHeapSizeLimit
+            };
+          }
+          return null;
+        }
+      };
+      
+      console.log('🚀 Grid Performance Measurement Ready');
+    </script>
   </body>
 </html>

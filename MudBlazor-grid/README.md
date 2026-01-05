@@ -6,7 +6,7 @@ Een Blazor WebAssembly implementatie met MudBlazor DataGrid voor performance tes
 
 - **Framework**: Blazor WebAssembly (.NET 8)
 - **Component**: MudBlazor DataGrid v7.8.0
-- **Dataset**: 100.000 rijen × 500 kolommen = 50 miljoen cellen
+- **Dataset**: 1.000 rijen × 500 kolommen = 500.000 cellen
 - **Virtualisatie**: ✅ Enabled (`Virtualize="true"`)
 - **Performance Tracking**: ✅ Geïntegreerd met JSON export
 
@@ -121,17 +121,17 @@ Employee class met **500 properties**:
 
 ### Data Generation (C# in WASM)
 
-- **100K rijen**: 10-25 seconden
-- **Speed**: ~5000-10000 rijen/seconde
+- **1K rijen**: 0.2-0.5 seconden
+- **Speed**: ~2000-5000 rijen/seconde
 
 ### Grid Initialization
 
-- **Render time**: 3-8 seconden
-- **Total load**: 15-35 seconden (generation + init)
+- **Render time**: 0.5-2 seconden
+- **Total load**: 1-3 seconden (generation + init)
 
 ### Memory Usage
 
-- **Expected**: 300MB-600MB browser memory
+- **Expected**: 50MB-150MB browser memory
 - **Peak**: tijdens data generatie
 
 ### CRUD Operations (met virtualisatie)
@@ -159,7 +159,7 @@ Zie `../playwright/MudBlazor-grid/` voor geautomatiseerde tests.
 
 ### Virtualisatie is ESSENTIEEL
 
-- Zonder `Virtualize="true"` zal de grid crashen met 100K rijen
+- Zonder `Virtualize="true"` kan de grid traag worden met 1K rijen × 500 kolommen
 - Grid moet vaste hoogte hebben voor virtualisatie
 - Alleen ~20-50 rijen worden tegelijk gerenderd
 
@@ -172,7 +172,7 @@ Zie `../playwright/MudBlazor-grid/` voor geautomatiseerde tests.
 ### Browser Memory
 
 - Monitor memory usage in browser DevTools
-- 100K × 500 cellen = substantieel geheugengebruik
+- 1K × 500 cellen = 500K cellen
 - Chrome/Edge aanbevolen (betere WASM performance)
 
 ## 🔧 Configuration
@@ -183,7 +183,7 @@ In `Pages/Index.razor`:
 
 ```csharp
 _employees = await DataService.GenerateDataAsync(
-    targetRows: 100000,  // <-- Pas dit aan
+    targetRows: 1000,  // <-- Pas dit aan
     progressCallback: (count) => { ... },
     chunkSize: 10000
 );
@@ -208,13 +208,13 @@ chunkSize: 10000  // 10K-20K aanbevolen
 ### Grid laadt niet / blijft hangen
 
 - Check browser console voor errors
-- Verlaag aantal rijen (probeer 50K first)
+- Verlaag aantal rijen (probeer 500 first)
 - Check beschikbaar browser memory
 
 ### Out of Memory error
 
-- 100K rijen zou stabiel moeten zijn
-- Bij problemen, probeer 50K rijen
+- 1K rijen zou stabiel moeten zijn
+- Bij problemen, probeer 500 rijen
 - Close andere browser tabs
 - Herstart browser
 

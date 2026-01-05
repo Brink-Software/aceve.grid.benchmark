@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\Sources\\aceve.grid.benchmark\\mudBlazor-grid\\MudBlazor-grid.csproj": {}
+    "Z:\\Sources\\aceve.grid.benchmark\\MudBlazor-grid\\MudBlazor-grid.csproj": {}
   },
   "projects": {
-    "Z:\\Sources\\aceve.grid.benchmark\\mudBlazor-grid\\MudBlazor-grid.csproj": {
+    "Z:\\Sources\\aceve.grid.benchmark\\MudBlazor-grid\\MudBlazor-grid.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\Sources\\aceve.grid.benchmark\\mudBlazor-grid\\MudBlazor-grid.csproj",
+        "projectUniqueName": "Z:\\Sources\\aceve.grid.benchmark\\MudBlazor-grid\\MudBlazor-grid.csproj",
         "projectName": "MudBlazor-grid",
-        "projectPath": "Z:\\Sources\\aceve.grid.benchmark\\mudBlazor-grid\\MudBlazor-grid.csproj",
+        "projectPath": "Z:\\Sources\\aceve.grid.benchmark\\MudBlazor-grid\\MudBlazor-grid.csproj",
         "packagesPath": "C:\\Users\\DesmondRobers\\.nuget\\packages\\",
-        "outputPath": "Z:\\Sources\\aceve.grid.benchmark\\mudBlazor-grid\\obj\\",
+        "outputPath": "Z:\\Sources\\aceve.grid.benchmark\\MudBlazor-grid\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

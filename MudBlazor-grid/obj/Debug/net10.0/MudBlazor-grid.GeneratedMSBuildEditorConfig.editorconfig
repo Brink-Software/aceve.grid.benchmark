@@ -20,25 +20,25 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = browser
 build_property.RootNamespace = MudBlazor_grid
 build_property.RootNamespace = MudBlazor_grid
-build_property.ProjectDir = Z:\Sources\aceve.grid.benchmark\mudBlazor-grid\
+build_property.ProjectDir = Z:\Sources\aceve.grid.benchmark\MudBlazor-grid\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = false
 build_property.RazorLangVersion = 9.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = Z:\Sources\aceve.grid.benchmark\mudBlazor-grid
+build_property.MSBuildProjectDirectory = Z:\Sources\aceve.grid.benchmark\MudBlazor-grid
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 10.0
 build_property.EnableCodeStyleSeverity = 
 
-[Z:/Sources/aceve.grid.benchmark/mudBlazor-grid/App.razor]
+[Z:/Sources/aceve.grid.benchmark/MudBlazor-grid/App.razor]
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Sources/aceve.grid.benchmark/mudBlazor-grid/Pages/Index.razor]
+[Z:/Sources/aceve.grid.benchmark/MudBlazor-grid/Pages/Index.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[Z:/Sources/aceve.grid.benchmark/mudBlazor-grid/_Imports.razor]
+[Z:/Sources/aceve.grid.benchmark/MudBlazor-grid/_Imports.razor]
 build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

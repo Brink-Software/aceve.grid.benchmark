@@ -60,6 +60,79 @@ public class PerformanceService
         return timeMs;
     }
 
+    // Start measurement using browser's Performance API
+    public async Task StartBrowserMeasurementAsync(string name)
+    {
+        try
+        {
+            await _jsRuntime.InvokeVoidAsync("gridPerformance.startMeasure", name);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Warning: Could not start browser measurement: {ex.Message}");
+        }
+    }
+
+    // Stop measurement using browser's Performance API
+    public async Task<double> StopBrowserMeasurementAsync(string name)
+    {
+        try
+        {
+            var timeMs = await _jsRuntime.InvokeAsync<double>("gridPerformance.stopMeasure", name);
+            
+            var metric = new PerformanceMetric
+            {
+                Operation = name,
+                Time = $"{timeMs:F2} ms",
+                TimeMs = timeMs,
+                Timestamp = DateTime.UtcNow,
+                TestFile = "mudblazor-grid"
+            };
+
+            _metrics.Add(metric);
+
+            Console.WriteLine($"=== PERFORMANCE (Browser): {name} ===");
+            Console.WriteLine($"TIME: {timeMs:F2} ms");
+
+            return timeMs;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Warning: Could not stop browser measurement: {ex.Message}");
+            return 0;
+        }
+    }
+
+    // Wait for grid to render and measure the time
+    public async Task<double> WaitForGridRenderAsync(string gridId, int maxWaitMs = 10000)
+    {
+        try
+        {
+            var timeMs = await _jsRuntime.InvokeAsync<double>("gridPerformance.waitForGridRender", gridId, maxWaitMs);
+            
+            var metric = new PerformanceMetric
+            {
+                Operation = "Grid Render Complete",
+                Time = $"{timeMs:F2} ms",
+                TimeMs = timeMs,
+                Timestamp = DateTime.UtcNow,
+                TestFile = "mudblazor-grid"
+            };
+
+            _metrics.Add(metric);
+
+            Console.WriteLine($"=== PERFORMANCE: Grid Render Complete ===");
+            Console.WriteLine($"TIME: {timeMs:F2} ms");
+
+            return timeMs;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error waiting for grid render: {ex.Message}");
+            return 0;
+        }
+    }
+
     private string GetDataTestAttribute(string operation)
     {
         return operation.ToLower()
