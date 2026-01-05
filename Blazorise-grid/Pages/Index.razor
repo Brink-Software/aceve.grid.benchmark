@@ -1,0 +1,298 @@
+@page "/"
+@using Blazorise_grid.Models
+@using Blazorise_grid.Services
+@using System.Diagnostics
+@inject DataGenerationService DataService
+@inject PerformanceService PerfService
+
+<PageTitle>Blazorise DataGrid - 10K Rows Benchmark</PageTitle>
+
+<Container Fluid>
+
+    @* Loading Overlay *@
+    @if (_isLoading)
+    {
+        <div class="loading-overlay" data-test="loading-spinner">
+            <div class="loading-content">
+                <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <div class="loading-progress" data-test="loading-progress">@_loadedRows.ToString("N0")</div>
+                <div class="loading-text">Rijen geladen...</div>
+                <p class="text-muted mt-2">
+                    Data wordt gegenereerd, even geduld...
+                </p>
+            </div>
+        </div>
+    }
+
+    @* Performance Indicator *@
+    @if (_showPerformanceIndicator)
+    {
+        <div class="performance-indicator">
+            <Alert Color="Color.Success" Visible>
+                <p class="mb-0">@_lastOperation</p>
+                <h6 class="mb-0" data-test="performance-tijd">@_lastPerformanceTime</h6>
+            </Alert>
+        </div>
+    }
+
+    @* Header *@
+    <Card Margin="Margin.Is2.FromBottom" Shadow="Shadow.Default">
+        <CardBody>
+            <Heading Size="HeadingSize.Is4" TextColor="TextColor.Primary">Blazorise DataGrid - Performance Benchmark
+            </Heading>
+            <Paragraph TextColor="TextColor.Muted">10.000 rijen × 500 kolommen met virtualisatie</Paragraph>
+        </CardBody>
+    </Card>
+
+    @* Statistics Panel *@
+    <Card Margin="Margin.Is2.FromBottom">
+        <CardBody>
+            <div class="statistics-panel">
+                <div class="stat-card">
+                    <Small TextColor="TextColor.Secondary">TOTAL EMPLOYEES</Small>
+                    <Heading Size="HeadingSize.Is5" TextColor="TextColor.Primary" id="totalEmployees">@_employees.Count
+                    </Heading>
+                </div>
+
+                <div class="stat-card">
+                    <Small TextColor="TextColor.Secondary">TOTAL COLUMNS</Small>
+                    <Heading Size="HeadingSize.Is5" TextColor="TextColor.Secondary" id="totalColumns">500</Heading>
+                </div>
+
+                <div class="stat-card">
+                    <Small TextColor="TextColor.Secondary">SELECTED</Small>
+                    <Heading Size="HeadingSize.Is5" TextColor="TextColor.Info" id="selectedCount">
+                        @_selectedEmployees.Count</Heading>
+                </div>
+            </div>
+        </CardBody>
+    </Card>
+
+    @* Action Buttons *@
+    <Card Margin="Margin.Is2.FromBottom">
+        <CardBody>
+            <div style="display: flex; gap: 12px;">
+                <Button Color="Color.Success" Clicked="AddNewRow" Disabled="@_isLoading" data-test="add-row-btn"
+                    id="addRowBtn">
+                    <Icon Name="IconName.Add" /> Nieuwe Rij Toevoegen
+                </Button>
+
+                <Button Color="Color.Danger" Clicked="DeleteSelectedRows"
+                    Disabled="@(_selectedEmployees.Count == 0 || _isLoading)" data-test="delete-rows-btn"
+                    id="deleteRowsBtn">
+                    <Icon Name="IconName.Delete" /> Verwijder Geselecteerde (@_selectedEmployees.Count)
+                </Button>
+            </div>
+        </CardBody>
+    </Card>
+
+    @* Blazorise DataGrid *@
+    <Card Shadow="Shadow.Default">
+        <CardBody Style="padding: 0; height: calc(100vh - 350px); overflow: auto;">
+            <DataGrid TItem="Employee" Data="@_employees" SelectedRows="@_selectedRows"
+                SelectedRowsChanged="@OnSelectedRowsChanged" SelectionMode="DataGridSelectionMode.Multiple"
+                ShowPager="false" Virtualize="true" FixedHeader="true" Responsive="false" Striped="false"
+                Bordered="false" Hoverable="false" Editable="false" Sortable="false" Filterable="false"
+                ShowCaptions="true" data-test="blazorise-datagrid" id="myGrid" Style="height: 100%;" Class="dense-grid">
+                <DataGridColumns>
+                    @* Selection Column *@
+                    <DataGridMultiSelectColumn TItem="Employee" Width="60px" />
+
+                    @* Core Columns - Use Field binding instead of DisplayTemplate where possible *@
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Id)" Caption="ID" Width="80px"
+                        Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Name)" Caption="Naam" Width="180px"
+                        Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Email)" Caption="Email" Width="200px"
+                        Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Department)" Caption="Afdeling"
+                        Width="150px" Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Team)" Caption="Team" Width="150px"
+                        Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Role)" Caption="Rol" Width="180px"
+                        Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Salary)" Caption="Salaris" Width="140px"
+                        Displayable DisplayFormat="{0:C0}" />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Experience)" Caption="Ervaring"
+                        Width="120px" Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Projects)" Caption="Projecten"
+                        Width="120px" Displayable />
+                    <DataGridColumn TItem="Employee" Field="@nameof(Employee.Performance)" Caption="Performance"
+                        Width="130px" Displayable DisplayFormat="{0:F1}" />
+
+                    @* Numeric Columns (490 columns) - Simplified without DisplayTemplate *@
+                    @for (int i = 1; i <= 490; i++)
+                    {
+                        var columnIndex = i;
+                        var fieldName = $"Num_{columnIndex}";
+                        <DataGridColumn TItem="Employee" Field="@fieldName" Caption="@($"Num_{columnIndex}")" Width="120px"
+                            Displayable DisplayFormat="{0:F2}" />
+                    }
+                </DataGridColumns>
+            </DataGrid>
+        </CardBody>
+    </Card>
+
+</Container>
+
+@code {
+    private List<Employee> _employees = new();
+    private HashSet<Employee> _selectedEmployees = new();
+    private List<Employee> _selectedRows = new();
+    private bool _isLoading = true;
+    private int _loadedRows = 0;
+
+    // Performance indicator state
+    private bool _showPerformanceIndicator = false;
+    private string _lastOperation = "";
+    private string _lastPerformanceTime = "";
+    private string _performanceDataTest = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            // Start total performance measurement
+            var totalStart = Stopwatch.GetTimestamp();
+
+            // Start data generation measurement
+            PerfService.StartMeasurement();
+            Console.WriteLine("=== PERFORMANCE METING: DATA GENERATIE (C#) ===");
+
+            _employees = await DataService.GenerateDataAsync(
+            targetRows: 10000,
+            progressCallback: (count) =>
+            {
+                _loadedRows = count;
+                InvokeAsync(StateHasChanged);
+            },
+            chunkSize: 10000
+            );
+
+            var dataGenTime = await PerfService.StopMeasurementAsync("Data Generation");
+            Console.WriteLine($"Generated {_employees.Count} employees");
+            Console.WriteLine($"Data generation speed: {(_employees.Count / (dataGenTime / 1000)):F0} rows/second");
+
+            // Grid render measurement - START BROWSER TIMING BEFORE SHOWING GRID
+            Console.WriteLine("=== PERFORMANCE METING: GRID INIT (Browser) ===");
+            await PerfService.StartBrowserMeasurementAsync("Grid Init");
+
+            // Show grid (triggers render)
+            _isLoading = false;
+            await InvokeAsync(StateHasChanged);
+
+            // Wait for grid to actually render (checks for DOM elements)
+            var gridInitTime = await PerfService.WaitForGridRenderAsync("myGrid", 30000);
+
+            // Stop browser measurement
+            await PerfService.StopBrowserMeasurementAsync("Grid Init");
+
+            // Calculate total time
+            var totalTime = Stopwatch.GetElapsedTime(totalStart).TotalMilliseconds;
+
+            Console.WriteLine("=== PERFORMANCE: SUMMARY ===");
+            Console.WriteLine($"Data Generation: {dataGenTime:F2} ms");
+            Console.WriteLine($"Grid Init (alleen render, gemeten door browser): {gridInitTime:F2} ms");
+            Console.WriteLine($"TOTAL TIME (Generation + Init): {totalTime:F2} ms");
+
+            await ShowPerformanceIndicatorAsync("Grid Init", $"{gridInitTime:F2} ms", "grid-init");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error during initialization: {ex.Message}");
+            _isLoading = false;
+        }
+    }
+
+    private void OnSelectedRowsChanged(List<Employee> selectedRows)
+    {
+        _selectedRows = selectedRows;
+        _selectedEmployees = selectedRows.ToHashSet();
+        // Don't call StateHasChanged here - let Blazorise handle it
+    }
+
+    protected override bool ShouldRender()
+    {
+        // Only render when necessary to improve performance
+        return true;
+    }
+
+    private async Task AddNewRow()
+    {
+        Console.WriteLine("=== PERFORMANCE METING: RIJ TOEVOEGEN ===");
+
+        try
+        {
+            // Start browser measurement
+            await PerfService.StartBrowserMeasurementAsync("Add Row");
+
+            var newEmployee = DataService.GenerateEmployee("Engineering", "Frontend Team", "Developer");
+            _employees.Insert(0, newEmployee);
+
+            await InvokeAsync(StateHasChanged);
+
+            // Yield to allow render to start
+            await Task.Yield();
+
+            var time = await PerfService.StopBrowserMeasurementAsync("Add Row");
+            await ShowPerformanceIndicatorAsync("Add Row", $"{time:F2} ms", "rij-toevoegen");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding row: {ex.Message}");
+        }
+    }
+
+    private async Task DeleteSelectedRows()
+    {
+        if (_selectedEmployees.Count == 0) return;
+
+        var rowCount = _selectedEmployees.Count;
+        Console.WriteLine($"=== PERFORMANCE METING: {rowCount} RIJEN VERWIJDEREN ===");
+
+        try
+        {
+            // Start browser measurement
+            await PerfService.StartBrowserMeasurementAsync($"Delete {rowCount} Rows");
+
+            var toDelete = _selectedEmployees.ToList();
+
+            foreach (var employee in toDelete)
+            {
+                _employees.Remove(employee);
+            }
+
+            _selectedEmployees.Clear();
+            _selectedRows.Clear();
+
+            await InvokeAsync(StateHasChanged);
+
+            // Yield to allow render to start
+            await Task.Yield();
+
+            var time = await PerfService.StopBrowserMeasurementAsync($"Delete {rowCount} Rows");
+            await ShowPerformanceIndicatorAsync($"Delete {rowCount} Rows", $"{time:F2} ms", "rijen-verwijderen");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error deleting rows: {ex.Message}");
+        }
+    }
+
+    private async Task ShowPerformanceIndicatorAsync(string operation, string time, string dataTest)
+    {
+        _lastOperation = operation;
+        _lastPerformanceTime = time;
+        _performanceDataTest = dataTest;
+        _showPerformanceIndicator = true;
+
+        await InvokeAsync(StateHasChanged);
+
+        // Hide after 3 seconds
+        await Task.Delay(3000);
+        _showPerformanceIndicator = false;
+        await InvokeAsync(StateHasChanged);
+    }
+}
